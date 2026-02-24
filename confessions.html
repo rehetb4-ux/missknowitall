@@ -5,19 +5,20 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<button class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+<button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
 
 <section class="hero">
-  <h1 class="title">Anonymous <span>Confessions</span></h1>
+  <a href="index.html" style="text-decoration:none; color:var(--blue); font-weight:bold;">← Home</a>
+  <h1 class="title">Anonymous <span>Wall</span></h1>
+  <p class="quote">Get it off your chest. <span>Safely.</span></p>
 </section>
 
-<section class="mission">
-  <textarea id="confessionInput" placeholder="Write your confession here..."></textarea><br>
+<section style="text-align:center;">
+  <textarea id="confessionInput" class="confession-box" placeholder="Write your secret here..."></textarea><br>
   <button class="submit-btn" onclick="postConfession()">Post Anonymously</button>
 </section>
 
-<section class="features" id="confessionList"></section>
+<section class="features" id="confessionWall" style="flex-direction:column; align-items:center;"></section>
 
 <script src="script.js"></script>
 </body>
