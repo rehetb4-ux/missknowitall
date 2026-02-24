@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Miss Know It All | Home</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -9,29 +10,61 @@
 
 <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
 
-<section class="hero">
-  <h1 class="title">Miss <span>Know</span> It All</h1>
-  <p class="quote">Your <span>mind</span> deserves honesty, not <span>silence</span>.</p>
-  <p style="max-width:600px; margin: 20px auto; color:#64748b;">
-    The ultimate student sanctuary for anonymous venting, professional support, and mood tracking.
+<nav class="navbar">
+  <div class="logo">Miss Know It All</div>
+  <div class="nav-links">
+    <a href="#mission">Mission</a>
+    <a href="confessions.html">Confessions</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="quiz.html" class="nav-btn">Take Quiz</a>
+  </div>
+</nav>
+
+<header class="hero-alt">
+  <h1>Knowledge is <span>Peace of Mind.</span></h1>
+  <p class="description">
+    Miss Know It All is a safe digital sanctuary designed for students to 
+    vent anonymously, access mental health resources, and understand 
+    their minds better.
+  </p>
+  <div class="hero-btns">
+    <a href="confessions.html" class="btn-dark">Explore the Wall</a>
+    <a href="analytics.html" class="btn-outline">Read Articles</a>
+  </div>
+</header>
+
+<section class="stats-bar">
+  <div class="stat-item">
+    <h2>1 in 5</h2>
+    <p>STUDENTS STRUGGLE YEARLY</p>
+  </div>
+  <div class="stat-item">
+    <h2>100%</h2>
+    <p>ANONYMOUS & SECURE</p>
+  </div>
+  <div class="stat-item">
+    <h2>24/7</h2>
+    <p>RESOURCE ACCESSIBILITY</p>
+  </div>
+</section>
+
+<section id="mission" class="mission-section">
+  <h3>Our Mission</h3>
+  <p class="mission-text">
+    "To destigmatize the conversation around mental health on campus by providing 
+    a judgment-free zone where students don't have to have all the answers—because 
+    we're here to help you find them."
   </p>
 </section>
 
-<section class="stats">
-  <div class="stat-box">1 in 5 students struggle yearly</div>
-  <div class="stat-box">100% Anonymous & Secure</div>
-  <div class="stat-box">24/7 Accessible Resources</div>
-</section>
-
 <section class="features">
-  <a href="confessions.html" class="card">🗣️ Confessions</a>
-  <a href="quiz.html" class="card">🧪 Mental Health Quiz</a>
-  <a href="premium.html" class="card" style="color:var(--orange)">⭐ Premium Support</a>
-  <a href="dashboard.html" class="card">📊 My Dashboard</a>
-  <a href="analytics.html" class="card">📈 Platform Data</a>
+  <a href="premium.html" class="card">⭐ Premium Support</a>
+  <a href="admin.html" class="card">🛡️ Admin Panel</a>
 </section>
 
-<footer><p style="text-align:center; padding:40px; color:#94a3b8;">© 2026 Miss Know It All</p></footer>
+<footer>
+  <p style="text-align:center; padding:40px; color:#94a3b8; font-size:0.8rem;">© 2026 Miss Know It All. University Project.</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
