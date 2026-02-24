@@ -3,65 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miss Know It All | Elite Mental Health</title>
+    <title>Miss Know It All</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav class="navbar" style="display:flex; justify-content:space-between; padding: 25px 8%;">
+<nav>
     <div class="logo">Miss<span>KnowItAll</span></div>
-    <div class="nav-links">
-        <a href="confessions.html">Wall</a>
-        <a href="quiz.html">Quiz</a>
-        <a href="analytics.html" class="btn-elite" style="padding:10px 25px;">Dashboard</a>
+    <div>
+        <a href="#wall" style="margin-right:20px; text-decoration:none; color:inherit;">Wall</a>
+        <a href="quiz.html" class="btn">Take Quiz</a>
     </div>
 </nav>
 
-<header class="hero-container">
-    <div class="hero-content hero">
+<header class="hero">
+    <div>
         <h1>Knowledge is<br><span>Peace of Mind.</span></h1>
-        <p class="hero-p">The digital sanctuary where your identity stays hidden, but your voice is finally heard.</p>
-        <a href="quiz.html" class="btn-elite">Take the Assessment →</a>
+        <p style="font-size: 1.2rem; color: #64748b; margin-bottom: 30px;">The student sanctuary for anonymous venting and mental health tracking.</p>
+        <a href="#wall" class="btn">Start Venting</a>
     </div>
-    <div class="hero-visual">
-        <svg width="400" height="400" viewBox="0 0 200 200" style="opacity:0.8;">
-            <circle cx="100" cy="100" r="80" fill="none" stroke="#4f46e5" stroke-width="0.5" stroke-dasharray="4 4" />
-            <path d="M40,100 Q100,20 160,100 T160,100" fill="none" stroke="#4f46e5" stroke-width="1" opacity="0.5" />
-        </svg>
-    </div>
+    <div style="background: #e0e7ff; height: 300px; border-radius: 30px;"></div>
 </header>
 
 <section class="stats-bar">
     <div class="stat-item"><h2>1/5</h2><p>Students Struggle</p></div>
-    <div class="stat-item"><h2>2.4k</h2><p>Active Secrets</p></div>
-    <div class="stat-item"><h2>100%</h2><p>Identity Safe</p></div>
+    <div class="stat-item"><h2>2.4k</h2><p>Vents Posted</p></div>
+    <div class="stat-item"><h2>100%</h2><p>Private</p></div>
 </section>
 
-<section class="path-container">
-    <div class="step-card"><div class="step-num">1</div><h3>Vent</h3><p>Let it all out anonymously.</p></div>
-    <div class="step-card"><div class="step-num">2</div><h3>Check</h3><p>25-point stress diagnostic.</p></div>
-    <div class="step-card"><div class="step-num">3</div><h3>Heal</h3><p>Expert 1-on-1 support.</p></div>
-</section>
-
-<section style="text-align:center; padding: 60px 0;">
-    <p style="text-transform:uppercase; letter-spacing:3px; color:var(--text-muted); font-size:0.7rem;">Trusted by students at</p>
-    <div style="display:flex; justify-content:center; gap:50px; opacity:0.4; font-weight:800; margin-top:20px;">
-        <span>IIT DELHI</span> <span>DU</span> <span>NSUT</span> <span>BITS</span>
+<section id="wall" class="container">
+    <h2 style="margin-bottom: 30px;">The Anonymous Wall</h2>
+    <div class="card">
+        <textarea id="confessionInput" class="input-area" placeholder="What's your secret?"></textarea>
+        <button class="btn" onclick="postConfession()">Post Anonymously</button>
+    </div>
+    <div id="confessionWall">
+        <div class="card"><p style="font-style:italic;">"Sometimes I feel like I'm the only one struggling with my grades."</p></div>
     </div>
 </section>
 
-<div class="grid">
-    <a href="confessions.html" class="card wall"><h3>The Wall</h3><p>Read what others are hiding.</p></a>
-    <a href="premium.html" class="card premium"><h3>Premium</h3><p>Get a human on the line.</p></a>
-    <a href="analytics.html" class="card data"><h3>Analytics</h3><p>Campus mood insights.</p></a>
-</div>
-
-<footer>
-    <div style="display:flex; justify-content:space-between;">
-        <div class="logo" style="color:white;">Miss<span>KnowItAll</span></div>
-        <div style="color:#94a3b8; font-size:0.9rem;">Built for students, by students. Anonymity guaranteed.</div>
-    </div>
-</footer>
-
+<script src="script.js"></script>
 </body>
 </html>
