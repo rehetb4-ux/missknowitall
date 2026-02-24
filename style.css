@@ -1,143 +1,177 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&display=swap');
 
 :root {
-  --blue: #2563eb;
-  --indigo: #1e1b4b;
-  --orange: #f97316;
-  --black: #0f172a;
-  --white: #ffffff;
-  --slate: #64748b;
-  --bg: #fdfdfd;
+  --primary: #4f46e5;    /* Electric Indigo */
+  --primary-light: #818cf8;
+  --secondary: #0f172a;  /* Midnight */
+  --accent: #f97316;     /* Success Orange */
+  --bg-gradient: radial-gradient(circle at top right, #f8fafc, #eef2ff, #ffffff);
+  --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.04), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
 }
 
-* { box-sizing: border-box; } /* Prevents layout breaking on mobile */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  margin: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  background: var(--bg);
-  color: var(--black);
-  line-height: 1.6;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  background: var(--bg-gradient);
+  color: var(--secondary);
+  line-height: 1.5;
+  overflow-x: hidden;
 }
 
-/* --- NAVIGATION --- */
+/* --- 9. Navigation Polish --- */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 5%;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  padding: 25px 8%;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(15px);
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.logo { font-weight: 800; font-size: 1.2rem; color: var(--indigo); letter-spacing: -1px; }
-.logo span { color: var(--blue); }
+.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+.logo span { color: var(--primary); }
 
-.nav-links { display: flex; align-items: center; }
-.nav-links a { margin-left: 15px; text-decoration: none; color: var(--slate); font-weight: 600; font-size: 0.9rem; }
-
-/* Hide desktop buttons on very small phones if needed */
-@media (max-width: 480px) {
-  .nav-links a:not(.nav-btn) { display: none; }
+.nav-links a { 
+  margin-left: 35px; 
+  text-decoration: none; 
+  color: #64748b; 
+  font-weight: 600; 
+  font-size: 0.95rem;
+  position: relative;
 }
 
-.nav-btn { background: var(--blue); color: white !important; padding: 8px 16px; border-radius: 50px; }
-
-/* --- HERO SECTION --- */
-.hero { 
-  text-align: center; 
-  padding: 60px 5%; 
-  background: radial-gradient(circle at top right, #eff6ff, #ffffff); 
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0; height: 2px; bottom: -5px; left: 0;
+  background: var(--primary);
+  transition: 0.3s;
 }
 
-.hero h1 { 
-  font-size: 2.5rem; /* Small for mobile */
-  font-weight: 800; 
-  color: var(--indigo); 
-  line-height: 1.1; 
+.nav-links a:hover::after { width: 100%; }
+
+/* --- 1. Hero Section (Main Character Energy) --- */
+.hero {
+  text-align: center;
+  padding: 120px 10% 80px;
 }
 
-/* Scale up for Laptops */
-@media (min-width: 1024px) {
-  .hero { padding: 120px 10%; }
-  .hero h1 { font-size: 4.5rem; }
+.hero h1 {
+  font-size: 5rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -3px;
+  color: var(--secondary);
+  margin-bottom: 30px;
 }
 
-.hero-p { font-size: 1rem; color: var(--slate); max-width: 600px; margin: 20px auto; }
+.hero h1 span {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--primary);
+  background: linear-gradient(to right, var(--primary), #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-/* --- STATS BAR (Responsive Flex) --- */
-.stats-bar { 
-  background: var(--indigo); 
-  color: white; 
-  display: flex; 
-  flex-direction: column; /* Stack on mobile */
+.hero-p {
+  font-size: 1.25rem;
+  color: #475569;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+/* --- 5. Button Energy --- */
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  padding: 18px 40px;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+}
+
+/* --- 2. The Slapping Stats Bar --- */
+.stats-bar {
+  background: var(--secondary);
+  margin: 0 5%;
+  padding: 80px 0;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.stat-item {
+  padding: 0 60px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-item h2 {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+  transition: 0.3s;
+}
+
+.stat-item:hover h2 { transform: scale(1.1); color: var(--primary-light); }
+
+.stat-item p {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #94a3b8;
+}
+
+/* --- 3. Feature Cards (Goodbye 2009) --- */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  padding: 40px 10%; 
-  text-align: center; 
-}
-
-@media (min-width: 768px) {
-  .stats-bar { flex-direction: row; justify-content: space-around; padding: 70px 10%; }
-}
-
-.stat-item h2 { font-size: 2.5rem; margin: 0; font-weight: 800; }
-.stat-item p { text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; opacity: 0.7; }
-
-/* --- GRID & CARDS (Responsive Grid) --- */
-.grid { 
-  display: grid; 
-  grid-template-columns: 1fr; /* 1 column on mobile */
-  gap: 20px; 
-  padding: 40px 5%; 
-}
-
-@media (min-width: 768px) {
-  .grid { grid-template-columns: repeat(2, 1fr); } /* 2 columns on tablets */
-}
-
-@media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(3, 1fr); padding: 60px 10%; } /* 3 columns on laptops */
+  padding: 100px 8%;
 }
 
 .card {
   background: white;
-  padding: 30px;
-  border-radius: 20px;
-  border: 1px solid #f1f5f9;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-  transition: 0.3s ease;
+  padding: 50px 40px;
+  border-radius: 30px;
+  border: 1px solid rgba(0,0,0,0.03);
+  box-shadow: var(--card-shadow);
+  text-decoration: none;
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* --- BUTTONS & INPUTS --- */
-.btn-primary { 
-  background: var(--orange); 
-  color: white; 
-  padding: 15px 30px; 
-  border-radius: 12px; 
-  border: none; 
-  font-weight: 700; 
-  width: 100%; /* Full width on mobile */
-  max-width: 300px;
-  cursor: pointer; 
+.card:hover {
+  transform: translateY(-15px);
+  border-color: var(--primary-light);
 }
 
-.quiz-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
+.card .icon { font-size: 2.5rem; margin-bottom: 25px; }
+.card h3 { font-size: 1.5rem; margin-bottom: 12px; color: var(--secondary); }
+.card p { color: #64748b; font-size: 1rem; }
 
-.question-block {
-  background: white;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 15px;
-  border: 1px solid #f1f5f9;
+/* --- 4. The "Middle Zone" Fix --- */
+.how-it-works {
+  text-align: center;
+  padding: 100px 10%;
+  background: rgba(255,255,255,0.4);
 }
-
-.dark-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 2000; border-radius: 50%; width: 50px; height: 50px; border: none; background: var(--indigo); color: white; cursor: pointer; }
