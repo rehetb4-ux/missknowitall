@@ -1,66 +1,51 @@
-// --- DARK MODE LOGIC ---
+// Toggle between light and dark themes
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
-  localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
 }
 
-// Load preferences on all pages
-window.addEventListener("DOMContentLoaded", () => {
-  if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
-  
-  // If we are on the confession page, load previous ones
-  if (document.getElementById("confessionWall")) loadConfessions();
-});
-
-// --- QUIZ LOGIC ---
+// Calculate Mental Health Quiz results
 function calculateResult() {
   let score = 0;
   const form = document.getElementById("quizForm");
   const data = new FormData(form);
   
-  for (let value of data.values()) score += Number(value);
-
-  const resultDisplay = document.getElementById("result");
-  if (score === 0) {
-    resultDisplay.innerText = "Please answer the questions first!";
-  } else if (score <= 5) {
-    resultDisplay.innerText = "Result: Low Stress. You're handling things well!";
-  } else if (score <= 10) {
-    resultDisplay.innerText = "Result: Moderate Stress. Time for a mental health break.";
-  } else {
-    resultDisplay.innerText = "Result: High Stress. Please reach out to our resources.";
+  // Sum up all selected values
+  for (let v of data.values()) {
+    score += Number(v);
   }
+
+  const resultArea = document.getElementById("result");
+  
+  if (score === 0) {
+    resultArea.innerText = "Please answer at least one question.";
+    return;
+  }
+
+  let finalResult = "";
+  if (score <= 6) finalResult = "Status: Low Stress 😊 - Keep doing what you're doing!";
+  else if (score <= 10) finalResult = "Status: Moderate Stress 😐 - Try to schedule a break today.";
+  else finalResult = "Status: High Stress 😟 - Please reach out to our resources or a friend.";
+
+  resultArea.innerText = finalResult;
+  resultArea.style.color = "var(--blue)";
 }
 
-// --- CONFESSION LOGIC ---
+// Post a confession live to the page
 function postConfession() {
   const input = document.getElementById("confessionInput");
   const wall = document.getElementById("confessionWall");
-  
-  if (!input.value.trim()) return alert("Write something first!");
 
-  const text = input.value;
-  displayConfession(text);
+  if (input.value.trim() === "") {
+    alert("Please write a confession before posting!");
+    return;
+  }
 
-  // Save to browser memory
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
-  posts.push(text);
-  localStorage.setItem("posts", JSON.stringify(posts));
+  const newPost = document.createElement("div");
+  newPost.className = "card";
+  newPost.style.width = "100%";
+  newPost.style.marginBottom = "15px";
+  newPost.innerText = `“${input.value}”`;
 
-  input.value = ""; // Clear input
-}
-
-function displayConfession(text) {
-  const wall = document.getElementById("confessionWall");
-  const card = document.createElement("div");
-  card.className = "card";
-  card.style.width = "100%";
-  card.style.marginBottom = "15px";
-  card.innerText = `“${text}”`;
-  wall.prepend(card);
-}
-
-function loadConfessions() {
-  let posts = JSON.parse(localStorage.getItem("posts")) || [];
-  posts.forEach(t => displayConfession(t));
+  wall.prepend(newPost); // Adds the newest post to the top
+  input.value = ""; // Clears the text area
 }
