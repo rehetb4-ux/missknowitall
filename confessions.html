@@ -1,33 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Confessions | Miss Know It All</title>
-  <link rel="stylesheet" href="style.css">
+    <title>Wall | Miss Know It All</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
-  
-  <nav class="navbar">
-    <div class="logo">Miss Know It All</div>
-    <a href="index.html" style="text-decoration:none; color:var(--blue); font-weight:bold;">← Home</a>
-  </nav>
+<nav class="navbar"><div class="logo">Miss <span>Know It All</span></div><a href="index.html">← Back</a></nav>
 
-  <section class="hero-alt">
-    <h1>Anonymous <span>Wall</span></h1>
-    <p class="description">Get it off your chest. Safely.</p>
-  </section>
+<section class="hero-section" style="padding: 60px 10%;">
+    <h1>Anonymous <span>Wall.</span></h1>
+    <textarea id="confessionInput" style="width:100%; max-width:700px; height:150px; border-radius:20px; padding:20px; border:1px solid #ddd; margin:20px 0;" placeholder="What's on your mind?"></textarea><br>
+    <button class="primary-btn" onclick="postConfession()">Post Anonymously</button>
+</section>
 
-  <section style="text-align:center; padding: 0 20px;">
-    <textarea id="confessionInput" class="confession-box" placeholder="What's on your mind?"></textarea><br>
-    <button class="submit-btn" onclick="postConfession()">Post Anonymously</button>
-  </section>
+<section id="confessionWall" class="features-grid" style="grid-template-columns: 1fr; max-width:800px; margin:auto;">
+    <div class="card"><p>"I feel so overwhelmed with my project."</p></div>
+</section>
 
-  <section id="confessionWall" class="features" style="flex-direction:column; align-items:center;">
-    <div class="card" style="width:100%;">“I’m exhausted all the time.”</div>
-    <div class="card" style="width:100%;">“I feel behind in life.”</div>
-  </section>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
