@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body style="background: #fcfdff;">
+<head><link rel="stylesheet" href="style.css"></head>
+<body>
 <nav class="navbar"><div class="logo">Miss<span>KnowItAll</span></div><a href="index.html">← Back</a></nav>
 
-<div style="max-width: 800px; margin: 80px auto; padding: 0 20px;">
-    <h1 style="font-size: 3rem; margin-bottom: 10px; letter-spacing: -1px;">Mental Health <span>Check-In</span></h1>
-    <p style="color: #64748b; margin-bottom: 60px;">Answer these 25 questions. Take your time. We're here.</p>
-
-    <form id="quizForm">
-        <div id="questionsContainer"></div>
-        <button type="button" class="btn-primary" style="width:100%; margin-top: 40px;" onclick="calculateQuiz()">View My Results</button>
+<div style="max-width: 800px; margin: 60px auto; padding: 0 20px;">
+    <h1>Stress <span>Check-In</span></h1>
+    <p style="margin-bottom: 40px; color: var(--text-muted);">25 questions to understand your mental landscape.</p>
+    <form id="quizForm"><div id="questionsContainer"></div>
+    <button type="button" class="btn-elite" style="width:100%; margin-top:40px; border:none;" onclick="calculateQuiz()">See My Results</button>
     </form>
     <div id="result"></div>
 </div>
 
 <script src="script.js"></script>
 <script>
-    // Logic to generate questions into "SaaS-style" input cards
-    const qList = ["Do you feel overwhelmed?", "Is sleep hard?", /* ... rest of your 25 questions ... */];
+    const questions = [
+        "Do you feel overwhelmed by your workload?", "Is sleep hard to come by?", 
+        "Do you feel lonely around peers?", "Do you struggle to concentrate?",
+        "Do you worry about your career daily?", "Do you feel irritable lately?",
+        "Is it hard to find joy in hobbies?", "Do you feel 'behind' in life?",
+        "Do you experience physical stress pain?", "Do you procrastinate often?",
+        "Do you feel judged by others?", "Are you tired even after sleeping?",
+        "Do you avoid social events?", "Do you feel pressure to look 'fine'?",
+        "Is your appetite unusual lately?", "Do you feel like a failure often?",
+        "Do you struggle with Imposter Syndrome?", "Do you feel expectations are too high?",
+        "Do you use social media to escape?", "Do you have a safe person to talk to?",
+        "Do you feel your mental health is a priority?", "Do you feel burnt out?",
+        "Do you struggle to make decisions?", "Do you feel hopeless about the future?",
+        "Do you want professional help?"
+    ];
+
     const container = document.getElementById('questionsContainer');
-    
-    qList.forEach((q, i) => {
+    questions.forEach((q, i) => {
         container.innerHTML += `
-            <div style="background: white; padding: 40px; border-radius: 24px; margin-bottom: 25px; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-                <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 20px;">${i+1}. ${q}</p>
-                <div style="display: flex; gap: 15px;">
-                    <label style="flex:1; background:#f8fafc; padding:15px; border-radius:12px; cursor:pointer; text-align:center;"><input type="radio" name="q${i}" value="4"> Always</label>
-                    <label style="flex:1; background:#f8fafc; padding:15px; border-radius:12px; cursor:pointer; text-align:center;"><input type="radio" name="q${i}" value="2"> Sometimes</label>
-                    <label style="flex:1; background:#f8fafc; padding:15px; border-radius:12px; cursor:pointer; text-align:center;"><input type="radio" name="q${i}" value="0"> Never</label>
+            <div style="background:white; padding:30px; border-radius:24px; margin-bottom:15px; border:1px solid #f1f5f9;">
+                <p style="font-weight:600; margin-bottom:15px;">${i+1}. ${q}</p>
+                <div style="display:flex; gap:10px;">
+                    <label><input type="radio" name="q${i}" value="4" required> Always</label>
+                    <label><input type="radio" name="q${i}" value="2"> Sometimes</label>
+                    <label><input type="radio" name="q${i}" value="0"> Never</label>
                 </div>
-            </div>
-        `;
+            </div>`;
     });
 </script>
 </body>
