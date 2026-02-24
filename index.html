@@ -2,41 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Miss Know It All | Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miss Know It All | Knowledge is Peace</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav class="navbar">
-    <div class="logo">Miss <span>Know It All</span></div>
+    <div class="logo">Miss<span>KnowItAll</span></div>
     <div class="nav-links">
-        <a href="confessions.html">Confessions</a>
+        <a href="confessions.html">The Wall</a>
         <a href="dashboard.html">Dashboard</a>
-        <a href="quiz.html" class="nav-btn">Take Quiz</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="quiz.html" class="btn-primary" style="padding: 12px 25px; box-shadow:none;">Take Quiz</a>
     </div>
 </nav>
 
-<header class="hero-section">
-    <h1>Knowledge is <span>Peace of Mind.</span></h1>
-    <p class="hero-p">A student-first mental health platform that’s anonymous, accessible, and built for real life.</p>
-    <div style="margin-top: 40px;">
-        <a href="confessions.html" class="primary-btn" style="text-decoration:none;">Explore the Wall</a>
-    </div>
+<header class="hero">
+    <h1>Knowledge is<br><span>Peace of Mind.</span></h1>
+    <p class="hero-p">A student-first sanctuary. Anonymous, secure, and built for your real life — not just a dashboard.</p>
+    <a href="quiz.html" class="btn-primary">Get Started Now <span>→</span></a>
 </header>
 
 <section class="stats-bar">
     <div class="stat-item"><h2>1 in 5</h2><p>Students Struggle</p></div>
     <div class="stat-item"><h2>100%</h2><p>Anonymous</p></div>
-    <div class="stat-item"><h2>24/7</h2><p>Accessibility</p></div>
+    <div class="stat-item"><h2>24/7</h2><p>Always Open</p></div>
+</section>
+
+<section class="how-it-works">
+    <h2 style="font-size: 2.5rem; margin-bottom: 50px;">A Simple Path to Clarity</h2>
+    <div style="display: flex; justify-content: space-around; gap: 20px;">
+        <div style="max-width: 250px;">
+            <h4 style="color: var(--primary);">01. Vent</h4>
+            <p style="font-size: 0.9rem; color: #64748b;">Post your secrets on the wall. No names, no judgment.</p>
+        </div>
+        <div style="max-width: 250px;">
+            <h4 style="color: var(--primary);">02. Assess</h4>
+            <p style="font-size: 0.9rem; color: #64748b;">Take our 25-question check-in to see where you stand.</p>
+        </div>
+        <div style="max-width: 250px;">
+            <h4 style="color: var(--primary);">03. Connect</h4>
+            <p style="font-size: 0.9rem; color: #64748b;">Get premium audio support if things feel heavy.</p>
+        </div>
+    </div>
 </section>
 
 <section class="features-grid">
-    <a href="premium.html" class="card"><h3>⭐ Premium Support</h3><p>Get 1-on-1 audio sessions for ₹450.</p></a>
-    <a href="analytics.html" class="card"><h3>📈 Platform Data</h3><p>View real-time campus mood trends.</p></a>
-    <a href="admin.html" class="card"><h3>🛡️ Admin Control</h3><p>Manage and moderate community posts.</p></a>
+    <a href="confessions.html" class="card">
+        <div class="icon">🗣️</div>
+        <h3>The Wall</h3>
+        <p>Your thoughts deserve a safe home. 100% anonymous venting.</p>
+    </a>
+    <a href="premium.html" class="card">
+        <div class="icon">💎</div>
+        <h3>Premium Care</h3>
+        <p>1-on-1 audio sessions with verified student support peers.</p>
+    </a>
+    <a href="analytics.html" class="card">
+        <div class="icon">📈</div>
+        <h3>Campus Data</h3>
+        <p>Real-time mental health trends across your university.</p>
+    </a>
 </section>
 
-<button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
-<script src="script.js"></script>
+<div style="text-align: center; opacity: 0.3; padding-bottom: 100px;">
+    
+</div>
+
 </body>
 </html>
