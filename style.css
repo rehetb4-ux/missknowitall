@@ -1,0 +1,65 @@
+:root {
+  --blue:#2563eb;
+  --orange:#f97316;
+  --black:#0f172a;
+  --bg:#f8fafc;
+}
+
+body {
+  margin:0;
+  font-family:Arial;
+  background:var(--bg);
+  color:var(--black);
+}
+
+.dark { background:#0f172a; color:white; }
+
+.hero { text-align:center; padding:60px 20px; }
+
+.title { font-size:3rem; color:var(--blue); }
+.title span { color:var(--black); }
+
+.quote span { color:var(--blue); }
+
+.stats, .features {
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+  padding:30px;
+}
+
+.stat-box {
+  background:var(--blue);
+  color:white;
+  padding:20px;
+  border-radius:12px;
+}
+
+.card {
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  text-decoration:none;
+  color:black;
+  font-weight:bold;
+}
+
+.submit-btn {
+  background:var(--orange);
+  color:white;
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+}
+
+.confession-box {
+  width:80%;
+  height:100px;
+}
+
+.dark-toggle {
+  position:fixed;
+  top:10px;
+  right:10px;
+}
