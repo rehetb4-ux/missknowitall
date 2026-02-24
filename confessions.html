@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Confessions</title>
+  <meta charset="UTF-8">
+  <title>Confessions | Miss Know It All</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
+  
+  <nav class="navbar">
+    <div class="logo">Miss Know It All</div>
+    <a href="index.html" style="text-decoration:none; color:var(--blue); font-weight:bold;">← Home</a>
+  </nav>
 
-<section class="hero">
-  <a href="index.html" style="text-decoration:none; color:var(--blue); font-weight:bold;">← Home</a>
-  <h1 class="title">Anonymous <span>Wall</span></h1>
-  <p class="quote">Get it off your chest. <span>Safely.</span></p>
-</section>
+  <section class="hero-alt">
+    <h1>Anonymous <span>Wall</span></h1>
+    <p class="description">Get it off your chest. Safely.</p>
+  </section>
 
-<section style="text-align:center;">
-  <textarea id="confessionInput" class="confession-box" placeholder="Write your secret here..."></textarea><br>
-  <button class="submit-btn" onclick="postConfession()">Post Anonymously</button>
-</section>
+  <section style="text-align:center; padding: 0 20px;">
+    <textarea id="confessionInput" class="confession-box" placeholder="What's on your mind?"></textarea><br>
+    <button class="submit-btn" onclick="postConfession()">Post Anonymously</button>
+  </section>
 
-<section class="features" id="confessionWall" style="flex-direction:column; align-items:center;"></section>
+  <section id="confessionWall" class="features" style="flex-direction:column; align-items:center;">
+    <div class="card" style="width:100%;">“I’m exhausted all the time.”</div>
+    <div class="card" style="width:100%;">“I feel behind in life.”</div>
+  </section>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
