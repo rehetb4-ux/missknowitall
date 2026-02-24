@@ -15,30 +15,21 @@
 <section class="mission">
 <form id="quizForm">
 
-<h3>1. Stress reaction?</h3>
+<h3>When stressed, what do you do?</h3>
 <label><input type="radio" name="q1" value="1"> Deal with it</label><br>
 <label><input type="radio" name="q1" value="2"> Stress then calm</label><br>
 <label><input type="radio" name="q1" value="3"> Overthink</label><br>
 <label><input type="radio" name="q1" value="4"> Shut down</label>
 
-<h3>2. Emotionally drained?</h3>
-<label><input type="radio" name="q2" value="1"> Rarely</label><br>
-<label><input type="radio" name="q2" value="2"> Sometimes</label><br>
-<label><input type="radio" name="q2" value="3"> Often</label><br>
-<label><input type="radio" name="q2" value="4"> Always</label>
-
-<h3>3. I feel pressure to look fine.</h3>
-<label><input type="radio" name="q3" value="3"> True</label>
-<label><input type="radio" name="q3" value="1"> False</label>
-
-<h3>4. Daily stress (1–5)</h3>
-<input type="range" min="1" max="5" name="q4">
+<h3>How stressed are you daily? (1–5)</h3>
+<input type="range" min="1" max="5" value="3">
 
 <br><br>
-<button type="button" class="submit-btn" onclick="calculateResult()">Submit</button>
+<button type="button" class="submit-btn" onclick="calculateResult()">Submit Quiz</button>
 </form>
 
 <h2 id="result"></h2>
+<p style="font-size:0.8rem">Not a medical diagnosis.</p>
 </section>
 
 <script src="script.js"></script>
