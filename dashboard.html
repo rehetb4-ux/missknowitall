@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <title>Dashboard | Miss Know It All</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
+  
+  <nav class="navbar">
+    <div class="logo">Miss Know It All</div>
+    <a href="index.html" style="text-decoration:none; color:var(--blue); font-weight:bold;">← Home</a>
+  </nav>
 
-<section class="hero">
-  <h1 class="title">Your <span>Dashboard</span></h1>
-</section>
+  <section class="hero-alt">
+    <h1>Your <span>Dashboard</span></h1>
+  </section>
 
-<section class="features">
-  <div class="card" id="stressBox">🧠 Stress Level: Not taken</div>
-  <div class="card">📓 Confessions Stored Locally</div>
-</section>
+  <section class="features">
+    <div class="card">📈 Mood: Stable</div>
+    <div class="card">🧠 Stress: Moderate</div>
+    <div class="card">⭐ Premium: Inactive</div>
+  </section>
 
-<script src="script.js"></script>
+  
+
+  <script src="script.js"></script>
 </body>
 </html>
