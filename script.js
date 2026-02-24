@@ -1,41 +1,64 @@
-// --- FIX: Confession System ---
 function postConfession() {
     const input = document.getElementById("confessionInput");
-    const text = input.value.trim();
-    if (!text) return alert("Please type your secret first.");
-
     const wall = document.getElementById("confessionWall");
-    const newCard = document.createElement("div");
-    newCard.className = "card wall";
-    newCard.style.width = "100%";
-    newCard.innerHTML = `<p style="font-style:italic;">"${text}"</p><small style="color:#64748b;">— Posted just now</small>`;
-    
-    wall.prepend(newCard);
-    input.value = ""; // Clear input
-}
 
-// --- FIX: Quiz Result System ---
-function calculateQuiz() {
-    const form = new FormData(document.getElementById("quizForm"));
-    let score = 0;
-    let count = 0;
-    for (let v of form.values()) {
-        score += parseInt(v);
-        count++;
+    if (!input || !input.value.trim()) {
+        alert("Please write something first!");
+        return;
     }
 
-    if (count < 25) return alert("Please answer all 25 questions to get an accurate result.");
+    // Create the new vent card
+    const newVent = document.createElement("div");
+    newVent.className = "card";
+    newVent.innerHTML = `
+        <p style="font-style:italic;">"${input.value}"</p>
+        <small style="color: #94a3b8; display: block; margin-top: 10px;">— Posted just now</small>
+    `;
 
-    const resultDiv = document.getElementById("result");
-    let mood = score > 60 ? "High Stress 😟" : score > 30 ? "Moderate 😐" : "Balanced 😊";
-    let color = score > 60 ? "#ef4444" : score > 30 ? "#f97316" : "#22c55e";
+    // Add to top of wall
+    wall.prepend(newVent);
 
-    resultDiv.innerHTML = `
-        <div class="card" style="background:${color}; color:white; border:none; margin-top:30px; text-align:center;">
-            <h2>Result: ${mood}</h2>
-            <p>Your Score: ${score}/100</p>
-            <p style="margin-top:10px; font-size:0.9rem; opacity:0.9;">We recommend talking to a peer counselor on our Premium page.</p>
+    // Clear the input
+    input.value = "";
+}
+
+// Function for the Quiz
+function calculateQuiz() {
+    const form = document.getElementById("quizForm");
+    const resultArea = document.getElementById("quizResult");
+    
+    // Get all checked inputs
+    const answers = document.querySelectorAll('input[type="radio"]:checked');
+    
+    if (answers.length < 25) {
+        alert(`You've only answered ${answers.length}/25 questions. Please finish the quiz!`);
+        return;
+    }
+
+    let score = 0;
+    answers.forEach(input => {
+        score += parseInt(input.value);
+    });
+
+    let message = "";
+    let color = "";
+
+    if (score > 70) {
+        message = "High Stress: We recommend reaching out to a peer counselor.";
+        color = "#ef4444";
+    } else if (score > 40) {
+        message = "Moderate Stress: Try taking some time for yourself this weekend.";
+        color = "#f97316";
+    } else {
+        message = "You're doing great! Keep maintaining your mental balance.";
+        color = "#22c55e";
+    }
+
+    resultArea.innerHTML = `
+        <div class="card" style="background: ${color}; color: white; border: none;">
+            <h3>Result: ${score}/100</h3>
+            <p>${message}</p>
         </div>
     `;
-    resultDiv.scrollIntoView({ behavior: 'smooth' });
+    resultArea.scrollIntoView({ behavior: 'smooth' });
 }
