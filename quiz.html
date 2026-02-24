@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html>
-<head><link rel="stylesheet" href="style.css"></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz | Miss Know It All</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<nav class="navbar"><div class="logo">Miss<span>KnowItAll</span></div><a href="index.html">← Back</a></nav>
+<nav>
+    <div class="logo">Miss<span>KnowItAll</span></div>
+    <a href="index.html" style="text-decoration:none; color:inherit;">← Home</a>
+</nav>
 
-<div style="max-width: 800px; margin: 60px auto; padding: 0 20px;">
-    <h1>Stress <span>Check-In</span></h1>
-    <p style="margin-bottom: 40px; color: var(--text-muted);">25 questions to understand your mental landscape.</p>
-    <form id="quizForm"><div id="questionsContainer"></div>
-    <button type="button" class="btn-elite" style="width:100%; margin-top:40px; border:none;" onclick="calculateQuiz()">See My Results</button>
+<div class="container">
+    <h1>Mental Health Assessment</h1>
+    <p style="margin-bottom: 40px; color: #64748b;">Answer all 25 questions for an accurate stress score.</p>
+    
+    <form id="quizForm">
+        <div id="questions"></div>
+        <button type="button" class="btn" style="width:100%; margin-top: 30px;" onclick="calculateQuiz()">Submit Results</button>
     </form>
-    <div id="result"></div>
+    
+    <div id="quizResult" style="margin-top: 40px;"></div>
 </div>
 
 <script src="script.js"></script>
 <script>
-    const questions = [
+    const qList = [
         "Do you feel overwhelmed by your workload?", "Is sleep hard to come by?", 
         "Do you feel lonely around peers?", "Do you struggle to concentrate?",
         "Do you worry about your career daily?", "Do you feel irritable lately?",
@@ -31,17 +42,18 @@
         "Do you want professional help?"
     ];
 
-    const container = document.getElementById('questionsContainer');
-    questions.forEach((q, i) => {
-        container.innerHTML += `
-            <div style="background:white; padding:30px; border-radius:24px; margin-bottom:15px; border:1px solid #f1f5f9;">
-                <p style="font-weight:600; margin-bottom:15px;">${i+1}. ${q}</p>
-                <div style="display:flex; gap:10px;">
-                    <label><input type="radio" name="q${i}" value="4" required> Always</label>
-                    <label><input type="radio" name="q${i}" value="2"> Sometimes</label>
+    const qDiv = document.getElementById('questions');
+    qList.forEach((q, i) => {
+        qDiv.innerHTML += `
+            <div class="card">
+                <p><strong>${i+1}. ${q}</strong></p>
+                <div style="margin-top:10px;">
+                    <label><input type="radio" name="q${i}" value="4"> Always</label> &nbsp;
+                    <label><input type="radio" name="q${i}" value="2"> Sometimes</label> &nbsp;
                     <label><input type="radio" name="q${i}" value="0"> Never</label>
                 </div>
-            </div>`;
+            </div>
+        `;
     });
 </script>
 </body>
