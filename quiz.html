@@ -2,110 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mental Health Assessment | Miss Know It All</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Assessment | Miss Know It All</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar">
-    <div class="logo">Miss <span>Know It All</span></div>
-    <a href="index.html" style="text-decoration:none; color:var(--indigo); font-weight:bold;">← Back Home</a>
-</nav>
+<nav class="navbar"><div class="logo">Miss<span>KnowItAll</span></div><a href="index.html" style="text-decoration:none;">← Back</a></nav>
 
-<section class="hero-section" style="padding: 60px 10%;">
+<section class="hero" style="padding: 40px 5%;">
     <h1>Mental Health <span>Check-In</span></h1>
-    <p class="hero-p">Answer honestly. This data is 100% anonymous and used only for your personal insight.</p>
+    <p class="hero-p">25 Questions to help you understand your current state.</p>
 </section>
 
-<section class="mission-section" style="max-width: 800px; margin: auto; padding-bottom: 100px;">
-    <form id="quizForm" style="text-align:left; background:white; padding:40px; border-radius:24px; border:1px solid #f1f5f9; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
-        
-        <h2 style="color:var(--blue); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px;">Academic & Daily Stress</h2>
-        <p>1. How often do you feel overwhelmed by your workload?</p>
-        <input type="radio" name="q1" value="4"> Always | <input type="radio" name="q1" value="3"> Often | <input type="radio" name="q1" value="2"> Rarely | <input type="radio" name="q1" value="1"> Never
-
-        <p>2. Do you struggle to concentrate on lectures or assignments?</p>
-        <input type="radio" name="q2" value="4"> Always | <input type="radio" name="q2" value="1"> Never
-
-        <p>3. Do you feel "behind" compared to your peers?</p>
-        <input type="radio" name="q3" value="4"> Yes | <input type="radio" name="q3" value="1"> No
-
-        <p>4. How often do you procrastinate due to anxiety?</p>
-        <input type="radio" name="q4" value="4"> Daily | <input type="radio" name="q4" value="1"> Rarely
-
-        <p>5. Do you feel physical tension (neck, back, jaw) while studying?</p>
-        <input type="radio" name="q5" value="4"> Yes | <input type="radio" name="q5" value="1"> No
-
-        <h2 style="color:var(--blue); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top:40px;">Physical Well-being</h2>
-        <p>6. How many hours of sleep do you get on average?</p>
-        <input type="radio" name="q6" value="4"> Under 5 | <input type="radio" name="q6" value="2"> 5-7 | <input type="radio" name="q6" value="1"> 8+
-
-        <p>7. Do you have trouble falling asleep because your mind is racing?</p>
-        <input type="radio" name="q7" value="4"> Yes | <input type="radio" name="q7" value="1"> No
-
-        <p>8. Has your appetite changed significantly recently?</p>
-        <input type="radio" name="q8" value="4"> Yes | <input type="radio" name="q8" value="1"> No
-
-        <p>9. Do you feel chronically tired even after resting?</p>
-        <input type="radio" name="q9" value="4"> Yes | <input type="radio" name="q9" value="1"> No
-
-        <p>10. Do you experience sudden headaches or stomach pains?</p>
-        <input type="radio" name="q10" value="4"> Often | <input type="radio" name="q10" value="1"> Rarely
-
-        <h2 style="color:var(--blue); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top:40px;">Social & Emotional</h2>
-        <p>11. Do you avoid social gatherings because you lack energy?</p>
-        <input type="radio" name="q11" value="4"> Yes | <input type="radio" name="q11" value="1"> No
-
-        <p>12. How often do you feel lonely even when around others?</p>
-        <input type="radio" name="q12" value="4"> Often | <input type="radio" name="q12" value="1"> Never
-
-        <p>13. Do you feel irritable or annoyed by small things?</p>
-        <input type="radio" name="q13" value="4"> Often | <input type="radio" name="q13" value="1"> Rarely
-
-        <p>14. Do you feel like you have to "mask" your emotions to fit in?</p>
-        <input type="radio" name="q14" value="4"> Yes | <input type="radio" name="q14" value="1"> No
-
-        <p>15. Do you struggle to find joy in hobbies you used to love?</p>
-        <input type="radio" name="q15" value="4"> Yes | <input type="radio" name="q15" value="1"> No
-
-        <h2 style="color:var(--blue); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top:40px;">Self-Perception</h2>
-        <p>16. Do you feel like a failure if you don't get a perfect grade?</p>
-        <input type="radio" name="q16" value="4"> Always | <input type="radio" name="q16" value="1"> No
-
-        <p>17. Do you worry about your future career daily?</p>
-        <input type="radio" name="q17" value="4"> Yes | <input type="radio" name="q17" value="1"> No
-
-        <p>18. Do you feel like you don't deserve your successes (Imposter Syndrome)?</p>
-        <input type="radio" name="q18" value="4"> Yes | <input type="radio" name="q18" value="1"> No
-
-        <p>19. How often do you compare yourself to people on social media?</p>
-        <input type="radio" name="q19" value="4"> Constantly | <input type="radio" name="q19" value="1"> Rarely
-
-        <p>20. Do you feel like your parents or teachers have unrealistic expectations?</p>
-        <input type="radio" name="q20" value="4"> Yes | <input type="radio" name="q20" value="1"> No
-
-        <h2 style="color:var(--blue); border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-top:40px;">Coping & Support</h2>
-        <p>21. Do you have a safe person you can talk to about your feelings?</p>
-        <input type="radio" name="q21" value="1"> Yes | <input type="radio" name="q21" value="4"> No
-
-        <p>22. Do you use unhealthy habits (scrolling, caffeine, etc.) to escape stress?</p>
-        <input type="radio" name="q22" value="4"> Often | <input type="radio" name="q22" value="1"> Rarely
-
-        <p>23. Do you feel that your mental health is a priority to you?</p>
-        <input type="radio" name="q23" value="1"> Yes | <input type="radio" name="q23" value="4"> No
-
-        <p>24. Have you ever felt that "giving up" would be easier?</p>
-        <input type="radio" name="q24" value="10"> Yes | <input type="radio" name="q24" value="1"> No
-
-        <p>25. Do you believe things will get better in the next 6 months?</p>
-        <input type="radio" name="q25" value="1"> Yes | <input type="radio" name="q25" value="4"> No
-
-        <br><br>
-        <button type="button" class="primary-btn" style="width:100%" onclick="calculateQuiz()">Submit Full Assessment</button>
+<div class="quiz-container">
+    <form id="quizForm">
+        <div id="questionsContainer"></div>
+        <button type="button" class="btn-primary" onclick="calculateQuiz()" style="margin: 30px auto; display: block;">Submit Assessment</button>
     </form>
-    <div id="quizResult" style="margin-top:30px;"></div>
-</section>
+    <div id="quizResult"></div>
+</div>
 
-<button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
 <script src="script.js"></script>
+<script>
+    const questions = [
+        "Do you feel overwhelmed by your workload?", "Is your sleep quality poor?", 
+        "Do you feel lonely around peers?", "Do you struggle to concentrate?",
+        "Do you worry about your career daily?", "Do you feel irritable lately?",
+        "Is it hard to find joy in hobbies?", "Do you feel 'behind' in life?",
+        "Do you experience physical stress pain?", "Do you procrastinate often?",
+        "Do you feel judged by others?", "Are you tired even after sleeping?",
+        "Do you avoid social events?", "Do you feel pressure to look 'fine'?",
+        "Is your appetite unusual lately?", "Do you feel like a failure often?",
+        "Do you struggle with 'Imposter Syndrome'?", "Do you feel expectations are too high?",
+        "Do you use social media to escape?", "Do you have a safe person to talk to?",
+        "Do you feel your mental health is a priority?", "Do you feel burnt out?",
+        "Do you struggle to make decisions?", "Do you feel hopeless about the future?",
+        "Do you want professional help?"
+    ];
+
+    const container = document.getElementById('questionsContainer');
+    questions.forEach((q, i) => {
+        container.innerHTML += `
+            <div class="question-block">
+                <p style="font-weight:600; margin-bottom:15px;">${i+1}. ${q}</p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <label><input type="radio" name="q${i}" value="4"> Always</label>
+                    <label><input type="radio" name="q${i}" value="2"> Sometimes</label>
+                    <label><input type="radio" name="q${i}" value="0"> Never</label>
+                </div>
+            </div>
+        `;
+    });
+</script>
 </body>
 </html>
