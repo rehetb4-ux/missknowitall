@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mental Health Quiz</title>
+  <title>Quiz</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
 
 <section class="hero">
-  <h1 class="title">Mental Health <span>Check-In</span></h1>
+  <a href="index.html" style="text-decoration:none; color:var(--blue); font-weight:bold;">← Home</a>
+  <h1 class="title">Stress <span>Check-In</span></h1>
 </section>
 
-<section class="mission">
-<form id="quizForm">
+<section style="max-width:500px; margin:auto; padding:20px;">
+  <form id="quizForm">
+    <h3>1. How often do you feel overwhelmed?</h3>
+    <input type="radio" name="q1" value="1"> Rarely | 
+    <input type="radio" name="q1" value="3"> Often | 
+    <input type="radio" name="q1" value="4"> Daily
 
-<h3>1. When stressed, what do you do?</h3>
-<label><input type="radio" name="q1" value="1"> Deal with it</label><br>
-<label><input type="radio" name="q1" value="2"> Stress then calm</label><br>
-<label><input type="radio" name="q1" value="3"> Overthink</label><br>
-<label><input type="radio" name="q1" value="4"> Shut down</label>
+    <h3>2. Quality of sleep lately?</h3>
+    <input type="radio" name="q2" value="1"> Great | 
+    <input type="radio" name="q2" value="3"> Average | 
+    <input type="radio" name="q2" value="4"> Poor
 
-<h3>2. How emotionally drained are you?</h3>
-<label><input type="radio" name="q2" value="1"> Rarely</label><br>
-<label><input type="radio" name="q2" value="2"> Sometimes</label><br>
-<label><input type="radio" name="q2" value="3"> Often</label><br>
-<label><input type="radio" name="q2" value="4"> Always</label>
-
-<h3>3. I feel pressure to look fine.</h3>
-<label><input type="radio" name="q3" value="3"> True</label>
-<label><input type="radio" name="q3" value="1"> False</label>
-
-<h3>4. Daily stress (1–5)</h3>
-<input type="range" min="1" max="5" value="3">
-
-<h3>5. Motivation level (1–5)</h3>
-<input type="range" min="1" max="5" value="3">
-
-<br><br>
-<button type="button" class="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
-</form>
-
-<h2 id="result"></h2>
-<p style="font-size:0.8rem">Not a medical diagnosis.</p>
+    <h3>3. Current stress level (1-5):</h3>
+    <input type="range" name="q3" min="1" max="5">
+    
+    <br><br>
+    <button type="button" class="submit-btn" onclick="calculateResult()">Get Results</button>
+  </form>
+  <h2 id="result" style="color:var(--blue); text-align:center;"></h2>
 </section>
 
 <script src="script.js"></script>
