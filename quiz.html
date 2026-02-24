@@ -4,67 +4,73 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="background: var(--bg-light);">
+<body>
+<nav style="padding:20px 10%; background:white; border-bottom:1px solid #eee;">
+    <a href="index.html" style="text-decoration:none; color:var(--primary-blue); font-weight:700;">← Back to Sanctuary</a>
+</nav>
 
-<section style="max-width: 800px; margin: auto;">
-    <h1 style="font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 20px;">Stress <span>Check-In</span></h1>
-    <p style="margin-bottom: 40px; color: #64748B;">Answer honestly. No one will see these results but you.</p>
-
+<div style="max-width: 800px; margin: 60px auto; padding: 0 20px;">
+    <h1 style="font-size: 3rem; color:var(--primary-blue);">Mental Health <span>Quiz</span></h1>
+    <p style="margin-bottom: 40px; color:#64748b;">Answer all 25 questions to receive your emotional clarity score.</p>
+    
     <form id="quizForm">
-        <div id="quizContainer"></div>
-        <button type="button" class="btn-glow" style="width:100%; margin-top:40px;" onclick="showResult()">Get My Assessment</button>
+        <div id="quizQuestions"></div>
+        <button type="button" class="btn btn-primary" style="width:100%; margin-top:40px;" onclick="calculateQuiz()">Submit Assessment</button>
     </form>
-
-    <div id="resultOutput"></div>
-</section>
+    
+    <div id="quizResult" style="margin-top:40px;"></div>
+</div>
 
 <script>
     const questions = [
-        "Do you feel overwhelmed by your workload?", "Is sleep hard to come by?", "Do you feel lonely around peers?", 
+        "Do you feel overwhelmed by your workload?", "Is sleep hard to come by lately?", "Do you feel lonely around peers?", 
         "Do you struggle to concentrate?", "Do you worry about your career daily?", "Do you feel irritable lately?",
         "Is it hard to find joy in hobbies?", "Do you feel 'behind' in life?", "Do you experience physical stress pain?",
         "Do you procrastinate often?", "Do you feel judged by others?", "Are you tired even after sleeping?",
         "Do you avoid social events?", "Do you feel pressure to look 'fine'?", "Is your appetite unusual lately?",
         "Do you feel like a failure often?", "Do you struggle with Imposter Syndrome?", "Are expectations too high?",
         "Do you use social media to escape?", "Do you have a safe person to talk to?", "Is mental health your priority?",
-        "Do you feel burnt out?", "Is it hard to make decisions?", "Do you feel hopeless?", "Would you like help?"
+        "Do you feel burnt out?", "Is it hard to make decisions?", "Do you feel hopeless?", "Would you like professional help?"
     ];
 
-    const container = document.getElementById('quizContainer');
+    const qContainer = document.getElementById('quizQuestions');
     questions.forEach((q, i) => {
-        container.innerHTML += `
-            <div class="vent-item" style="border-left: none; margin-top:15px; border-bottom: 1px solid #F1F5F9;">
-                <p style="font-weight:600; margin-bottom:15px; color:var(--primary);">${i+1}. ${q}</p>
+        qContainer.innerHTML += `
+            <div class="card" style="margin-bottom:15px;">
+                <p style="font-weight:600; margin-bottom:15px;">${i+1}. ${q}</p>
                 <div style="display:flex; gap:20px;">
-                    <label><input type="radio" name="q${i}" value="4"> Always</label>
+                    <label><input type="radio" name="q${i}" value="4" required> Always</label>
                     <label><input type="radio" name="q${i}" value="2"> Sometimes</label>
                     <label><input type="radio" name="q${i}" value="0"> Never</label>
                 </div>
             </div>`;
     });
 
-    function showResult() {
-        const selected = document.querySelectorAll('input:checked');
-        if(selected.length < 25) {
-            alert(`Please answer all 25 questions. You missed ${25 - selected.length}.`);
+    function calculateQuiz() {
+        const checked = document.querySelectorAll('input:checked');
+        const resultDiv = document.getElementById('quizResult');
+        
+        if(checked.length < 25) {
+            alert(`Please answer all questions! You missed ${25 - checked.length}.`);
             return;
         }
 
-        let score = 0;
-        selected.forEach(s => score += parseInt(s.value));
+        let total = 0;
+        checked.forEach(radio => total += parseInt(radio.value));
+        
+        // Calculate percentage (Max score 100)
+        let score = total; 
+        let status = score > 70 ? "High Stress" : score > 40 ? "Moderate" : "Healthy Balance";
+        let color = score > 70 ? "#EF4444" : "var(--primary-blue)";
 
-        const output = document.getElementById('resultOutput');
-        let mood = score > 70 ? "High Stress (Take a break!)" : score > 40 ? "Moderate Stress" : "Balanced";
-        let color = score > 70 ? "#EF4444" : score > 40 ? "var(--accent)" : "var(--support)";
-
-        output.innerHTML = `
-            <div class="vent-item" style="background:var(--primary); color:white; text-align:center; border:none; padding:50px;">
-                <h2 style="font-size:2rem; margin-bottom:10px;">Your Score: ${score}/100</h2>
-                <h3 style="color:${color}; font-size:1.5rem;">${mood}</h3>
-                <p style="margin-top:20px; font-size:0.9rem; opacity:0.8;">Continue to use the wall to vent and manage your daily clarity.</p>
-                <button class="btn-glow" style="margin-top:30px; background:white; color:var(--primary);" onclick="location.href='index.html'">Return Home</button>
+        resultDiv.innerHTML = `
+            <div class="card" style="background:var(--deep-navy); color:white; text-align:center; padding:60px;">
+                <h2 style="font-size:3rem; color:var(--accent-orange);">${score}%</h2>
+                <h3 style="margin:10px 0;">Status: ${status}</h3>
+                <p style="opacity:0.8;">Thank you for your honesty. Consider exploring our Premium Care for deeper support.</p>
+                <button class="btn btn-orange" style="margin-top:20px;" onclick="location.href='index.html'">Return Home</button>
             </div>`;
-        output.scrollIntoView({ behavior: 'smooth' });
+        resultDiv.scrollIntoView({ behavior: 'smooth' });
     }
 </script>
 </body>
