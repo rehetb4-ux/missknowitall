@@ -1,84 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&display=swap');
-
-:root {
-    --primary-blue: #2563EB;
-    --deep-navy: #0F172A;
-    --soft-white: #F8FAFC;
-    --accent-orange: #F59E0B;
-    --calm-tint: #E0F2FE;
-    --text-navy: #1E293B;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--soft-white);
-    color: var(--text-navy);
-    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
 }
 
-/* --- 1. Hero Section (Split Layout) --- */
-.hero {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    align-items: center;
-    padding: 100px 10%;
-    background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
-    gap: 40px;
+.glass {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-.hero h1 { font-size: 4.5rem; color: var(--primary-blue); font-weight: 800; line-height: 1; }
-.hero .quote { font-size: 1.5rem; margin: 20px 0; font-weight: 500; }
-.hero .quote span { color: var(--primary-blue); }
-
-/* --- Buttons (Pill Shaped) --- */
-.btn {
-    display: inline-block;
-    padding: 16px 32px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s;
-    border: none;
-    cursor: pointer;
+.neon-glow {
+    text-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
 }
-.btn-primary { background: var(--primary-blue); color: white; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3); }
-.btn-orange { background: var(--accent-orange); color: white; }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
 
-/* --- 2. Blue Data Section --- */
-.data-strip {
-    background: var(--primary-blue);
-    color: white;
-    padding: 80px 10%;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
 }
-.stat h2 { font-size: 4rem; font-weight: 800; margin-bottom: 10px; }
-.stat p { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
-
-/* --- 4. Features Grid --- */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    padding: 80px 10%;
+::-webkit-scrollbar-track {
+    background: #0f172a;
 }
-.card {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: 0.3s;
-}
-.card:hover { transform: translateY(-10px); }
-.icon-circle { width: 50px; height: 50px; background: var(--calm-tint); border-radius: 50%; margin-bottom: 20px; }
-
-/* --- Anonymous Wall Container --- */
-.wall-box { max-width: 800px; margin: 40px auto; padding: 20px; }
-textarea {
-    width: 100%; height: 150px; border-radius: 20px; padding: 20px;
-    border: 2px solid var(--calm-tint); font-family: inherit; margin-bottom: 15px;
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 10px;
 }
