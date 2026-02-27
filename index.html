@@ -3,52 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miss Know It All</title>
+    <title>MindFlow | Modern Mental Health</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-slate-950 text-white antialiased">
 
-<section class="hero">
-    <div>
-        <h1>Miss Know It All</h1>
-        <p class="quote"><span>Clarity</span> begins the moment you choose to <span>speak</span>.</p>
-        <p style="margin-bottom: 30px; color: #64748b;">A student-first sanctuary for anonymous sharing and mental health tracking.</p>
-        <a href="#wall-anchor" class="btn btn-primary">Explore the Wall</a>
-        <a href="quiz.html" class="btn" style="color: var(--primary-blue); border: 2px solid var(--primary-blue);">Take the Quiz</a>
-    </div>
-    <div style="background: var(--calm-tint); height: 400px; border-radius: 30px;">
+    <button onclick="window.location.href='https://google.com'" class="fixed top-4 right-4 z-50 bg-red-600 px-4 py-2 rounded-full font-bold text-xs border-2 border-white">QUICK EXIT</button>
+
+    <header class="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 space-y-6">
+            <h1 class="text-7xl font-black uppercase leading-none">Radical <br><span class="text-violet-500">Empathy.</span></h1>
+            <p class="text-slate-400 text-xl">The modern ecosystem for mental wellness.</p>
+            <a href="#reframer" class="inline-block bg-violet-600 px-8 py-4 rounded-xl font-bold">GET STARTED</a>
         </div>
-</section>
+        <div class="md:w-1/2 mt-10 md:mt-0 glass p-6 rounded-3xl">
+            <canvas id="heroChart"></canvas>
+        </div>
+    </header>
 
-<section class="data-strip">
-    <div class="stat"><h2>1 in 5</h2><p>Students Struggle</p></div>
-    <div class="stat"><h2>100%</h2><p>Anonymous</p></div>
-    <div class="stat"><h2>24/7</h2><p>Accessible</p></div>
-</section>
+    <section id="reframer" class="max-w-4xl mx-auto p-10 bg-slate-900 my-20 rounded-[3rem] border border-slate-800">
+        <h2 class="text-3xl font-black mb-6">Thought Deconstructor</h2>
+        <textarea id="userInput" placeholder="I always fail..." class="w-full h-32 p-4 bg-slate-950 rounded-2xl border-2 border-slate-800 focus:border-violet-500 outline-none"></textarea>
+        <button onclick="reframeThought()" class="w-full mt-4 bg-cyan-400 text-black font-black py-4 rounded-2xl uppercase">Analyze</button>
+        <div id="result" class="hidden mt-6 p-6 bg-violet-900/20 rounded-xl border-l-4 border-violet-500">
+            <h4 id="distortionType" class="font-bold text-violet-400"></h4>
+            <p id="reframedText" class="text-slate-300 italic"></p>
+        </div>
+    </section>
 
-<section id="wall-anchor" class="wall-box">
-    <h2 style="text-align:center; margin-bottom:30px;">Anonymous Confession Wall</h2>
-    <textarea id="ventInput" placeholder="You're safe here. No names. No tracking."></textarea>
-    <div style="text-align: right;">
-        <button class="btn btn-primary" onclick="submitVent()">Post to Wall</button>
-    </div>
-    <div id="wallDisplay" style="margin-top:40px;"></div>
-</section>
+    <section class="max-w-7xl mx-auto p-6 grid md:grid-cols-3 gap-10 py-20">
+        <div class="glass p-8 rounded-3xl">
+            <h3 class="font-bold mb-4 uppercase text-sm tracking-widest text-slate-500">Log Today</h3>
+            <input type="number" id="moodIn" placeholder="Mood (1-10)" class="w-full mb-4 p-3 bg-slate-800 rounded-lg">
+            <input type="number" id="sleepIn" placeholder="Sleep (Hours)" class="w-full mb-4 p-3 bg-slate-800 rounded-lg">
+            <button onclick="updateChart()" class="w-full bg-violet-600 py-3 rounded-xl font-bold">LOG DATA</button>
+        </div>
+        <div class="md:col-span-2 glass p-8 rounded-3xl min-h-[300px]">
+            <canvas id="moodChart"></canvas>
+        </div>
+    </section>
 
-<script>
-    function submitVent() {
-        const input = document.getElementById('ventInput');
-        const wall = document.getElementById('wallDisplay');
-        if(!input.value.trim()) return;
-
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.style.marginBottom = '20px';
-        card.innerHTML = `<p>"${input.value}"</p><small style="color:var(--primary-blue)">• Anonymous Student</small>`;
-        
-        wall.prepend(card);
-        input.value = '';
-    }
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
