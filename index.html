@@ -4,538 +4,416 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MindSpace — Mental Health Ecosystem</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 :root {
-  --bg: #FFFBF9;           /* Cleaner off-white */
-  --surface: #F8EEE7;      /* Warm linen */
-  --card: #FFFFFF;         /* Pure white cards for better contrast */
-  --border: #E8D8D0;       /* Defined but soft border */
-  --white: #2D2424;        /* Darker brown for better readability (Accessibility) */
-  --accent: #FF7E67;       /* Keep the Coral Punch */
-  --accent2: #B08EAD;      /* Muted Lavender (complements Coral better than Terracotta) */
+  --bg:        #F2F8F4;
+  --bg2:       #EAF3EC;
+  --surface:   #DCF0E2;
+  --surface2:  #CDEBD6;
+  --card:      #FFFFFF;
+  --card2:     #F7FBF8;
+  --text:      #0F2B1A;
+  --text2:     #2D5C3E;
+  --muted:     #6B8F77;
+  --primary:   #2A7A4B;
+  --primary2:  #1E5E38;
+  --accent:    #4CAF72;
+  --accent2:   #38976A;
+  --lime:      #8BC34A;
+  --teal:      #26A69A;
+  --sage:      #7BAF8A;
+  --emerald:   #00897B;
+  --mint:      #A8D5B5;
+  --forest:    #1B5E20;
+  --warn:      #C0392B;
+  --gold:      #C8A84B;
+  --border:    rgba(42,122,75,0.12);
+  --border2:   rgba(42,122,75,0.22);
+  --glow:      rgba(42,122,75,0.2);
+  --glow2:     rgba(76,175,114,0.18);
+  --shadow:    rgba(15,43,26,0.08);
+  --nav-h:     66px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);
-  color:var(--white);
-  font-family:'DM Sans',sans-serif;
-  overflow-x:hidden;
-  cursor:none;
-}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5;}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg2);}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px;}
 
-/* ── Cursor ── */
-#cur{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
-#cur2{position:fixed;width:32px;height:32px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s ease;opacity:.5;}
-body *{cursor:none!important;}
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:500;padding:0 5vw;display:flex;justify-content:space-between;align-items:center;height:var(--nav-h);background:rgba(242,248,244,0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;text-decoration:none;color:var(--text);display:flex;align-items:center;gap:.5rem;letter-spacing:-0.02em;}
+.logo-dot{width:9px;height:9px;background:var(--accent);border-radius:50%;box-shadow:0 0 10px var(--glow2);animation:pdot 2.5s ease infinite;}
+@keyframes pdot{0%,100%{transform:scale(1);box-shadow:0 0 8px var(--glow2);}50%{transform:scale(1.3);box-shadow:0 0 18px var(--glow2);}}
+.logo span{color:var(--primary);}
+.nav-links{display:flex;gap:0;list-style:none;align-items:center;}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:.83rem;font-weight:500;padding:0 1rem;height:var(--nav-h);display:flex;align-items:center;border-bottom:2.5px solid transparent;transition:color .2s,border-color .2s;}
+.nav-links a:hover{color:var(--primary);border-bottom-color:var(--accent);}
+.nav-pill{background:var(--primary)!important;color:#fff!important;border-radius:8px!important;padding:.5rem 1.4rem!important;height:auto!important;font-weight:600!important;border-bottom:none!important;font-size:.8rem!important;margin-left:.7rem;box-shadow:0 4px 18px var(--glow);transition:all .2s!important;}
+.nav-pill:hover{background:var(--primary2)!important;transform:translateY(-1px);box-shadow:0 8px 24px var(--glow)!important;}
 
-/* ── Nav ── */
-nav{
-  position:fixed;top:0;width:100%;z-index:200;
-  padding:1.1rem 5vw;
-  display:flex;justify-content:space-between;align-items:center;
-  background: #E6F0EC; /* soft sage green */
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-}
-.logo{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;text-decoration:none;color:var(--black);letter-spacing:-0.02em;}
-.logo span{color:var(--accent);}
-.nav-links{display:flex;gap:2rem;list-style:none;}
-.nav-links a{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
-.nav-links a:hover{color:var(--accent2);}
-.nav-pill{background:var(--accent);color:#fff;padding:.48rem 1.3rem;border-radius:50px;font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s,transform .15s;}
-.nav-pill:hover{background:#9e82ff;transform:translateY(-1px);}
+#qexit{position:fixed;bottom:2rem;right:2rem;z-index:999;background:var(--warn);color:#fff;border:none;border-radius:8px;padding:.6rem 1.3rem;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 18px rgba(192,57,43,0.35);transition:all .2s;}
+#qexit:hover{transform:translateY(-2px);}
 
-/* Quick Exit */
-#qexit{
-  position:fixed;bottom:2rem;right:2rem;z-index:999;
-  background:var(--warn);color:#fff;
-  border:none;border-radius:50px;
-  padding:.6rem 1.4rem;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;
-  box-shadow:0 0 24px rgba(255,107,107,.35);
-  transition:transform .2s,box-shadow .2s;
-}
-#qexit:hover{transform:scale(1.05);}
+/* SHARED */
+section.page-section{padding:7rem 5vw;position:relative;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;}
+.s-label{font-size:.63rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;display:flex;align-items:center;gap:.55rem;}
+.s-label::before{content:'';width:20px;height:2px;background:var(--accent);border-radius:2px;}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,3.8vw,3.6rem);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin-bottom:1.2rem;color:var(--text);}
+.s-title em{font-style:italic;color:var(--primary);}
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:.85rem 2rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:all .25s;cursor:pointer;box-shadow:0 4px 20px var(--glow);}
+.btn-primary:hover{background:var(--primary2);transform:translateY(-2px);box-shadow:0 8px 28px var(--glow);}
+.btn-ghost{background:transparent;color:var(--text2);border:1.5px solid var(--border2);padding:.85rem 2rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:all .25s;cursor:pointer;}
+.btn-ghost:hover{border-color:var(--accent);color:var(--primary);background:rgba(76,175,114,0.07);}
 
-/* ── Hero ── */
-#home{
-  min-height:100vh;
-  display:grid;grid-template-columns:1fr 1fr;
-  align-items:center;
-  padding:9rem 5vw 5rem;
-  position:relative;overflow:hidden;
-}
-.hero-glow{
-  position:absolute;top:10%;right:5%;
-  width:600px;height:600px;
-  background:radial-gradient(circle,rgba(124,92,252,.18) 0%,transparent 70%);
-  border-radius:50%;pointer-events:none;
-  animation:pulse 4s ease-in-out infinite;
-}
-.hero-glow2{
-  position:absolute;bottom:5%;left:0;
-  width:400px;height:400px;
-  background:radial-gradient(circle,rgba(0,229,176,.1) 0%,transparent 70%);
-  border-radius:50%;pointer-events:none;
-}
-.hero-content{position:relative;z-index:1;}
-.badge{
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:rgba(124,92,252,.12);
-  border:1px solid rgba(124,92,252,.3);
-  border-radius:50px;
-  padding:.35rem .9rem;
-  font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:1.8rem;
-  animation:fadeUp .7s ease both;
-}
-.badge-dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:blink 1.5s ease infinite;}
-h1{
-  font-family:'Syne',sans-serif;font-size:clamp(3.5rem,6vw,6.5rem);
-  font-weight:800;line-height:.95;letter-spacing:-.03em;
-  margin-bottom:1.5rem;
-  animation:fadeUp .7s .1s ease both;
-}
-h1 em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--accent);font-weight:400;}
-.hero-sub{
-  font-size:1rem;color:var(--muted);line-height:1.75;
-  max-width:430px;margin-bottom:2.5rem;
-  animation:fadeUp .7s .2s ease both;
-}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s .3s ease both;}
-.btn-primary{
-  background:linear-gradient(135deg,var(--accent),#9e82ff);
-  color:#fff;border:none;
-  padding:.85rem 2rem;border-radius:50px;
-  font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.04em;
-  text-decoration:none;display:inline-block;
-  box-shadow:0 8px 32px rgba(124,92,252,.35);
-  transition:transform .2s,box-shadow .2s;
-}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(124,92,252,.5);}
-.btn-ghost{
-  background:transparent;color:var(--white);
-  border:1.5px solid var(--border);
-  padding:.85rem 2rem;border-radius:50px;
-  font-family:'DM Sans',sans-serif;font-weight:500;font-size:.88rem;
-  text-decoration:none;display:inline-block;
-  transition:border-color .2s,color .2s;
-}
-.btn-ghost:hover{border-color:var(--accent2);color:var(--accent2);}
+/* HERO */
+#home{min-height:100vh;display:flex;align-items:center;padding:9rem 5vw 5rem;border-bottom:1px solid var(--border2);position:relative;}
+.hero-inner{max-width:720px;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:.55rem;background:rgba(42,122,75,0.08);border:1px solid rgba(42,122,75,0.22);border-radius:100px;padding:.38rem 1.1rem;font-size:.69rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--primary);margin-bottom:2.2rem;}
+.badge-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--glow2);}
+h1{font-family:'Playfair Display',serif;font-size:clamp(3.2rem,6vw,6.5rem);font-weight:700;line-height:1.0;letter-spacing:-0.03em;margin-bottom:1.6rem;color:var(--text);}
+h1 em{font-style:italic;color:var(--primary);}
+.hero-sub{font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:520px;margin-bottom:2.8rem;font-weight:300;}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap;}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--border2);flex-wrap:wrap;}
+.hstat .num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--primary);line-height:1;}
+.hstat .lbl{font-size:.72rem;color:var(--muted);margin-top:.35rem;line-height:1.45;}
 
-/* Hero Right - Floating Cards */
-.hero-right{position:relative;z-index:1;height:500px;}
-.float-card{
-  position:absolute;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:1.2rem 1.5rem;
-  backdrop-filter:blur(10px);
-}
-.fc1{top:0;right:0;width:240px;animation:float1 5s ease-in-out infinite;}
-.fc2{top:35%;left:0;width:200px;animation:float2 6s ease-in-out infinite;}
-.fc3{bottom:0;right:10%;width:220px;animation:float1 7s 1s ease-in-out infinite;}
-.float-card .fc-label{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
-.float-card .fc-val{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;line-height:1;}
-.float-card .fc-sub{font-size:.75rem;color:var(--muted);margin-top:.25rem;}
-.fc-bar{height:4px;border-radius:2px;margin-top:.75rem;background:rgba(255,255,255,.08);}
-.fc-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
-.mood-row{display:flex;gap:.4rem;margin-top:.5rem;}
-.mood-pip{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+/* ABOUT */
+#about{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);}
+.about-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:6rem;align-items:start;}
+.about-body p{color:var(--text2);line-height:1.85;font-size:.93rem;margin-bottom:1.1rem;font-weight:300;}
+.conditions-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.cond-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.4rem;transition:all .25s;position:relative;overflow:hidden;}
+.cond-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--primary),var(--accent));transform:scaleX(0);transition:transform .3s;}
+.cond-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 30px var(--shadow);}
+.cond-card:hover::after{transform:scaleX(1);}
+.cond-icon{font-size:1.5rem;margin-bottom:.6rem;display:block;}
+.cond-card h4{font-size:.88rem;font-weight:600;margin-bottom:.35rem;color:var(--text);}
+.cond-card p{font-size:.77rem;color:var(--muted);line-height:1.65;}
+.cond-pill{display:inline-block;background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.22);border-radius:4px;padding:.12rem .55rem;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-top:.6rem;}
 
-/* ── Stats ── */
-.stats-strip{
-  background:var(--surface);
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  padding:2.5rem 5vw;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;
-}
-.stat-box{text-align:center;}
-.stat-box .num{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.stat-box .lbl{font-size:.75rem;color:var(--muted);letter-spacing:.06em;margin-top:.25rem;}
+/* BREATHE */
+#breathe{background:var(--bg);border-bottom:1px solid var(--border2);text-align:center;}
+.breathe-container{max-width:480px;margin:2.5rem auto 0;}
+.breathe-ring-wrap{position:relative;width:260px;height:260px;margin:0 auto 2rem;display:flex;align-items:center;justify-content:center;}
+.breathe-svg{position:absolute;inset:0;transform:rotate(-90deg);}
+.breathe-svg circle{fill:none;stroke-width:3.5;stroke-linecap:round;}
+.br-track{stroke:var(--surface);}
+.br-progress{stroke:var(--primary);stroke-dasharray:722;stroke-dashoffset:722;filter:drop-shadow(0 0 8px rgba(42,122,75,0.4));transition:stroke-dashoffset .1s linear;}
+.breathe-inner{position:relative;width:195px;height:195px;border-radius:50%;background:radial-gradient(circle,rgba(76,175,114,0.15),rgba(42,122,75,0.04));border:2px solid rgba(42,122,75,0.2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .5s ease;}
+.breathe-inner.expanding{transform:scale(1.22);background:radial-gradient(circle,rgba(76,175,114,0.25),rgba(42,122,75,0.06));box-shadow:0 0 60px rgba(76,175,114,0.25);}
+.breathe-inner.holding{background:radial-gradient(circle,rgba(200,168,75,0.2),rgba(200,168,75,0.04));border-color:rgba(200,168,75,0.4);box-shadow:0 0 60px rgba(200,168,75,0.2);}
+.breathe-inner.contracting{transform:scale(0.88);background:radial-gradient(circle,rgba(38,166,154,0.15),rgba(38,166,154,0.03));border-color:rgba(38,166,154,0.3);box-shadow:0 0 40px rgba(38,166,154,0.18);}
+.breathe-emoji{font-size:2.2rem;margin-bottom:.3rem;}
+#breathePhase{font-size:.78rem;font-weight:700;color:var(--primary);letter-spacing:.14em;text-transform:uppercase;}
+#breatheCount{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--text);line-height:1;margin-top:.15rem;}
+.breathe-label{font-size:.78rem;color:var(--muted);}
+.breathe-controls{display:flex;gap:1rem;justify-content:center;align-items:center;flex-wrap:wrap;}
+.breathe-btn{background:var(--primary);color:#fff;border:none;border-radius:8px;padding:.65rem 1.7rem;font-family:'DM Sans',sans-serif;font-size:.84rem;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px var(--glow);}
+.breathe-btn:hover{background:var(--primary2);transform:translateY(-1px);}
+.breathe-select{background:var(--card);border:1.5px solid var(--border2);color:var(--text2);padding:.62rem 1rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none;cursor:pointer;}
+#breatheCycles{font-size:.78rem;color:var(--muted);margin-top:1rem;}
 
-/* ── Section base ── */
-section.page-section{padding:7rem 5vw;position:relative;}
-.s-label{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;}
-.s-title{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-bottom:1.5rem;}
-.s-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--accent);font-weight:400;}
-
-/* ── About ── */
-#about{background:var(--surface);}
-.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;}
-.about-body p{color:var(--muted);line-height:1.8;font-size:.95rem;margin-bottom:1.2rem;}
-.conditions-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.cond-card{
-  background:var(--card);border:1px solid var(--border);border-radius:12px;
-  padding:1.4rem;transition:transform .2s,border-color .3s;
-}
-.cond-card:hover{transform:translateY(-4px);border-color:rgba(124,92,252,.4);}
-.cond-icon{font-size:1.6rem;margin-bottom:.6rem;}
-.cond-card h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.4rem;}
-.cond-card p{font-size:.78rem;color:var(--muted);line-height:1.6;}
-.cond-pill{display:inline-block;background:rgba(124,92,252,.12);border:1px solid rgba(124,92,252,.2);border-radius:50px;padding:.15rem .6rem;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:.6rem;}
-
-/* ── AI Chatbot ── */
-#chat-section{background:var(--bg);}
-.chat-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
-.chat-info p{color:var(--muted);line-height:1.8;font-size:.95rem;margin-bottom:1rem;}
-.chat-box{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;
-  display:flex;flex-direction:column;height:520px;overflow:hidden;
-}
-.chat-header{
-  padding:1rem 1.4rem;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:.75rem;
-}
-.chat-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
-.chat-hinfo h4{font-size:.9rem;font-weight:700;}
-.chat-hinfo span{font-size:.7rem;color:var(--accent2);}
-.chat-hinfo .online{display:flex;align-items:center;gap:.3rem;}
-.online-dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);}
-.chat-msgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.8rem;}
-.chat-msgs::-webkit-scrollbar{width:4px;}
-.chat-msgs::-webkit-scrollbar-track{background:transparent;}
-.chat-msgs::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-.msg{max-width:82%;padding:.7rem 1rem;border-radius:12px;font-size:.85rem;line-height:1.6;animation:fadeUp .3s ease both;}
-.msg.bot{background:rgba(124,92,252,.12);border:1px solid rgba(124,92,252,.2);align-self:flex-start;border-radius:4px 12px 12px 12px;}
-.msg.user{background:linear-gradient(135deg,var(--accent),#9e82ff);color:#fff;align-self:flex-end;border-radius:12px 4px 12px 12px;}
-.msg.typing{background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.15);align-self:flex-start;border-radius:4px 12px 12px 12px;padding:.8rem 1.2rem;}
-.typing-dots{display:flex;gap:.3rem;align-items:center;}
-.typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:dotPulse 1.2s ease infinite;}
+/* CHAT */
+#chat-section{background:var(--bg2);border-bottom:1px solid var(--border2);}
+.chat-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start;}
+.chat-info p{color:var(--text2);line-height:1.8;font-size:.93rem;margin-bottom:1rem;font-weight:300;}
+.chat-features{display:flex;flex-direction:column;gap:.7rem;margin-top:1.4rem;}
+.cf-item{display:flex;align-items:center;gap:.75rem;font-size:.83rem;color:var(--text2);}
+.cf-icon{width:32px;height:32px;border-radius:8px;background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.2);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+.privacy-note{margin-top:1.5rem;padding:1.1rem 1.3rem;background:rgba(42,122,75,0.06);border:1px solid rgba(42,122,75,0.2);border-radius:10px;border-left:3px solid var(--primary);}
+.privacy-note .pn-label{font-size:.62rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--primary);margin-bottom:.4rem;}
+.privacy-note p{font-size:.8rem;color:var(--muted);line-height:1.65;margin:0;}
+.chat-box{background:var(--card);border:1px solid var(--border2);border-radius:16px;display:flex;flex-direction:column;height:540px;overflow:hidden;box-shadow:0 20px 60px var(--shadow);}
+.chat-header{padding:1rem 1.3rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.8rem;background:linear-gradient(135deg,rgba(42,122,75,0.12),rgba(76,175,114,0.07));}
+.chat-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 4px 14px var(--glow);}
+.chat-hinfo h4{font-size:.9rem;font-weight:600;color:var(--text);}
+.online{display:flex;align-items:center;gap:.35rem;margin-top:.1rem;}
+.online-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--glow2);animation:pdot 2s ease infinite;}
+.chat-hinfo span{font-size:.68rem;color:var(--muted);}
+.chat-mood-bar{display:flex;gap:.4rem;padding:.55rem .9rem;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+.chat-mood-bar::-webkit-scrollbar{display:none;}
+.qp{background:rgba(42,122,75,0.07);border:1px solid rgba(42,122,75,0.18);border-radius:100px;padding:.3rem .85rem;font-size:.7rem;color:var(--primary);font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .2s;cursor:pointer;font-weight:500;}
+.qp:hover{background:rgba(42,122,75,0.15);border-color:var(--primary);}
+.chat-msgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem;}
+.chat-msgs::-webkit-scrollbar{width:3px;}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px;}
+.msg{max-width:84%;padding:.72rem 1rem;border-radius:10px;font-size:.85rem;line-height:1.65;}
+.msg.bot{background:var(--surface);border:1px solid var(--border);align-self:flex-start;color:var(--text2);border-radius:3px 10px 10px 10px;}
+.msg.user{background:var(--primary);color:#fff;align-self:flex-end;border-radius:10px 3px 10px 10px;box-shadow:0 4px 14px var(--glow);}
+.msg.typing{background:var(--surface);border:1px solid var(--border);align-self:flex-start;padding:.9rem 1.1rem;border-radius:3px 10px 10px 10px;}
+.typing-dots{display:flex;gap:.35rem;align-items:center;}
+.typing-dots span{width:5px;height:5px;border-radius:50%;background:var(--muted);animation:dp 1.2s ease infinite;}
 .typing-dots span:nth-child(2){animation-delay:.2s;}
 .typing-dots span:nth-child(3){animation-delay:.4s;}
-.chat-input-row{padding:.9rem 1rem;border-top:1px solid var(--border);display:flex;gap:.6rem;}
-.chat-input{
-  flex:1;background:var(--surface);border:1px solid var(--border);
-  color:var(--white);padding:.6rem 1rem;border-radius:50px;
-  font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;
-  transition:border-color .2s;
-}
-.chat-input:focus{border-color:var(--accent);}
-.chat-send{
-  background:linear-gradient(135deg,var(--accent),#9e82ff);
-  border:none;border-radius:50px;width:38px;height:38px;
-  color:#fff;font-size:1rem;
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .15s;
-}
-.chat-send:hover{transform:scale(1.1);}
+@keyframes dp{0%,100%{transform:scale(1);opacity:.4;}50%{transform:scale(1.35);opacity:1;}}
+.chat-input-row{padding:.9rem;border-top:1px solid var(--border);display:flex;gap:.5rem;background:var(--card2);}
+.chat-input{flex:1;background:var(--surface);border:1.5px solid var(--border2);color:var(--text);padding:.62rem 1rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.85rem;outline:none;transition:all .2s;}
+.chat-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(42,122,75,0.1);}
+.chat-input::placeholder{color:var(--muted);}
+.chat-send{background:var(--primary);border:none;border-radius:8px;width:38px;height:38px;color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;box-shadow:0 3px 10px var(--glow);}
+.chat-send:hover{background:var(--primary2);transform:scale(1.05);}
 
-/* Quick prompts */
-.quick-prompts{display:flex;flex-wrap:wrap;gap:.5rem;padding:.5rem 1rem .8rem;}
-.qp{background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.2);border-radius:50px;padding:.3rem .8rem;font-size:.72rem;color:var(--accent);transition:background .2s;}
-.qp:hover{background:rgba(124,92,252,.2);}
+/* REFRAME */
+#reframe{background:var(--bg);}
+.reframe-tool{max-width:720px;background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:2.2rem;margin-top:2.5rem;box-shadow:0 16px 50px var(--shadow);}
+.reframe-tool h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;margin-bottom:.35rem;color:var(--text);}
+.reframe-tool>p{color:var(--muted);font-size:.85rem;margin-bottom:1.4rem;line-height:1.7;}
+.thought-input{width:100%;background:var(--surface);border:1.5px solid var(--border2);color:var(--text);padding:1rem 1.1rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.9rem;min-height:90px;resize:vertical;outline:none;transition:all .2s;margin-bottom:1rem;}
+.thought-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(42,122,75,0.1);}
+.thought-input::placeholder{color:var(--muted);}
+.reframe-result{display:none;background:rgba(42,122,75,0.05);border:1px solid rgba(42,122,75,0.18);border-radius:12px;padding:1.5rem;margin-top:1.2rem;}
+.distortion-badge{display:inline-block;background:rgba(192,57,43,0.08);border:1px solid rgba(192,57,43,0.2);border-radius:4px;padding:.22rem .7rem;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--warn);margin-bottom:.8rem;}
+.reframe-result h4{font-size:.87rem;font-weight:600;color:var(--primary);margin-bottom:.5rem;}
+.reframe-result p{color:var(--text2);font-size:.84rem;line-height:1.75;}
+.reframe-new{margin-top:1.1rem;padding:1rem 1.2rem;background:rgba(42,122,75,0.07);border-left:3px solid var(--primary);border-radius:0 8px 8px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--primary2);line-height:1.75;}
 
-/* ── Cognitive Reframe Tool ── */
-#reframe{background:var(--surface);}
-.reframe-tool{
-  max-width:720px;
-  background:var(--card);border:1px solid var(--border);border-radius:16px;
-  padding:2.5rem;margin-top:2.5rem;
-}
-.reframe-tool h3{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:.4rem;}
-.reframe-tool>p{color:var(--muted);font-size:.88rem;margin-bottom:1.5rem;line-height:1.7;}
-.thought-input{
-  width:100%;background:var(--surface);border:1.5px solid var(--border);
-  color:var(--white);padding:1rem 1.2rem;border-radius:12px;
-  font-family:'DM Sans',sans-serif;font-size:.95rem;
-  min-height:90px;resize:vertical;outline:none;
-  transition:border-color .2s;margin-bottom:1rem;
-}
-.thought-input:focus{border-color:var(--accent);}
-.reframe-result{
-  display:none;
-  background:rgba(0,229,176,.05);
-  border:1px solid rgba(0,229,176,.2);
-  border-radius:12px;padding:1.5rem;margin-top:1rem;
-}
-.distortion-badge{
-  display:inline-block;background:rgba(255,107,107,.12);border:1px solid rgba(255,107,107,.25);
-  border-radius:50px;padding:.25rem .75rem;font-size:.7rem;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--warn);margin-bottom:.75rem;
-}
-.reframe-result h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--accent2);margin-bottom:.5rem;}
-.reframe-result p{color:var(--muted);font-size:.85rem;line-height:1.7;}
-.reframe-new{
-  margin-top:1rem;padding:1rem;
-  background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.2);
-  border-radius:10px;font-size:.9rem;font-style:italic;color:var(--white);
-  font-family:'Instrument Serif',serif;line-height:1.65;
-}
+/* JOURNAL */
+#journal{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);}
+.journal-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;}
+.journal-info p{color:var(--text2);font-size:.93rem;line-height:1.8;font-weight:300;margin-bottom:1rem;}
+.journal-box{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;box-shadow:0 16px 50px var(--shadow);}
+.journal-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--card2);}
+.j-tab{flex:1;padding:.82rem;background:transparent;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.79rem;font-weight:600;cursor:pointer;transition:all .2s;border-bottom:2.5px solid transparent;letter-spacing:.04em;}
+.j-tab.active{color:var(--primary);border-bottom-color:var(--primary);background:rgba(42,122,75,0.05);}
+.journal-panel{display:none;padding:1.4rem;}
+.journal-panel.active{display:block;}
+.journal-prompts-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.2rem;}
+.j-prompt{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.78rem 1rem;font-size:.83rem;color:var(--text2);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.65rem;}
+.j-prompt:hover{border-color:var(--primary);color:var(--primary);background:rgba(42,122,75,0.06);}
+.j-prompt span{opacity:.55;font-size:.9rem;}
+.journal-write{width:100%;background:var(--surface);border:1.5px solid var(--border2);color:var(--text);padding:1rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;min-height:180px;resize:vertical;outline:none;transition:all .2s;line-height:1.7;}
+.journal-write:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(42,122,75,0.1);}
+.journal-write::placeholder{color:var(--muted);}
+.journal-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:.8rem;}
+.j-char-count{font-size:.72rem;color:var(--muted);}
+.journal-entries-list{display:flex;flex-direction:column;gap:.6rem;max-height:300px;overflow-y:auto;}
+.j-entry{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;}
+.j-entry-meta{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-bottom:.4rem;}
+.j-entry-text{font-size:.82rem;color:var(--text2);line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.j-mood-tag{font-size:.6rem;background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.22);color:var(--primary);padding:.1rem .5rem;border-radius:4px;font-weight:600;}
 
-/* ── Mood Dashboard ── */
-#mood{background:var(--bg);}
-.mood-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start;}
-.mood-check{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;
-}
-.mood-check h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:.4rem;}
-.mood-check p{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;}
-.mood-emojis{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.2rem;}
-.m-btn{
-  background:var(--surface);border:1.5px solid var(--border);border-radius:10px;
-  padding:.6rem .7rem;font-size:1.5rem;transition:all .2s;position:relative;
-}
-.m-btn:hover,.m-btn.active{border-color:var(--accent);background:rgba(124,92,252,.1);transform:scale(1.1);}
-.m-btn::after{content:attr(data-l);position:absolute;bottom:-1.4rem;left:50%;transform:translateX(-50%);font-size:.58rem;font-family:'DM Sans',sans-serif;color:var(--muted);white-space:nowrap;}
+/* MOOD */
+#mood{background:var(--bg);border-bottom:1px solid var(--border2);}
+.mood-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:2.5rem;align-items:start;margin-top:2.5rem;}
+.mood-check{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:2rem;box-shadow:0 16px 50px var(--shadow);}
+.mood-check h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;margin-bottom:.35rem;color:var(--text);}
+.mood-check>p{font-size:.8rem;color:var(--muted);margin-bottom:1.4rem;}
+.mood-emojis{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+.m-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.55rem .65rem;font-size:1.5rem;transition:all .2s;position:relative;cursor:pointer;}
+.m-btn:hover,.m-btn.active{border-color:var(--primary);background:rgba(42,122,75,0.1);transform:scale(1.1);}
+.m-btn::after{content:attr(data-l);position:absolute;bottom:-1.4rem;left:50%;transform:translateX(-50%);font-size:.56rem;font-family:'DM Sans',sans-serif;color:var(--muted);white-space:nowrap;}
 .mood-sliders{margin-top:2.5rem;}
 .slider-row{margin-bottom:1.2rem;}
-.slider-row label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:.4rem;}
-.slider-row label span{color:var(--accent2);}
-input[type=range]{
-  -webkit-appearance:none;width:100%;height:4px;
-  background:rgba(255,255,255,.08);border-radius:2px;outline:none;
-}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:16px;height:16px;border-radius:50%;
-  background:var(--accent);border:2px solid #fff;cursor:none;
-}
-.chart-wrap{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;
-}
-.chart-wrap h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:1.5rem;}
+.slider-row label{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:.5rem;}
+.slider-row label span{color:var(--primary);font-weight:700;}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--surface2);border-radius:2px;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--primary);border:2px solid #fff;box-shadow:0 0 0 2px var(--primary);cursor:pointer;transition:transform .15s;}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
+#moodMsg{display:none;margin-top:1.2rem;padding:.85rem 1.1rem;background:rgba(42,122,75,0.08);border:1px solid rgba(42,122,75,0.22);border-radius:8px;color:var(--primary2);font-size:.84rem;}
+.chart-wrap{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:2rem;box-shadow:0 16px 50px var(--shadow);}
+.chart-wrap h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:500;margin-bottom:1.5rem;color:var(--text);}
 
-/* ── Tips ── */
-#tips{background:var(--surface);}
-.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
-.tip-card{
-  background:var(--card);border:1px solid var(--border);border-radius:12px;
-  padding:2rem 1.5rem;position:relative;overflow:hidden;transition:transform .2s,border-color .3s;
-}
-.tip-card::after{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-}
-.tip-card:hover{transform:translateY(-6px);border-color:rgba(124,92,252,.3);}
-.tip-num{font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;color:rgba(255,255,255,.04);position:absolute;right:1rem;top:0;line-height:1;}
-.tip-card h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.6rem;}
-.tip-card p{font-size:.83rem;color:var(--muted);line-height:1.7;}
+/* TIPS */
+#tips{background:var(--bg2);border-bottom:1px solid var(--border2);}
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem;}
+.tip-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem 1.5rem;transition:all .25s;position:relative;overflow:hidden;}
+.tip-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));transform:scaleX(0);transition:transform .3s ease;}
+.tip-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 14px 36px var(--shadow);}
+.tip-card:hover::after{transform:scaleX(1);}
+.tip-num{font-family:'Playfair Display',serif;font-size:.7rem;color:var(--sage);display:block;margin-bottom:.7rem;}
+.tip-card h4{font-size:.9rem;font-weight:600;margin-bottom:.5rem;color:var(--text);}
+.tip-card p{font-size:.8rem;color:var(--muted);line-height:1.75;}
 
-/* ── Resources ── */
-#resources{background:var(--bg);}
-.emergency-banner{
-  background:linear-gradient(135deg,var(--warn),#ff4040);
-  border-radius:12px;padding:1.5rem 2rem;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:1rem;margin-bottom:3rem;
-  box-shadow:0 8px 32px rgba(255,107,107,.3);
-}
-.emergency-banner strong{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;}
-.emergency-banner span{font-size:.85rem;opacity:.85;}
-.emrg-num{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:.04em;}
-.resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;}
-.res-card{
-  background:var(--card);border:1px solid var(--border);border-radius:12px;
-  padding:1.8rem;transition:transform .2s,border-color .3s;
-}
-.res-card:hover{transform:translateY(-4px);border-color:rgba(124,92,252,.35);}
-.res-type{
-  display:inline-block;background:rgba(124,92,252,.12);border:1px solid rgba(124,92,252,.2);
-  border-radius:50px;padding:.2rem .7rem;font-size:.62rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;
-}
-.res-card h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.5rem;}
-.res-card p{font-size:.8rem;color:var(--muted);line-height:1.65;margin-bottom:.9rem;}
-.res-contact{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--accent2);letter-spacing:.04em;}
+/* RESOURCES */
+#resources{background:var(--bg);border-bottom:1px solid var(--border2);}
+.emergency-banner{background:linear-gradient(135deg,rgba(27,94,32,0.12),rgba(42,122,75,0.06));border:1px solid rgba(42,122,75,0.25);border-radius:14px;padding:1.6rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;}
+.emergency-banner strong{font-size:1rem;font-weight:700;color:var(--text);display:block;margin-bottom:.25rem;}
+.emergency-banner>div>span{font-size:.82rem;color:var(--text2);}
+.emrg-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--primary);}
+.resources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;}
+.res-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.6rem;transition:all .25s;}
+.res-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 12px 32px var(--shadow);}
+.res-type{display:inline-block;background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.22);border-radius:4px;padding:.15rem .65rem;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:.9rem;}
+.res-card h4{font-size:.96rem;font-weight:600;margin-bottom:.45rem;color:var(--text);}
+.res-card p{font-size:.78rem;color:var(--muted);line-height:1.65;margin-bottom:.9rem;}
+.res-contact{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:500;color:var(--primary2);}
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3.5rem;}
+.tier-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all .25s;}
+.tier-card.featured{border-color:var(--primary);border-width:1.5px;background:linear-gradient(160deg,rgba(42,122,75,0.06),var(--card));box-shadow:0 0 0 1px rgba(42,122,75,0.1),0 20px 50px rgba(42,122,75,0.08);position:relative;}
+.tier-card.featured::before{content:'Most Popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:.3rem 1rem;border-radius:100px;white-space:nowrap;}
+.tier-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--text);}
+.tier-price{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin:.9rem 0 .2rem;color:var(--primary);}
+.tier-price sub{font-size:.9rem;color:var(--muted);font-weight:300;}
+.tier-period{font-size:.72rem;color:var(--muted);margin-bottom:1.5rem;}
+.tier-features{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.5rem;}
+.tier-features li{font-size:.82rem;color:var(--text2);display:flex;align-items:center;gap:.5rem;}
+.tier-features li::before{content:'✦';color:var(--accent2);font-size:.6rem;flex-shrink:0;}
 
-/* Pricing Tiers */
-.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem;}
-.tier-card{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;
-  padding:2rem;transition:transform .2s;position:relative;overflow:hidden;
-}
-.tier-card.featured{border-color:var(--accent);box-shadow:0 0 40px rgba(124,92,252,.2);}
-.tier-card.featured::before{content:'RECOMMENDED';position:absolute;top:1rem;right:-2rem;background:var(--accent);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.12em;padding:.25rem 3rem;transform:rotate(45deg);}
-.tier-price{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;margin:1rem 0 .25rem;}
-.tier-price sub{font-size:1rem;color:var(--muted);}
-.tier-period{font-size:.75rem;color:var(--muted);margin-bottom:1.5rem;}
-.tier-features{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.5rem;}
-.tier-features li{font-size:.83rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;}
-.tier-features li::before{content:'✓';color:var(--accent2);font-weight:700;flex-shrink:0;}
-.tier-name{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;}
-
-/* ── Contact ── */
-#contact{background:var(--surface);}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
-.contact-left p{color:var(--muted);line-height:1.8;font-size:.95rem;margin-bottom:2rem;}
+/* CONTACT */
+#contact{background:var(--bg2);border-top:1px solid var(--border2);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+.contact-left p{color:var(--text2);line-height:1.85;font-size:.93rem;margin-bottom:2rem;font-weight:300;}
 .contact-detail{display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;}
-.cd-icon{width:38px;height:38px;border-radius:10px;background:rgba(124,92,252,.1);border:1px solid rgba(124,92,252,.2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
-.cd-body{font-size:.85rem;color:var(--muted);line-height:1.6;}
-.cd-body strong{display:block;color:var(--white);font-weight:600;margin-bottom:.1rem;}
-.form-group{margin-bottom:1.1rem;}
-.form-group label{display:block;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem;}
-.form-group input,.form-group select,.form-group textarea{
-  width:100%;background:var(--card);border:1.5px solid var(--border);
-  color:var(--white);padding:.75rem 1rem;border-radius:10px;
-  font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;
-}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);}
-.form-group select option{background:var(--card);}
+.cd-icon{width:38px;height:38px;border-radius:8px;background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.22);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.cd-body{font-size:.84rem;color:var(--muted);line-height:1.65;}
+.cd-body strong{display:block;color:var(--text);font-weight:600;margin-bottom:.15rem;font-size:.86rem;}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--card);border:1.5px solid var(--border2);color:var(--text);padding:.78rem 1rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.87rem;outline:none;transition:all .2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(42,122,75,0.12);}
 .form-group textarea{min-height:100px;resize:vertical;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.form-success{
-  display:none;margin-top:1rem;padding:1rem 1.2rem;
-  background:rgba(0,229,176,.08);border:1px solid rgba(0,229,176,.2);
-  border-radius:10px;color:var(--accent2);font-size:.88rem;
-}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted);}
+.form-group select option{background:var(--card);}
+.form-success{display:none;margin-top:1rem;padding:1rem 1.2rem;background:rgba(42,122,75,0.07);border:1px solid rgba(42,122,75,0.22);border-radius:10px;color:var(--primary2);font-size:.85rem;line-height:1.65;}
 
-/* ── Business Section ── */
-#business{background:var(--bg);}
-.biz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:3rem;}
-.biz-card{
-  background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;
-  transition:transform .2s,border-color .3s;
-}
-.biz-card:hover{transform:translateY(-4px);border-color:rgba(0,229,176,.3);}
-.biz-icon{font-size:1.8rem;margin-bottom:.8rem;}
-.biz-card h4{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem;}
-.biz-card p{font-size:.83rem;color:var(--muted);line-height:1.7;}
-.biz-tag{display:inline-block;background:rgba(0,229,176,.08);border:1px solid rgba(0,229,176,.2);border-radius:50px;padding:.2rem .7rem;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-top:.75rem;}
+/* FOOTER */
+footer{background:var(--forest);padding:2.5rem 5vw;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:2rem;}
+footer .logo{color:#fff;}
+footer .logo span{color:var(--mint);}
+footer .logo-dot{background:var(--mint);animation:none;}
+.footer-links{display:flex;gap:2rem;justify-content:center;}
+.footer-links a{text-decoration:none;color:rgba(168,213,181,0.6);font-size:.78rem;transition:color .2s;}
+.footer-links a:hover{color:var(--mint);}
+footer p{font-size:.72rem;color:rgba(168,213,181,0.4);text-align:right;}
 
-/* ── Footer ── */
-footer{
-  background:var(--surface);border-top:1px solid var(--border);
-  padding:3rem 5vw;
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;
-}
-.footer-links{display:flex;gap:2rem;}
-.footer-links a{text-decoration:none;color:var(--muted);font-size:.78rem;transition:color .2s;}
-.footer-links a:hover{color:var(--accent2);}
-footer p{font-size:.75rem;color:rgba(238,240,245,.25);}
-
-/* ── Animations ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
-@keyframes float1{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
-@keyframes float2{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(1.05);}}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
-@keyframes dotPulse{0%,100%{transform:scale(1);opacity:.4;}50%{transform:scale(1.3);opacity:1;}}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
 .reveal.vis{opacity:1;transform:none;}
 
-/* Responsive */
-@media(max-width:900px){
-  nav ul,.hero-right{display:none;}
-  #home{grid-template-columns:1fr;padding:7rem 1.5rem 3rem;}
-  .about-grid,.chat-layout,.mood-layout,.contact-grid{grid-template-columns:1fr;gap:2rem;}
-  section.page-section{padding:4rem 1.5rem;}
-  .stats-strip{grid-template-columns:1fr 1fr;padding:2rem 1.5rem;}
-  .tips-grid,.tiers-grid,.biz-grid{grid-template-columns:1fr;}
-  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
-  .form-row{grid-template-columns:1fr;}
-  #qexit{bottom:1rem;right:1rem;}
+@media(max-width:1000px){.nav-links li:not(:last-child):not(:nth-last-child(2)){display:none;}}
+@media(max-width:860px){
+  .nav-links li:not(:last-child){display:none;}
+  #home{padding:7rem 1.5rem 3rem;}
+  .about-grid,.chat-layout,.mood-layout,.contact-grid,.journal-layout{grid-template-columns:1fr;gap:2.5rem;}
+  section.page-section{padding:5rem 1.5rem;}
+  .tips-grid,.tiers-grid{grid-template-columns:1fr;}
+  footer{grid-template-columns:1fr;text-align:center;}
+  footer p,.footer-links{text-align:center;justify-content:center;}
 }
 </style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div id="cur"></div>
-<div id="cur2"></div>
-
-<!-- Quick Exit -->
 <button id="qexit" onclick="window.location.href='https://weather.com'">⚡ Quick Exit</button>
 
-<!-- Nav -->
 <nav>
-  <a href="#home" class="logo">Mind<span>Space</span></a>
+  <a href="#home" class="logo"><div class="logo-dot"></div>Mind<span>Space</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#breathe">Breathe</a></li>
     <li><a href="#chat-section">AI Chat</a></li>
-    <li><a href="#mood">Mood Tracker</a></li>
-    <li><a href="#tips">Self-Care</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#mood">Mood</a></li>
     <li><a href="#resources">Resources</a></li>
-    <li><a href="#contact" class="nav-pill">Get Help</a></li>
+    <li><a href="#contact" class="nav-pill">Get Help →</a></li>
   </ul>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section id="home">
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-content">
-    <div class="badge"><span class="badge-dot"></span>Mental Health Ecosystem · Est. 2025</div>
-    <h1>Your Mind<br><em>Deserves</em><br>Support.</h1>
-    <p class="hero-sub">An affordable, judgment-free platform combining AI-powered tools, peer community, and real therapists — because mental health care should be accessible to <em>everyone</em>.</p>
+  <div class="orb" style="width:600px;height:600px;background:rgba(76,175,114,0.14);top:-150px;right:-100px;"></div>
+  <div class="orb" style="width:400px;height:400px;background:rgba(42,122,75,0.09);bottom:-50px;left:100px;"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><div class="badge-dot"></div>Mental Health Ecosystem · Est. 2025</div>
+    <h1>Your mind<br>deserves <em>care.</em></h1>
+    <p class="hero-sub">Affordable, judgment-free support — combining AI tools, breathing exercises, journaling, and real therapists. Because mental health care should be accessible to everyone.</p>
     <div class="hero-btns">
-      <a href="#chat-section" class="btn-primary">Talk to AI Companion →</a>
-      <a href="#resources" class="btn-ghost">Find Resources</a>
+      <a href="#chat-section" class="btn-primary">Talk to Mira →</a>
+      <a href="#breathe" class="btn-ghost">Try Breathing Exercise</a>
     </div>
-  </div>
-  <div class="hero-right">
-    <div class="float-card fc1">
-      <div class="fc-label">Today's Mood</div>
-      <div class="mood-row">
-        <div class="mood-pip" style="background:rgba(124,92,252,.2)">😌</div>
-        <div class="mood-pip" style="background:rgba(0,229,176,.2)">🌱</div>
-        <div class="mood-pip" style="background:rgba(240,192,64,.15)">✨</div>
-      </div>
-      <div class="fc-sub" style="margin-top:.6rem">Feeling: Calm & Grounded</div>
-      <div class="fc-bar"><div class="fc-bar-fill" style="width:72%"></div></div>
-    </div>
-    <div class="float-card fc2">
-      <div class="fc-label">Community</div>
-      <div class="fc-val" style="color:var(--accent2)">2,418</div>
-      <div class="fc-sub">Active safe-circles today</div>
-    </div>
-    <div class="float-card fc3">
-      <div class="fc-label">Therapist Match</div>
-      <div style="font-size:.85rem;color:var(--white);margin-bottom:.4rem">Dr. Aanya Sharma</div>
-      <div class="fc-sub">LGBTQ+ Affirming · Bilingual</div>
-      <div style="margin-top:.6rem;font-size:.7rem;color:var(--accent)">● Available now</div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="num">970M+</div><div class="lbl">Living with mental health<br>conditions worldwide</div></div>
+      <div class="hstat"><div class="num">75%</div><div class="lbl">Cases untreated in<br>low-income regions</div></div>
+      <div class="hstat"><div class="num">24/7</div><div class="lbl">AI support,<br>always available</div></div>
     </div>
   </div>
 </section>
 
-<!-- ── STATS ── -->
-<div class="stats-strip reveal">
-  <div class="stat-box"><div class="num">970M</div><div class="lbl">People with mental health conditions worldwide</div></div>
-  <div class="stat-box"><div class="num">75%</div><div class="lbl">Cases go untreated in low-income regions</div></div>
-  <div class="stat-box"><div class="num">4×</div><div class="lbl">More affordable than traditional therapy</div></div>
-  <div class="stat-box"><div class="num">24/7</div><div class="lbl">AI support — always available, never judging</div></div>
-</div>
-
-<!-- ── ABOUT ── -->
+<!-- ABOUT -->
 <section class="page-section" id="about">
+  <div class="orb" style="width:450px;height:450px;background:rgba(76,175,114,0.08);top:-80px;right:-80px;"></div>
   <div class="about-grid">
     <div class="about-body reveal">
       <div class="s-label">Understanding</div>
-      <h2 class="s-title">What Is<br><em>Mental Health?</em></h2>
+      <h2 class="s-title">What is<br><em>mental health?</em></h2>
       <p>Mental health is the foundation of how we think, feel, and connect with the world. It shapes every decision we make, every relationship we build, and every challenge we face.</p>
-      <p>Yet despite its importance, mental health conditions remain deeply misunderstood and stigmatized — leaving millions to suffer in silence. The truth? Mental illness is not a weakness. It is a health condition, just like any other.</p>
-      <p>Breaking the stigma starts with awareness, empathy, and access. MindSpace was built to close the gap between people in need and the support they deserve.</p>
-      <a href="#resources" class="btn-primary" style="margin-top:1rem;display:inline-block;">Explore Resources →</a>
+      <p>Despite its importance, mental health remains deeply misunderstood. Mental illness is not weakness — it's a health condition, just like any other, and it deserves the same care and attention.</p>
+      <p>MindSpace was built to close the gap between people in need and the support they deserve.</p>
+      <a href="#resources" class="btn-primary" style="margin-top:1.5rem;">Explore Resources →</a>
     </div>
     <div class="conditions-grid reveal">
-      <div class="cond-card"><div class="cond-icon">🌧️</div><h4>Depression</h4><p>Persistent low mood, loss of interest, and fatigue. Highly treatable with therapy, medication, and lifestyle changes.</p><span class="cond-pill">Common</span></div>
-      <div class="cond-card"><div class="cond-icon">⚡</div><h4>Anxiety</h4><p>Excessive worry and fear that disrupts daily life. The most prevalent mental health condition globally.</p><span class="cond-pill">Most Common</span></div>
-      <div class="cond-card"><div class="cond-icon">🌊</div><h4>PTSD</h4><p>Emotional aftermath of trauma causing flashbacks and hyperarousal. Trauma-focused therapies are highly effective.</p><span class="cond-pill">Treatable</span></div>
-      <div class="cond-card"><div class="cond-icon">🎭</div><h4>Bipolar Disorder</h4><p>Extreme mood cycles between mania and depression. Stabilized effectively with medication and structured therapy.</p><span class="cond-pill">Manageable</span></div>
-      <div class="cond-card"><div class="cond-icon">🪞</div><h4>OCD</h4><p>Intrusive thoughts and repetitive behaviors. Cognitive-behavioral therapy (ERP) achieves excellent outcomes.</p><span class="cond-pill">Responsive</span></div>
-      <div class="cond-card"><div class="cond-icon">🤝</div><h4>Social Anxiety</h4><p>Intense fear of social situations and judgment. Gradual exposure therapy builds confidence and social skills.</p><span class="cond-pill">Common</span></div>
+      <div class="cond-card"><span class="cond-icon">🌧️</span><h4>Depression</h4><p>Persistent low mood and fatigue. Highly treatable with therapy, medication, and lifestyle support.</p><span class="cond-pill">Common</span></div>
+      <div class="cond-card"><span class="cond-icon">⚡</span><h4>Anxiety</h4><p>Excessive worry disrupting daily life. The most prevalent mental health condition worldwide.</p><span class="cond-pill">Most Common</span></div>
+      <div class="cond-card"><span class="cond-icon">🌊</span><h4>PTSD</h4><p>Emotional aftermath of trauma. Trauma-focused therapies are highly effective.</p><span class="cond-pill">Treatable</span></div>
+      <div class="cond-card"><span class="cond-icon">🎭</span><h4>Bipolar Disorder</h4><p>Extreme mood cycles. Managed effectively with medication and structured therapy.</p><span class="cond-pill">Manageable</span></div>
+      <div class="cond-card"><span class="cond-icon">🪞</span><h4>OCD</h4><p>Intrusive thoughts and repetitive behaviors. CBT (ERP) achieves excellent outcomes.</p><span class="cond-pill">Responsive</span></div>
+      <div class="cond-card"><span class="cond-icon">🤝</span><h4>Social Anxiety</h4><p>Fear of social situations. Gradual exposure therapy builds lasting confidence.</p><span class="cond-pill">Common</span></div>
     </div>
   </div>
 </section>
 
-<!-- ── AI CHATBOT ── -->
+<!-- BREATHE -->
+<section class="page-section" id="breathe">
+  <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto;">
+    <div class="s-label" style="justify-content:center;">Breathing Tool</div>
+    <h2 class="s-title">Calm your<br><em>nervous system.</em></h2>
+    <p style="color:var(--muted);font-size:.9rem;line-height:1.78;margin-bottom:2rem;">Guided breathing activates the parasympathetic nervous system in minutes. Choose a technique and follow the rhythm.</p>
+  </div>
+  <div class="breathe-container reveal">
+    <div class="breathe-controls" style="margin-bottom:1.5rem;">
+      <select class="breathe-select" id="breatheTech" onchange="resetBreath()">
+        <option value="4-4-4-4">Box Breathing (4-4-4-4)</option>
+        <option value="4-7-8">4-7-8 Relaxation</option>
+        <option value="5-5">Equal Breathing (5-5)</option>
+        <option value="3-6">Calming (3-6)</option>
+      </select>
+    </div>
+    <div class="breathe-ring-wrap">
+      <svg class="breathe-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+        <circle class="br-track" cx="130" cy="130" r="115"/>
+        <circle class="br-progress" id="brProgress" cx="130" cy="130" r="115"/>
+      </svg>
+      <div class="breathe-inner" id="breatheCircle" onclick="toggleBreath()">
+        <div class="breathe-emoji" id="breatheEmoji">🌿</div>
+        <div id="breathePhase">tap to start</div>
+        <div id="breatheCount">—</div>
+        <div class="breathe-label" id="breatheLabel"></div>
+      </div>
+    </div>
+    <div class="breathe-controls">
+      <button class="breathe-btn" id="breatheToggle" onclick="toggleBreath()">▶ Start</button>
+      <button class="breathe-btn" style="background:var(--surface2);color:var(--text2);box-shadow:none;border:1.5px solid var(--border2);" onclick="resetBreath()">↺ Reset</button>
+    </div>
+    <p id="breatheCycles" style="text-align:center;margin-top:1rem;font-size:.78rem;color:var(--muted);">Complete 5 cycles for maximum benefit</p>
+  </div>
+</section>
+
+<!-- AI CHAT -->
 <section class="page-section" id="chat-section">
+  <div class="orb" style="width:500px;height:500px;background:rgba(42,122,75,0.07);bottom:-100px;right:-120px;"></div>
   <div class="chat-layout">
     <div class="chat-info reveal">
       <div class="s-label">AI Companion</div>
-      <h2 class="s-title">Talk To<br><em>Someone</em><br>Anytime.</h2>
-      <p>Our AI Warm-Up Companion helps you vent, reflect, and understand your needs — with zero judgment and complete privacy. Think of it as a safe space to process your thoughts before connecting with a human therapist.</p>
-      <p>The AI identifies patterns, offers coping strategies, and gently guides you to the right professional support when needed.</p>
-      <div style="margin-top:1.5rem;padding:1rem 1.2rem;background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.2);border-radius:12px;">
-        <div style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;">Privacy First</div>
-        <div style="font-size:.82rem;color:var(--muted);line-height:1.65;">All conversations are anonymous by default. No account needed. Use Incognito Mode for extra privacy. Your words are never sold or shared.</div>
+      <h2 class="s-title">Talk to<br><em>someone</em><br>anytime.</h2>
+      <p>Mira uses empathetic AI to help you vent, reflect, and understand your needs — with zero judgment and complete privacy.</p>
+      <div class="chat-features">
+        <div class="cf-item"><div class="cf-icon">🔒</div>Anonymous by default — no account needed</div>
+        <div class="cf-item"><div class="cf-icon">🧠</div>Emotionally aware, context-sensitive responses</div>
+        <div class="cf-item"><div class="cf-icon">🌐</div>Available in multiple languages</div>
+        <div class="cf-item"><div class="cf-icon">🤝</div>Bridges to real therapists when you're ready</div>
+      </div>
+      <div class="privacy-note">
+        <div class="pn-label">Privacy First</div>
+        <p>All conversations are anonymous by default. No account needed. Your words are never sold or shared.</p>
       </div>
     </div>
     <div class="reveal">
-      <div class="chat-box" id="chatbox">
+      <div class="chat-box">
         <div class="chat-header">
           <div class="chat-avatar">🤗</div>
           <div class="chat-hinfo">
@@ -543,11 +421,12 @@ footer p{font-size:.75rem;color:rgba(238,240,245,.25);}
             <div class="online"><div class="online-dot"></div><span>Online · Always here for you</span></div>
           </div>
         </div>
-        <div class="quick-prompts">
-          <button class="qp" onclick="sendQuick(this)">I feel anxious</button>
-          <button class="qp" onclick="sendQuick(this)">I can't sleep</button>
-          <button class="qp" onclick="sendQuick(this)">I feel overwhelmed</button>
-          <button class="qp" onclick="sendQuick(this)">I need someone to talk to</button>
+        <div class="chat-mood-bar">
+          <button class="qp" onclick="sendQuick(this)">I feel anxious 😰</button>
+          <button class="qp" onclick="sendQuick(this)">Can't sleep 🌙</button>
+          <button class="qp" onclick="sendQuick(this)">Overwhelmed 😮‍💨</button>
+          <button class="qp" onclick="sendQuick(this)">I need to talk 💬</button>
+          <button class="qp" onclick="sendQuick(this)">I feel lonely 💙</button>
         </div>
         <div class="chat-msgs" id="chatMsgs">
           <div class="msg bot">Hi there 👋 I'm Mira. This is a safe, judgment-free space. How are you feeling today?</div>
@@ -561,18 +440,19 @@ footer p{font-size:.75rem;color:rgba(238,240,245,.25);}
   </div>
 </section>
 
-<!-- ── COGNITIVE REFRAME ── -->
+<!-- REFRAME -->
 <section class="page-section" id="reframe">
+  <div class="orb" style="width:400px;height:400px;background:rgba(76,175,114,0.08);top:0;right:0;"></div>
   <div class="reveal">
     <div class="s-label">Cognitive Tools</div>
-    <h2 class="s-title">Reframe Your<br><em>Thoughts.</em></h2>
+    <h2 class="s-title">Reframe your<br><em>thoughts.</em></h2>
+    <p style="color:var(--muted);max-width:520px;font-size:.9rem;line-height:1.8;margin-top:.5rem;">Cognitive distortions are habitual negative thinking patterns. Type a thought below and we'll identify the pattern and offer a balanced perspective.</p>
   </div>
-  <p style="color:var(--muted);max-width:560px;font-size:.95rem;line-height:1.75;" class="reveal">Many mental health struggles stem from cognitive distortions — habitual negative thinking patterns. This tool helps you identify and rewrite them.</p>
   <div class="reframe-tool reveal">
     <h3>Thought Reframing Tool</h3>
-    <p>Type a negative thought below. Our tool will identify the cognitive distortion and suggest a healthier, balanced perspective.</p>
+    <p>Type a negative thought. We'll identify the cognitive distortion and suggest a healthier perspective.</p>
     <textarea class="thought-input" id="thoughtInput" placeholder="e.g. I always mess everything up. Nobody really likes me. I'll never be good enough…"></textarea>
-    <button class="btn-primary" onclick="reframeThought()" style="border-radius:50px;">Analyze & Reframe →</button>
+    <button class="btn-primary" onclick="reframeThought()">Analyze & Reframe →</button>
     <div class="reframe-result" id="reframeResult">
       <div class="distortion-badge" id="distortionBadge">Distortion detected</div>
       <h4>What's happening in your mind:</h4>
@@ -582,11 +462,62 @@ footer p{font-size:.75rem;color:rgba(238,240,245,.25);}
   </div>
 </section>
 
-<!-- ── MOOD TRACKER ── -->
+<!-- JOURNAL -->
+<section class="page-section" id="journal">
+  <div class="orb" style="width:400px;height:400px;background:rgba(42,122,75,0.07);bottom:0;left:-100px;"></div>
+  <div class="journal-layout">
+    <div class="reveal">
+      <div class="s-label">Guided Journal</div>
+      <h2 class="s-title">Write your<br><em>way through.</em></h2>
+      <p class="journal-info">Journaling externalizes your thoughts, reducing their weight. Research shows even 5 minutes of daily writing creates measurable improvements in mental clarity and emotional regulation.</p>
+      <p class="journal-info" style="color:var(--muted);">Use the prompts tab for inspiration, or write freely. Your entries are saved locally and never leave your device.</p>
+    </div>
+    <div class="reveal">
+      <div class="journal-box">
+        <div class="journal-tabs">
+          <button class="j-tab active" onclick="switchJTab(this,'write')">✏️ Write</button>
+          <button class="j-tab" onclick="switchJTab(this,'prompts')">💡 Prompts</button>
+          <button class="j-tab" onclick="switchJTab(this,'entries')">📚 Entries</button>
+        </div>
+        <div class="journal-panel active" id="jp-write">
+          <div style="display:flex;gap:.5rem;margin-bottom:.8rem;flex-wrap:wrap;" id="writeMoodTags">
+            <span style="font-size:.7rem;color:var(--muted);align-self:center;">Tag:</span>
+            <button class="qp" onclick="tagMood(this,'😊 Grateful')">😊 Grateful</button>
+            <button class="qp" onclick="tagMood(this,'😔 Low')">😔 Low</button>
+            <button class="qp" onclick="tagMood(this,'😤 Frustrated')">😤 Frustrated</button>
+            <button class="qp" onclick="tagMood(this,'🌟 Hopeful')">🌟 Hopeful</button>
+          </div>
+          <textarea class="journal-write" id="journalText" placeholder="Start writing… no judgment, no rules. Just you and your thoughts." oninput="updateCharCount()"></textarea>
+          <div class="journal-bottom">
+            <span class="j-char-count" id="charCount">0 words</span>
+            <button class="btn-primary" onclick="saveJournalEntry()" style="padding:.55rem 1.3rem;font-size:.8rem;">Save Entry →</button>
+          </div>
+        </div>
+        <div class="journal-panel" id="jp-prompts">
+          <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;">Click any prompt to begin writing.</p>
+          <div class="journal-prompts-list">
+            <div class="j-prompt" onclick="usePrompt(this)"><span>💭</span>What's been weighing on your mind this week?</div>
+            <div class="j-prompt" onclick="usePrompt(this)"><span>🌱</span>Name three small things you're grateful for today.</div>
+            <div class="j-prompt" onclick="usePrompt(this)"><span>🔮</span>What would you tell your past self from a year ago?</div>
+            <div class="j-prompt" onclick="usePrompt(this)"><span>💪</span>Describe a challenge you overcame and what it taught you.</div>
+            <div class="j-prompt" onclick="usePrompt(this)"><span>🌊</span>What emotions are you feeling right now, without judgment?</div>
+            <div class="j-prompt" onclick="usePrompt(this)"><span>🏡</span>What does a "good day" feel like to you? Describe it fully.</div>
+          </div>
+        </div>
+        <div class="journal-panel" id="jp-entries">
+          <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;" id="entriesHint">Your saved entries will appear here.</p>
+          <div class="journal-entries-list" id="entriesList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOOD -->
 <section class="page-section" id="mood">
   <div class="s-label reveal">Mood Dashboard</div>
-  <h2 class="s-title reveal">Track Your<br><em>Wellbeing.</em></h2>
-  <div class="mood-layout" style="margin-top:3rem;">
+  <h2 class="s-title reveal">Track your<br><em>wellbeing.</em></h2>
+  <div class="mood-layout">
     <div class="mood-check reveal">
       <h3>How are you feeling?</h3>
       <p>Log your mood to build your personal wellness picture.</p>
@@ -599,333 +530,256 @@ footer p{font-size:.75rem;color:rgba(238,240,245,.25);}
         <button class="m-btn" data-l="Numb" onclick="selectMood(this,'Numb')">😶</button>
       </div>
       <div class="mood-sliders">
-        <div class="slider-row">
-          <label>Sleep Quality <span id="sleepVal">6hrs</span></label>
-          <input type="range" min="1" max="10" value="6" oninput="document.getElementById('sleepVal').textContent=this.value+'hrs'">
-        </div>
-        <div class="slider-row">
-          <label>Energy Level <span id="energyVal">5/10</span></label>
-          <input type="range" min="1" max="10" value="5" oninput="document.getElementById('energyVal').textContent=this.value+'/10'">
-        </div>
-        <div class="slider-row">
-          <label>Stress Level <span id="stressVal">4/10</span></label>
-          <input type="range" min="1" max="10" value="4" oninput="document.getElementById('stressVal').textContent=this.value+'/10'">
-        </div>
+        <div class="slider-row"><label>Sleep Quality <span id="sleepVal">6 hrs</span></label><input type="range" min="1" max="10" value="6" oninput="document.getElementById('sleepVal').textContent=this.value+' hrs'"></div>
+        <div class="slider-row"><label>Energy Level <span id="energyVal">5/10</span></label><input type="range" min="1" max="10" value="5" oninput="document.getElementById('energyVal').textContent=this.value+'/10'"></div>
+        <div class="slider-row"><label>Stress Level <span id="stressVal">4/10</span></label><input type="range" min="1" max="10" value="4" oninput="document.getElementById('stressVal').textContent=this.value+'/10'"></div>
       </div>
-      <button class="btn-primary" style="margin-top:1.5rem;border-radius:50px;width:100%;justify-content:center;display:block;text-align:center;" onclick="logMood()">Log Today's Entry</button>
-      <div id="moodMsg" style="display:none;margin-top:1rem;padding:.75rem 1rem;background:rgba(0,229,176,.08);border:1px solid rgba(0,229,176,.2);border-radius:10px;color:var(--accent2);font-size:.85rem;"></div>
+      <button class="btn-primary" style="margin-top:1.8rem;width:100%;justify-content:center;" onclick="logMood()">Log Today's Entry</button>
+      <div id="moodMsg"></div>
     </div>
     <div class="chart-wrap reveal">
       <h3>Your 7-Day Wellness Trend</h3>
-      <canvas id="moodChart" height="200"></canvas>
+      <canvas id="moodChart" height="220"></canvas>
     </div>
   </div>
 </section>
 
-<!-- ── SELF-CARE TIPS ── -->
+<!-- TIPS -->
 <section class="page-section" id="tips">
   <div class="reveal">
     <div class="s-label">Self-Care</div>
-    <h2 class="s-title">Daily Habits<br>For a <em>Healthier Mind.</em></h2>
+    <h2 class="s-title">Daily habits for a<br><em>healthier mind.</em></h2>
   </div>
   <div class="tips-grid">
-    <div class="tip-card reveal"><span class="tip-num">01</span><h4>Move Your Body</h4><p>Just 20–30 minutes of daily movement floods your brain with endorphins. Consistency beats intensity — a walk counts.</p></div>
-    <div class="tip-card reveal"><span class="tip-num">02</span><h4>Protect Your Sleep</h4><p>7–9 hours of quality sleep is non-negotiable for mental health. Create a wind-down routine and keep a consistent sleep schedule.</p></div>
-    <div class="tip-card reveal"><span class="tip-num">03</span><h4>Mindful Breathing</h4><p>The 4-7-8 technique (inhale 4s, hold 7s, exhale 8s) activates your parasympathetic nervous system in minutes.</p></div>
-    <div class="tip-card reveal"><span class="tip-num">04</span><h4>Limit Doom-Scrolling</h4><p>Set a 30-minute daily social media limit. Replace one scroll session with something that fills your cup — a book, a walk, a call.</p></div>
-    <div class="tip-card reveal"><span class="tip-num">05</span><h4>Connect Authentically</h4><p>Deep, genuine conversations are more restorative than dozens of shallow ones. Quality of connection matters far more than quantity.</p></div>
-    <div class="tip-card reveal"><span class="tip-num">06</span><h4>Journal Your Thoughts</h4><p>Writing your thoughts externalizes them, reducing their emotional weight. Even 5 minutes a day creates powerful mental clarity.</p></div>
+    <div class="tip-card reveal"><span class="tip-num">01 ·</span><h4>Move Your Body</h4><p>Just 20–30 minutes of daily movement releases endorphins. A walk counts. Consistency beats intensity every time.</p></div>
+    <div class="tip-card reveal"><span class="tip-num">02 ·</span><h4>Protect Your Sleep</h4><p>7–9 hours of quality sleep is non-negotiable. Create a wind-down routine and keep a consistent schedule.</p></div>
+    <div class="tip-card reveal"><span class="tip-num">03 ·</span><h4>Mindful Breathing</h4><p>The 4-7-8 technique (inhale 4s, hold 7s, exhale 8s) activates your parasympathetic nervous system in minutes.</p></div>
+    <div class="tip-card reveal"><span class="tip-num">04 ·</span><h4>Limit Doom-Scrolling</h4><p>Set a 30-minute daily social media limit. Replace one scroll session with something that fills your cup.</p></div>
+    <div class="tip-card reveal"><span class="tip-num">05 ·</span><h4>Connect Authentically</h4><p>Deep conversations are more restorative than many shallow ones. Quality always matters more than quantity.</p></div>
+    <div class="tip-card reveal"><span class="tip-num">06 ·</span><h4>Journal Your Thoughts</h4><p>Writing externalizes your thoughts, reducing their weight. Even 5 minutes a day creates meaningful clarity.</p></div>
   </div>
 </section>
 
-<!-- ── RESOURCES ── -->
+<!-- RESOURCES -->
 <section class="page-section" id="resources">
   <div class="reveal">
     <div class="s-label">Help & Support</div>
-    <h2 class="s-title">You're Not<br><em>Alone.</em></h2>
+    <h2 class="s-title">You're not<br><em>alone.</em></h2>
   </div>
   <div class="emergency-banner reveal">
-    <div>
-      <strong>🆘 In Crisis? Get Immediate Help</strong><br>
-      <span>Free, confidential support available 24/7 — no judgment, no questions asked.</span>
-    </div>
+    <div><strong>🆘 In Crisis? Get Immediate Help</strong><span>Free, confidential support available 24/7 — no judgment, no questions asked.</span></div>
     <div class="emrg-num">iCall: 9152987821</div>
   </div>
   <div class="resources-grid">
-    <div class="res-card reveal"><span class="res-type">Crisis Helpline</span><h4>iCall</h4><p>Free, confidential counselling by trained professionals. Available Monday–Saturday, 8am–10pm IST.</p><div class="res-contact">📞 9152987821</div></div>
-    <div class="res-card reveal"><span class="res-type">24/7 Helpline</span><h4>Vandrevala Foundation</h4><p>Round-the-clock mental health support in multiple languages including Hindi and English.</p><div class="res-contact">📞 1860-2662-345</div></div>
-    <div class="res-card reveal"><span class="res-type">Suicide Prevention</span><h4>AASRA</h4><p>India's leading suicide prevention helpline. Available 24 hours a day, every day of the year.</p><div class="res-contact">📞 9820466627</div></div>
-    <div class="res-card reveal"><span class="res-type">Youth Support</span><h4>YourDOST</h4><p>Online counselling platform specifically designed for students and young professionals.</p><div class="res-contact">🌐 yourdost.com</div></div>
-    <div class="res-card reveal"><span class="res-type">Women's Support</span><h4>Snehi</h4><p>Emotional support and counselling for women experiencing mental health challenges and distress.</p><div class="res-contact">📞 044-24640050</div></div>
-    <div class="res-card reveal"><span class="res-type">LGBTQ+ Support</span><h4>Arpita Suicide Hotline</h4><p>Inclusive, safe support for LGBTQ+ individuals facing mental health crises and distress.</p><div class="res-contact">📞 080-23655557</div></div>
+    <div class="res-card reveal"><span class="res-type">Crisis Helpline</span><h4>iCall</h4><p>Free, confidential counselling by trained professionals. Mon–Sat, 8am–10pm IST.</p><div class="res-contact">📞 9152987821</div></div>
+    <div class="res-card reveal"><span class="res-type">24/7 Helpline</span><h4>Vandrevala Foundation</h4><p>Round-the-clock support in Hindi and English.</p><div class="res-contact">📞 1860-2662-345</div></div>
+    <div class="res-card reveal"><span class="res-type">Suicide Prevention</span><h4>AASRA</h4><p>India's leading suicide prevention helpline, available 24 hours every day.</p><div class="res-contact">📞 9820466627</div></div>
+    <div class="res-card reveal"><span class="res-type">Youth Support</span><h4>YourDOST</h4><p>Online counselling for students and young professionals.</p><div class="res-contact">🌐 yourdost.com</div></div>
+    <div class="res-card reveal"><span class="res-type">Women's Support</span><h4>Snehi</h4><p>Emotional support and counselling for women experiencing mental health challenges.</p><div class="res-contact">📞 044-24640050</div></div>
+    <div class="res-card reveal"><span class="res-type">LGBTQ+ Support</span><h4>Arpita Suicide Hotline</h4><p>Safe, inclusive support for LGBTQ+ individuals facing mental health crises.</p><div class="res-contact">📞 080-23655557</div></div>
   </div>
-
-  <!-- Tiered Pricing -->
   <div style="margin-top:5rem;" class="reveal">
     <div class="s-label">Access Tiers</div>
-    <h2 class="s-title">Support That<br>Fits Your <em>Budget.</em></h2>
+    <h2 class="s-title">Support that fits<br>your <em>budget.</em></h2>
   </div>
   <div class="tiers-grid reveal">
     <div class="tier-card">
       <div class="tier-name">Free</div>
       <div class="tier-price">₹0<sub>/mo</sub></div>
       <div class="tier-period">Always free, no credit card</div>
-      <ul class="tier-features">
-        <li>AI Companion (Mira)</li>
-        <li>Mood & Wellness Tracker</li>
-        <li>Cognitive Reframing Tool</li>
-        <li>Community Safe-Circles</li>
-        <li>Crisis Helpline Directory</li>
-        <li>Self-care Resources</li>
-      </ul>
-      <a href="#contact" class="btn-ghost" style="display:block;text-align:center;border-radius:50px;">Get Started</a>
+      <ul class="tier-features"><li>AI Companion (Mira)</li><li>Mood & Wellness Tracker</li><li>Cognitive Reframing Tool</li><li>Guided Journal</li><li>Crisis Helpline Directory</li></ul>
+      <a href="#contact" class="btn-ghost" style="display:flex;justify-content:center;">Get Started</a>
     </div>
     <div class="tier-card featured">
       <div class="tier-name">Group Care</div>
       <div class="tier-price">₹499<sub>/mo</sub></div>
       <div class="tier-period">Group sessions of 8–10 people</div>
-      <ul class="tier-features">
-        <li>Everything in Free</li>
-        <li>Weekly group therapy sessions</li>
-        <li>Smart therapist matching</li>
-        <li>Session recordings & notes</li>
-        <li>Guided meditation library</li>
-        <li>Priority AI response</li>
-      </ul>
-      <a href="#contact" class="btn-primary" style="display:block;text-align:center;border-radius:50px;">Start Free Trial</a>
+      <ul class="tier-features"><li>Everything in Free</li><li>Weekly group therapy sessions</li><li>Smart therapist matching</li><li>Session recordings & notes</li><li>Guided meditation library</li></ul>
+      <a href="#contact" class="btn-primary" style="display:flex;justify-content:center;">Start Free Trial</a>
     </div>
     <div class="tier-card">
       <div class="tier-name">1-on-1 Care</div>
       <div class="tier-price">₹1,299<sub>/mo</sub></div>
       <div class="tier-period">Private video sessions</div>
-      <ul class="tier-features">
-        <li>Everything in Group Care</li>
-        <li>2× private video sessions</li>
-        <li>Personalized care plan</li>
-        <li>Between-session messaging</li>
-        <li>Detailed analytics dashboard</li>
-        <li>Sliding scale available</li>
-      </ul>
-      <a href="#contact" class="btn-ghost" style="display:block;text-align:center;border-radius:50px;">Book Consultation</a>
+      <ul class="tier-features"><li>Everything in Group Care</li><li>2× private video sessions</li><li>Personalized care plan</li><li>Between-session messaging</li><li>Sliding scale available</li></ul>
+      <a href="#contact" class="btn-ghost" style="display:flex;justify-content:center;">Book Consultation</a>
     </div>
   </div>
 </section>
 
-<!-- ── BUSINESS MODEL ── -->
-<section class="page-section" id="business">
-  <div class="reveal">
-    <div class="s-label">Our Model</div>
-    <h2 class="s-title">Built For<br><em>Impact.</em></h2>
-  </div>
-  <p style="color:var(--muted);max-width:600px;font-size:.95rem;line-height:1.75;" class="reveal">MindSpace operates on radical transparency. Here is exactly how we sustain ourselves while keeping care affordable for everyone.</p>
-  <div class="biz-grid">
-    <div class="biz-card reveal"><div class="biz-icon">🏛️</div><h4>B2B University & Corporate</h4><p>We license the MindSpace platform to universities and corporations as a "Wellness Package." Students and employees access it free while institutions pay a flat fee — high volume, stable impact.</p><span class="biz-tag">Primary Revenue</span></div>
-    <div class="biz-card reveal"><div class="biz-icon">🎯</div><h4>Freemium Logic</h4><p>Core tools are permanently free to build trust. Advanced analytics, specialist workshops ("Burnout Recovery," "Exam Stress") unlock at a small one-time cost. Trust first, then value exchange.</p><span class="biz-tag">User Revenue</span></div>
-    <div class="biz-card reveal"><div class="biz-icon">🤝</div><h4>Sliding Scale Commission</h4><p>We take a reduced % from therapists who offer lower rates to low-income users. The more affordable the session, the less we charge — incentivizing access over profit.</p><span class="biz-tag">Fair Model</span></div>
-    <div class="biz-card reveal"><div class="biz-icon">💡</div><h4>White-Label Technology</h4><p>Hospitals and clinics that lack good mental health tech can license our AI chat and mood tracking modules. Pure technology income that funds our free tier.</p><span class="biz-tag">Scale Revenue</span></div>
-  </div>
-  <div style="margin-top:2rem;padding:1.5rem 2rem;background:rgba(0,229,176,.05);border:1px solid rgba(0,229,176,.15);border-radius:12px;max-width:700px;" class="reveal">
-    <div style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold1);margin-bottom:.75rem;">Radical Transparency · Where Your ₹ Goes</div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center;">
-      <div><div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--gold1);">50%</div><div style="font-size:.72rem;color:var(--muted);">To therapists</div></div>
-      <div><div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--accent);">25%</div><div style="font-size:.72rem;color:var(--muted);">Free-tier subsidies</div></div>
-      <div><div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--midnightblue);">15%</div><div style="font-size:.72rem;color:var(--muted);">R&D & tech</div></div>
-      <div><div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--warn);">10%</div><div style="font-size:.72rem;color:var(--muted);">Operations</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CONTACT ── -->
+<!-- CONTACT -->
 <section class="page-section" id="contact">
   <div class="contact-grid">
     <div class="contact-left reveal">
       <div class="s-label">Get In Touch</div>
-      <h2 class="s-title">Ready To<br>Take The<br><em>First Step?</em></h2>
-      <p>Whether you need support, want to join as a therapist, or are a university looking for a wellness solution — we're here. No judgment. No pressure. Just help.</p>
-      <div class="contact-detail"><div class="cd-icon">📧</div><div class="cd-body"><strong>Email Us</strong>hello@mindspace.in</div></div>
+      <h2 class="s-title">Ready to take<br>the <em>first step?</em></h2>
+      <p>Whether you need support, want to join as a therapist, or are an institution looking for a wellness solution — we're here. No judgment. No pressure.</p>
+      <div class="contact-detail"><div class="cd-icon">📧</div><div class="cd-body"><strong>Email</strong>hello@mindspace.in</div></div>
       <div class="contact-detail"><div class="cd-icon">📞</div><div class="cd-body"><strong>Call / WhatsApp</strong>+91 98765 43210</div></div>
       <div class="contact-detail"><div class="cd-icon">🔒</div><div class="cd-body"><strong>Anonymous Form</strong>No name required. We'll respond to any email you provide.</div></div>
-      <div class="contact-detail"><div class="cd-icon">⚡</div><div class="cd-body"><strong>Quick Exit Available</strong>Press the red button anytime to instantly leave this page for your privacy.</div></div>
     </div>
     <div class="reveal">
-      <div class="form-group">
-        <label>Your Name (optional)</label>
-        <input type="text" id="fname" placeholder="Anonymous is fine">
+      <div class="form-group"><label>Your Name (optional)</label><input type="text" id="fname" placeholder="Anonymous is fine"></div>
+      <div class="form-group"><label>Email (optional)</label><input type="email" id="femail" placeholder="For us to respond"></div>
+      <div class="form-group"><label>I'm reaching out as a…</label>
+        <select id="ftype"><option value="">Select one</option><option>Someone seeking support</option><option>University / Organisation</option><option>Therapist wanting to join</option><option>Press / Media</option><option>Just curious</option></select>
       </div>
-      <div class="form-group">
-        <label>Email (optional)</label>
-        <input type="email" id="femail" placeholder="For us to respond">
-      </div>
-      <div class="form-group">
-        <label>I'm reaching out as a…</label>
-        <select id="ftype">
-          <option value="">Select one</option>
-          <option>Someone seeking support</option>
-          <option>University / Organisation</option>
-          <option>Therapist wanting to join</option>
-          <option>Press / Media</option>
-          <option>Just curious</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea id="fmsg" placeholder="Share what's on your mind, or what you're looking for…"></textarea>
-      </div>
-      <button class="btn-primary" style="border-radius:50px;width:100%;justify-content:center;" onclick="submitForm()">Send Message →</button>
-      <div class="form-success" id="formSuccess">✅ Thank you for reaching out. We'll get back to you within 24 hours. You're brave for taking this step.</div>
+      <div class="form-group"><label>Message</label><textarea id="fmsg" placeholder="Share what's on your mind, or what you're looking for…"></textarea></div>
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="submitForm()">Send Message →</button>
+      <div class="form-success" id="formSuccess">✅ Thank you for reaching out. We'll respond within 24 hours. You're brave for taking this step.</div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
-  <a href="#home" class="logo">Mind<span>Space</span></a>
+  <a href="#home" class="logo"><div class="logo-dot"></div>Mind<span>Space</span></a>
   <div class="footer-links">
-    <a href="#about">About</a>
-    <a href="#resources">Resources</a>
-    <a href="#business">Our Model</a>
-    <a href="#contact">Contact</a>
+    <a href="#about">About</a><a href="#breathe">Breathe</a><a href="#resources">Resources</a><a href="#journal">Journal</a><a href="#contact">Contact</a>
   </div>
-  <p>© 2026 MindSpace. Built with care for everyone. Mental health is a right, not a privilege.</p>
+  <p>© 2026 MindSpace · Mental health is a right, not a privilege.</p>
 </footer>
 
 <script>
-// ── Cursor ──
-const cur = document.getElementById('cur');
-const cur2 = document.getElementById('cur2');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-function animCur(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;cur2.style.left=rx+'px';cur2.style.top=ry+'px';requestAnimationFrame(animCur);}
-animCur();
+// REVEAL
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// ── Scroll Reveal ──
-const revEls=document.querySelectorAll('.reveal');
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');}});},{threshold:0.1});
-revEls.forEach(el=>obs.observe(el));
-
-// ── AI Chat ──
-const chatResponses = {
-  anxious: "I hear you — anxiety can feel really overwhelming. 💙 Let's try something together: take a slow breath in for 4 counts, hold for 4, and out for 6. You're safe right now. Would you like to talk about what's causing the anxiety, or would some grounding techniques help?",
-  sleep: "Poor sleep and mental health are deeply connected — you're not alone in this. Some things that genuinely help: avoid screens 1 hour before bed, keep a consistent sleep time, and try writing down tomorrow's worries so your brain can 'let them go'. Would you like a full sleep hygiene guide?",
-  overwhelmed: "Feeling overwhelmed is your mind telling you it's carrying too much. Let's break it down — what's the single biggest thing weighing on you right now? Sometimes naming it out loud (or in text) takes away some of its power. I'm here. 💙",
-  talk: "I'm so glad you reached out. You don't have to have a specific problem to talk — sometimes you just need space to be heard, and that's completely valid. What's been on your mind lately?",
-  default: ["That sounds really hard, and your feelings are completely valid. Tell me more — I'm listening. 💙", "I'm here with you. It takes courage to reach out. What's been weighing on you most?", "You're not alone in this. Mental health struggles are real, and you deserve support. What would feel most helpful right now — venting, coping strategies, or finding professional help?", "Thank you for trusting me with this. Can you tell me a bit more about what you're experiencing? The more you share, the better I can help guide you."]
+// CHAT
+const chatResponses={
+  anxious:"I hear you — anxiety can feel really overwhelming. 💚\n\nLet's try something together: breathe in for 4 counts, hold for 4, and out for 6. Repeat 3 times.\n\nYou're safe right now. Would you like to talk about what's triggering it?",
+  sleep:"Poor sleep and mental health are deeply connected. 🌙\n\nA few things that genuinely help: no screens an hour before bed, a consistent sleep time, and writing down tomorrow's tasks so your mind can let go.",
+  overwhelmed:"Feeling overwhelmed means your mind is carrying too much. 💚\n\nWhat's the single biggest thing weighing on you right now? Naming it often takes away some of its power.",
+  lonely:"I'm really glad you're here. Feeling lonely is one of the most common human experiences — it doesn't mean anything is wrong with you. 💚\n\nWould you like to talk about what's been making you feel this way?",
+  talk:"I'm glad you reached out. You don't need a specific problem to talk — sometimes you just need space to be heard. 💚\n\nWhat's been on your mind lately?",
+  default:["That sounds really hard, and your feelings are completely valid. Tell me more — I'm listening. 💚","I'm here with you. It takes courage to reach out. What's been weighing on you most?","You're not alone in this. What would feel most helpful — venting, coping strategies, or connecting with professional help?","Thank you for trusting me with this. Can you tell me more about what you're experiencing?"]
 };
-
-let msgCount = 0;
+let msgCount=0;
 function sendMsg(){
-  const inp=document.getElementById('chatInp');
-  const val=inp.value.trim();
-  if(!val)return;
-  addMsg(val,'user');
-  inp.value='';
-  const lower=val.toLowerCase();
-  showTyping();
+  const inp=document.getElementById('chatInp'),val=inp.value.trim();if(!val)return;
+  addMsg(val,'user');inp.value='';const lower=val.toLowerCase();showTyping();
   setTimeout(()=>{
     removeTyping();
-    let resp;
-    if(lower.includes('anxi')||lower.includes('nervous')||lower.includes('panic'))resp=chatResponses.anxious;
-    else if(lower.includes('sleep')||lower.includes('tired')||lower.includes('insomnia'))resp=chatResponses.sleep;
-    else if(lower.includes('overwhelm')||lower.includes('too much')||lower.includes('stress'))resp=chatResponses.overwhelmed;
-    else if(lower.includes('talk')||lower.includes('listen')||lower.includes('someone'))resp=chatResponses.talk;
-    else resp=chatResponses.default[msgCount%chatResponses.default.length];
-    msgCount++;
-    addMsg(resp,'bot');
-    if(msgCount>=3){
-      setTimeout(()=>addMsg("If you'd like to speak with a real counsellor, our team is available. You can find helplines in the Resources section below, or book a session with one of our therapists. 🤝",'bot'),800);
-    }
-  },1200);
+    let r;
+    if(lower.includes('anxi')||lower.includes('nervous')||lower.includes('panic'))r=chatResponses.anxious;
+    else if(lower.includes('sleep')||lower.includes('tired')||lower.includes('insomnia'))r=chatResponses.sleep;
+    else if(lower.includes('overwhelm')||lower.includes('too much')||lower.includes('stress'))r=chatResponses.overwhelmed;
+    else if(lower.includes('lonely')||lower.includes('alone')||lower.includes('isolated'))r=chatResponses.lonely;
+    else if(lower.includes('talk')||lower.includes('listen')||lower.includes('someone'))r=chatResponses.talk;
+    else r=chatResponses.default[msgCount%chatResponses.default.length];
+    msgCount++;addMsg(r,'bot');
+    if(msgCount>=3)setTimeout(()=>addMsg("If you'd like to speak with a real counsellor, helplines are listed in the Resources section below. 🤝",'bot'),900);
+  },1400);
 }
-function sendQuick(btn){document.getElementById('chatInp').value=btn.textContent;sendMsg();}
-function addMsg(text,role){
-  const msgs=document.getElementById('chatMsgs');
-  const div=document.createElement('div');
-  div.className='msg '+role;
-  div.textContent=text;
-  msgs.appendChild(div);
-  msgs.scrollTop=msgs.scrollHeight;
-}
-function showTyping(){
-  const msgs=document.getElementById('chatMsgs');
-  const div=document.createElement('div');
-  div.className='msg typing';div.id='typing';
-  div.innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>';
-  msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
-}
+function sendQuick(btn){document.getElementById('chatInp').value=btn.textContent.replace(/[😰🌙😮‍💨💬💙]/gu,'').trim();sendMsg();}
+function addMsg(t,r){const m=document.getElementById('chatMsgs'),d=document.createElement('div');d.className='msg '+r;d.style.whiteSpace='pre-wrap';d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight;}
+function showTyping(){const m=document.getElementById('chatMsgs'),d=document.createElement('div');d.className='msg typing';d.id='typing';d.innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>';m.appendChild(d);m.scrollTop=m.scrollHeight;}
 function removeTyping(){const t=document.getElementById('typing');if(t)t.remove();}
 
-// ── Cognitive Reframe ──
+// BREATHING
+const techniques={'4-4-4-4':{phases:[{label:'Inhale',dur:4,emoji:'🌿'},{label:'Hold',dur:4,emoji:'🍃'},{label:'Exhale',dur:4,emoji:'💨'},{label:'Hold',dur:4,emoji:'🍃'}]},'4-7-8':{phases:[{label:'Inhale',dur:4,emoji:'🌿'},{label:'Hold',dur:7,emoji:'🍃'},{label:'Exhale',dur:8,emoji:'💨'}]},'5-5':{phases:[{label:'Inhale',dur:5,emoji:'🌿'},{label:'Exhale',dur:5,emoji:'💨'}]},'3-6':{phases:[{label:'Inhale',dur:3,emoji:'🌿'},{label:'Exhale',dur:6,emoji:'💨'}]}};
+const circ=2*Math.PI*115;
+let bRun=false,bTimer=null,bPi=0,bSec=0,bCyc=0;
+function getPhases(){return techniques[document.getElementById('breatheTech').value].phases;}
+function setProg(r){document.getElementById('brProgress').style.strokeDashoffset=circ*(1-r);}
+function updateBUI(p,sl,tot){
+  document.getElementById('breathePhase').textContent=p.label;
+  document.getElementById('breatheCount').textContent=sl;
+  document.getElementById('breatheEmoji').textContent=p.emoji;
+  const c=document.getElementById('breatheCircle');c.classList.remove('expanding','holding','contracting');
+  if(p.label==='Inhale')c.classList.add('expanding');else if(p.label==='Hold')c.classList.add('holding');else c.classList.add('contracting');
+  setProg(sl/tot);
+}
+function toggleBreath(){bRun?pauseB():startB();}
+function startB(){bRun=true;document.getElementById('breatheToggle').textContent='⏸ Pause';runB();}
+function pauseB(){bRun=false;clearTimeout(bTimer);document.getElementById('breatheToggle').textContent='▶ Resume';}
+function resetBreath(){
+  bRun=false;clearTimeout(bTimer);bPi=0;bSec=0;bCyc=0;
+  document.getElementById('breatheToggle').textContent='▶ Start';
+  document.getElementById('breathePhase').textContent='tap to start';
+  document.getElementById('breatheCount').textContent='—';
+  document.getElementById('breatheEmoji').textContent='🌿';
+  document.getElementById('breatheCycles').textContent='Complete 5 cycles for maximum benefit';
+  document.getElementById('breatheCircle').classList.remove('expanding','holding','contracting');setProg(0);
+}
+function runB(){
+  if(!bRun)return;const phases=getPhases(),p=phases[bPi],sl=p.dur-bSec;
+  updateBUI(p,sl,p.dur);bSec++;
+  if(bSec>=p.dur){bSec=0;bPi++;if(bPi>=phases.length){bPi=0;bCyc++;document.getElementById('breatheCycles').textContent=`Cycles completed: ${bCyc} 🌿`;}}
+  bTimer=setTimeout(runB,1000);
+}
+
+// REFRAME
 const distortions=[
-  {keys:['always','never','every','all','none','nobody','everyone'],type:'All-or-Nothing Thinking',explain:'You\'re thinking in absolutes — "always", "never", "everyone". Real situations are rarely this black and white. This pattern causes unnecessary suffering because it ignores evidence of nuance and progress.',reframe:'I sometimes struggle, and that\'s human. I\'ve also handled challenges well before. Progress, not perfection, is what matters.'},
-  {keys:['nobody likes','no one cares','they all hate','worthless','useless'],type:'Mind Reading & Labelling',explain:'You\'re assuming you know what others think or are applying a permanent, negative label to yourself. One moment or mistake doesn\'t define who you are.',reframe:'I can\'t know for certain what others think. One difficult moment doesn\'t erase my worth or all the good I\'ve done.'},
-  {keys:['never be good enough','not good enough','failure','loser','stupid'],type:'Overgeneralization',explain:'You\'re taking one negative experience and projecting it as a permanent pattern. Your brain is drawing a sweeping conclusion from limited evidence.',reframe:'I\'m finding this challenging right now, but difficulty in one area doesn\'t mean I\'m failing overall. I have strengths, and I\'m learning.'},
-  {keys:['everything','ruin','disaster','worst','terrible','horrible'],type:'Catastrophizing',explain:'You\'re imagining the worst possible outcome and treating it as inevitable. This amplifies anxiety and makes problems seem much larger than they are.',reframe:'This is difficult, but the worst-case scenario is rarely what actually happens. I\'ve gotten through hard things before, and I can handle this too.'},
+  {keys:['always','never','every','all','none','nobody','everyone'],type:'All-or-Nothing Thinking',explain:'You\'re thinking in absolutes — "always", "never", "everyone". Real situations are rarely this black and white. This pattern ignores evidence of nuance and progress.',reframe:'I sometimes struggle, and that\'s human. I\'ve also handled challenges well before. Progress, not perfection, is what matters.'},
+  {keys:['nobody likes','no one cares','they all hate','worthless','useless'],type:'Mind Reading & Labelling',explain:'You\'re assuming you know what others think, or applying a permanent negative label to yourself. One moment doesn\'t define who you are.',reframe:'I can\'t know for certain what others think. One difficult moment doesn\'t erase my worth or all the good I\'ve done.'},
+  {keys:['never be good enough','not good enough','failure','loser','stupid'],type:'Overgeneralization',explain:'You\'re taking one negative experience and projecting it as a permanent pattern — drawing a sweeping conclusion from very limited evidence.',reframe:'I\'m finding this challenging right now, but difficulty in one area doesn\'t mean I\'m failing overall. I have strengths, and I\'m learning.'},
+  {keys:['everything','ruin','disaster','worst','terrible','horrible'],type:'Catastrophizing',explain:'You\'re imagining the worst possible outcome and treating it as inevitable. This amplifies anxiety and makes problems seem much larger than they are.',reframe:'This is difficult, but the worst case rarely happens. I\'ve gotten through hard things before, and I can handle this too.'},
 ];
 function reframeThought(){
-  const t=document.getElementById('thoughtInput').value.toLowerCase();
-  if(!t.trim()){return;}
-  let matched=distortions[distortions.length-1];
-  for(const d of distortions){if(d.keys.some(k=>t.includes(k))){matched=d;break;}}
-  document.getElementById('distortionBadge').textContent='⚠ '+matched.type+' detected';
-  document.getElementById('reframeExplain').textContent=matched.explain;
-  document.getElementById('reframeNew').textContent='"'+matched.reframe+'"';
-  const res=document.getElementById('reframeResult');
-  res.style.display='block';res.scrollIntoView({behavior:'smooth',block:'nearest'});
+  const t=document.getElementById('thoughtInput').value.toLowerCase();if(!t.trim())return;
+  let m=distortions[distortions.length-1];
+  for(const d of distortions){if(d.keys.some(k=>t.includes(k))){m=d;break;}}
+  document.getElementById('distortionBadge').textContent='⚠ '+m.type+' detected';
+  document.getElementById('reframeExplain').textContent=m.explain;
+  document.getElementById('reframeNew').textContent='"'+m.reframe+'"';
+  const res=document.getElementById('reframeResult');res.style.display='block';res.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-// ── Mood ──
-function selectMood(btn,label){
-  document.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+// JOURNAL
+let curTag='',jEntries=[];try{jEntries=JSON.parse(localStorage.getItem('ms_j')||'[]');}catch(e){}
+function switchJTab(btn,panel){
+  document.querySelectorAll('.j-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.journal-panel').forEach(p=>{p.classList.remove('active');p.style.display='none';});
+  btn.classList.add('active');const el=document.getElementById('jp-'+panel);el.style.display='block';el.classList.add('active');
+  if(panel==='entries')renderEntries();
 }
+function tagMood(btn,tag){document.querySelectorAll('#writeMoodTags .qp').forEach(b=>b.style.background='');btn.style.background='rgba(42,122,75,0.2)';curTag=tag;}
+function updateCharCount(){const w=document.getElementById('journalText').value.trim().split(/\s+/).filter(x=>x).length;document.getElementById('charCount').textContent=w+(w===1?' word':' words');}
+function usePrompt(el){
+  const text=el.textContent.trim().replace(/^[💭🌱🔮💪🌊🏡]\s*/,'');
+  document.getElementById('journalText').value=text+'\n\n';
+  document.querySelectorAll('.j-tab').forEach((t,i)=>{if(i===0)t.classList.add('active');else t.classList.remove('active');});
+  document.querySelectorAll('.journal-panel').forEach((p,i)=>{if(i===0){p.style.display='block';p.classList.add('active');}else{p.style.display='none';p.classList.remove('active');}});
+  document.getElementById('journalText').focus();updateCharCount();
+}
+function saveJournalEntry(){
+  const text=document.getElementById('journalText').value.trim();if(!text){alert('Write something first!');return;}
+  jEntries.unshift({text,mood:curTag,date:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}),time:new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})});
+  try{localStorage.setItem('ms_j',JSON.stringify(jEntries.slice(0,50)));}catch(e){}
+  document.getElementById('journalText').value='';curTag='';
+  document.querySelectorAll('#writeMoodTags .qp').forEach(b=>b.style.background='');
+  updateCharCount();alert('Entry saved! 🌿');
+}
+function renderEntries(){
+  const list=document.getElementById('entriesList'),hint=document.getElementById('entriesHint');
+  if(!jEntries.length){hint.style.display='block';list.innerHTML='';return;}
+  hint.style.display='none';
+  list.innerHTML=jEntries.map(e=>`<div class="j-entry"><div class="j-entry-meta"><span>${e.date} · ${e.time}</span>${e.mood?`<span class="j-mood-tag">${e.mood}</span>`:''}</div><div class="j-entry-text">${e.text}</div></div>`).join('');
+}
+document.querySelectorAll('.journal-panel').forEach((p,i)=>{if(i!==0)p.style.display='none';});
+
+// MOOD
+function selectMood(btn){document.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 function logMood(){
-  const active=document.querySelector('.m-btn.active');
-  const mood=active?active.getAttribute('data-l'):'your mood';
-  const msgs={
-    'Great':'You\'re doing amazing! Keep doing what\'s working. 🌟 Your entry has been logged.',
-    'Okay':'Neutral days are normal and healthy. Your entry is saved. 💙',
-    'Low':'It\'s okay to not be okay. Your feelings are valid. Your entry is logged — consider reaching out to a counsellor or a trusted friend today.',
-    'Anxious':'Anxiety is tough. Try 4-7-8 breathing right now. Your entry is saved. If this feeling persists, our AI chat and counsellors can help.',
-    'Angry':'Anger is a valid emotion. Your entry is logged. Journaling or physical exercise can help process it. 💪',
-    'Numb':'Emotional numbness can be a sign you need rest or support. Your entry is saved. Please be gentle with yourself today.',
-  };
-  const msg=document.getElementById('moodMsg');
-  msg.textContent=msgs[mood]||'Entry logged. Thank you for checking in with yourself today. 💙';
-  msg.style.display='block';
+  const a=document.querySelector('.m-btn.active'),mood=a?a.getAttribute('data-l'):null;
+  const msgs={'Great':'You\'re doing well — that matters. Entry logged. 🌿','Okay':'Neutral days are completely normal. Entry saved. 💚','Low':'It\'s okay to not be okay. Your feelings are valid. Consider reaching out to someone you trust.','Anxious':'Anxiety is tough. Try the breathing exercise above. Entry saved.','Angry':'Anger is valid. Journaling or movement can help. Entry logged. 💪','Numb':'Numbness can signal you need rest or support. Be gentle with yourself today.'};
+  const el=document.getElementById('moodMsg');el.textContent=mood?msgs[mood]:'Entry logged. Thank you for checking in with yourself. 💚';el.style.display='block';
 }
 
-// ── Chart ──
+// CHART
 window.addEventListener('load',()=>{
-  const ctx=document.getElementById('moodChart').getContext('2d');
-  new Chart(ctx,{
-    type:'line',
-    data:{
-      labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-      datasets:[
-        {label:'Mood',data:[5,4,6,5,7,8,7],borderColor:'#7c5cfc',backgroundColor:'rgba(124,92,252,.08)',fill:true,tension:0.4,pointBackgroundColor:'#7c5cfc',pointRadius:5,},
-        {label:'Sleep',data:[6,5,7,6,8,7,8],borderColor:'#00e5b0',backgroundColor:'rgba(0,229,176,.06)',fill:true,tension:0.4,pointBackgroundColor:'#00e5b0',pointRadius:5,},
-        {label:'Energy',data:[4,3,5,6,7,8,6],borderColor:'#f0c040',backgroundColor:'rgba(240,192,64,.06)',fill:true,tension:0.4,pointBackgroundColor:'#f0c040',pointRadius:5,},
-      ]
-    },
-    options:{
-      responsive:true,
-      plugins:{legend:{labels:{color:'rgba(238,240,245,.5)',font:{family:'DM Sans',size:11}}}},
-      scales:{
-        x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'rgba(238,240,245,.4)',font:{family:'DM Sans'}}},
-        y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'rgba(238,240,245,.4)',font:{family:'DM Sans'}},min:0,max:10},
-      }
-    }
-  });
+  new Chart(document.getElementById('moodChart').getContext('2d'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[
+    {label:'Mood',data:[5,4,6,5,7,8,7],borderColor:'#2A7A4B',backgroundColor:'rgba(42,122,75,0.08)',fill:true,tension:0.45,pointBackgroundColor:'#2A7A4B',pointRadius:5,pointBorderColor:'#F2F8F4',pointBorderWidth:2},
+    {label:'Sleep',data:[6,5,7,6,8,7,8],borderColor:'#26A69A',backgroundColor:'rgba(38,166,154,0.06)',fill:true,tension:0.45,pointBackgroundColor:'#26A69A',pointRadius:5,pointBorderColor:'#F2F8F4',pointBorderWidth:2},
+    {label:'Energy',data:[4,3,5,6,7,8,6],borderColor:'#8BC34A',backgroundColor:'rgba(139,195,74,0.06)',fill:true,tension:0.45,pointBackgroundColor:'#8BC34A',pointRadius:5,pointBorderColor:'#F2F8F4',pointBorderWidth:2},
+  ]},options:{responsive:true,plugins:{legend:{labels:{color:'#6B8F77',font:{family:'DM Sans',size:11},boxWidth:10,padding:16}}},scales:{x:{grid:{color:'rgba(42,122,75,0.06)'},ticks:{color:'#6B8F77',font:{family:'DM Sans',size:11}}},y:{grid:{color:'rgba(42,122,75,0.06)'},ticks:{color:'#6B8F77',font:{family:'DM Sans',size:11}},min:0,max:10}}}});
 });
 
-// ── Contact Form ──
+// FORM
 function submitForm(){
-  const msg=document.getElementById('fmsg').value.trim();
-  if(!msg){alert('Please share your message first.');return;}
+  const msg=document.getElementById('fmsg').value.trim();if(!msg){alert('Please share your message first.');return;}
   document.getElementById('formSuccess').style.display='block';
-  document.getElementById('fmsg').value='';
-  document.getElementById('fname').value='';
-  document.getElementById('femail').value='';
+  ['fmsg','fname','femail'].forEach(id=>document.getElementById(id).value='');
 }
 </script>
 </body>
