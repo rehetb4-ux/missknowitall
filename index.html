@@ -15,8 +15,8 @@
   --card:      #F2EDC2;
   --card2:     #F7FBF8;
   --text:      #0F2B1A;
-  --text2:     #000000;
-  --muted:     #000000;
+  --text2:     #1a3a27;
+  --muted:     #4a6b57;
   --primary:   #2A7A4B;
   --primary2:  #1E5E38;
   --accent:    #4CAF72;
@@ -50,7 +50,7 @@ nav{position:fixed;top:0;width:100%;z-index:500;padding:0 5vw;display:flex;justi
 @keyframes pdot{0%,100%{transform:scale(1);box-shadow:0 0 8px var(--glow2);}50%{transform:scale(1.3);box-shadow:0 0 18px var(--glow2);}}
 .logo span{color:var(--primary);}
 .nav-links{display:flex;gap:0;list-style:none;align-items:center;}
-.nav-links a{text-decoration:none;color:var(--black);font-size:1.1rem;font-weight:600;padding:0 1.2rem;height:var(--nav-h);display:flex;align-items:center;border-bottom:2.5px solid transparent;transition:color .2s,border-color .2s;}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:1.1rem;font-weight:600;padding:0 1.2rem;height:var(--nav-h);display:flex;align-items:center;border-bottom:2.5px solid transparent;transition:color .2s,border-color .2s;}
 .nav-links a:hover{color:var(--primary);border-bottom-color:var(--accent);}
 .nav-pill{background:var(--primary)!important;color:#fff!important;border-radius:8px!important;padding:.5rem 1.4rem!important;height:auto!important;font-weight:600!important;border-bottom:none!important;font-size:.8rem!important;margin-left:.7rem;box-shadow:0 4px 18px var(--glow);transition:all .2s!important;}
 .nav-pill:hover{background:var(--backgroudpl)!important;transform:translateY(-1px);box-shadow:0 8px 24px var(--glow)!important;}
@@ -83,6 +83,17 @@ h1 em{font-style:italic;color:var(--primary);}
 .hstat .num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--primary);line-height:1;}
 .hstat .lbl{font-size:.72rem;color:var(--muted);margin-top:.35rem;line-height:1.45;}
 
+/* Hero visual side */
+.hero-visual{position:absolute;right:5vw;top:50%;transform:translateY(-50%);width:420px;display:grid;grid-template-columns:1fr 1fr;gap:1rem;z-index:0;opacity:0.85;}
+.hv-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:1.4rem;transition:transform .3s;}
+.hv-card:hover{transform:translateY(-4px);}
+.hv-card .hv-icon{font-size:1.8rem;margin-bottom:.6rem;display:block;}
+.hv-card h4{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.3rem;}
+.hv-card p{font-size:.72rem;color:var(--muted);line-height:1.6;}
+.hv-card.wide{grid-column:1/-1;display:flex;align-items:center;gap:1rem;}
+.hv-card.wide .hv-icon{font-size:2rem;margin-bottom:0;}
+.hv-card.featured{border-color:var(--primary);background:linear-gradient(135deg,rgba(42,122,75,0.08),var(--card));}
+
 /* ABOUT */
 #about{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);}
 .about-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:6rem;align-items:start;}
@@ -95,7 +106,24 @@ h1 em{font-style:italic;color:var(--primary);}
 .cond-icon{font-size:1.5rem;margin-bottom:.6rem;display:block;}
 .cond-card h4{font-size:.88rem;font-weight:600;margin-bottom:.35rem;color:var(--text);}
 .cond-card p{font-size:.77rem;color:var(--muted);line-height:1.65;}
-.cond-pill{display:inline-block;background:#1B5E20;border:1px solid rgba(255, 255, 255, 0.1);;border-radius:4px;padding:.12rem .55rem;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF;margin-top:.6rem;}
+.cond-pill{display:inline-block;background:#1B5E20;border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:.12rem .55rem;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFFFFF;margin-top:.6rem;}
+
+/* MARQUEE STRIP */
+.marquee-strip{background:var(--primary);padding:.75rem 0;overflow:hidden;border-top:1px solid var(--primary2);border-bottom:1px solid var(--primary2);}
+.marquee-inner{display:flex;gap:3rem;white-space:nowrap;animation:marquee 28s linear infinite;}
+.marquee-item{font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.85);display:flex;align-items:center;gap:.8rem;}
+.marquee-item::before{content:'✦';color:var(--mint);font-size:.55rem;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* HOW IT WORKS */
+#how{background:var(--bg);border-bottom:1px solid var(--border2);}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;position:relative;}
+.how-steps::before{content:'';position:absolute;top:2.8rem;left:calc(12.5% + 1.5rem);right:calc(12.5% + 1.5rem);height:1.5px;background:linear-gradient(90deg,var(--accent),var(--teal),var(--lime));z-index:0;}
+.step-card{text-align:center;position:relative;z-index:1;}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--card);border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--primary);transition:all .3s;box-shadow:0 4px 16px var(--shadow);}
+.step-card:hover .step-num{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 8px 24px var(--glow);}
+.step-card h4{font-size:.9rem;font-weight:600;margin-bottom:.5rem;color:var(--text);}
+.step-card p{font-size:.78rem;color:var(--muted);line-height:1.7;}
 
 /* BREATHE */
 #breathe{background:var(--bg);border-bottom:1px solid var(--border2);text-align:center;}
@@ -118,6 +146,12 @@ h1 em{font-style:italic;color:var(--primary);}
 .breathe-btn:hover{background:var(--primary2);transform:translateY(-1px);}
 .breathe-select{background:var(--card);border:1.5px solid var(--border2);color:var(--text2);padding:.62rem 1rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none;cursor:pointer;}
 #breatheCycles{font-size:.78rem;color:var(--muted);margin-top:1rem;}
+/* Science cards below breathe */
+.breathe-science{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:860px;margin:3.5rem auto 0;text-align:left;}
+.sci-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.4rem;}
+.sci-card .sci-icon{font-size:1.6rem;margin-bottom:.7rem;display:block;}
+.sci-card h4{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:.4rem;}
+.sci-card p{font-size:.77rem;color:var(--muted);line-height:1.7;}
 
 /* CHAT */
 #chat-section{background:var(--bg2);border-bottom:1px solid var(--border2);}
@@ -197,6 +231,12 @@ h1 em{font-style:italic;color:var(--primary);}
 .j-entry-meta{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-bottom:.4rem;}
 .j-entry-text{font-size:.82rem;color:var(--text2);line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .j-mood-tag{font-size:.6rem;background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.22);color:var(--primary);padding:.1rem .5rem;border-radius:4px;font-weight:600;}
+/* Journal benefits column */
+.journal-benefits{display:flex;flex-direction:column;gap:.75rem;margin-top:1.8rem;}
+.jb-item{display:flex;align-items:flex-start;gap:.8rem;padding:1rem 1.1rem;background:var(--card);border:1px solid var(--border);border-radius:10px;}
+.jb-icon{font-size:1.2rem;flex-shrink:0;margin-top:.05rem;}
+.jb-body h5{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.2rem;}
+.jb-body p{font-size:.75rem;color:var(--muted);line-height:1.65;}
 
 /* MOOD */
 #mood{background:var(--bg);border-bottom:1px solid var(--border2);}
@@ -230,8 +270,21 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
 .tip-card h4{font-size:.9rem;font-weight:600;margin-bottom:.5rem;color:var(--text);}
 .tip-card p{font-size:.8rem;color:var(--muted);line-height:1.75;}
 
+/* TESTIMONIALS */
+#testimonials{background:var(--bg);border-bottom:1px solid var(--border2);}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem;}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;position:relative;transition:all .25s;}
+.testi-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 14px 36px var(--shadow);}
+.testi-quote{font-size:2.5rem;font-family:'Playfair Display',serif;color:var(--accent);line-height:1;margin-bottom:.8rem;opacity:.5;}
+.testi-text{font-size:.87rem;color:var(--text2);line-height:1.8;margin-bottom:1.2rem;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:.7rem;}
+.testi-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--primary));display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;color:#fff;font-family:'Playfair Display',serif;}
+.testi-name{font-size:.82rem;font-weight:600;color:var(--text);}
+.testi-role{font-size:.72rem;color:var(--muted);}
+.testi-stars{color:var(--gold);font-size:.75rem;letter-spacing:.1rem;margin-bottom:.7rem;}
+
 /* RESOURCES */
-#resources{background:var(--bg);border-bottom:1px solid var(--border2);}
+#resources{background:var(--bg2);border-bottom:1px solid var(--border2);}
 .emergency-banner{background:linear-gradient(135deg,rgba(27,94,32,0.12),rgba(42,122,75,0.06));border:1px solid rgba(42,122,75,0.25);border-radius:14px;padding:1.6rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;}
 .emergency-banner strong{font-size:1rem;font-weight:700;color:var(--text);display:block;margin-bottom:.25rem;}
 .emergency-banner>div>span{font-size:.82rem;color:var(--text2);}
@@ -255,46 +308,95 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
 .tier-features li{font-size:.82rem;color:var(--text2);display:flex;align-items:center;gap:.5rem;}
 .tier-features li::before{content:'✦';color:var(--accent2);font-size:.6rem;flex-shrink:0;}
 
-/* CONTACT */
-#contact{background:var(--bg2);border-top:1px solid var(--border2);}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
-.contact-left p{color:var(--text2);line-height:1.85;font-size:.93rem;margin-bottom:2rem;font-weight:300;}
-.contact-detail{display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;}
-.cd-icon{width:38px;height:38px;border-radius:8px;background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.22);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
-.cd-body{font-size:.84rem;color:var(--muted);line-height:1.65;}
-.cd-body strong{display:block;color:var(--text);font-weight:600;margin-bottom:.15rem;font-size:.86rem;}
+/* ===========================
+   CONTACT — fully redesigned
+   =========================== */
+#contact{background:var(--bg);border-top:1px solid var(--border2);}
+.contact-hero{text-align:center;max-width:600px;margin:0 auto 4.5rem;}
+.contact-hero p{color:var(--muted);font-size:.95rem;line-height:1.85;margin-top:.8rem;font-weight:300;}
+.contact-body{display:grid;grid-template-columns:1fr 1.35fr;gap:4rem;align-items:start;}
+
+/* Info column */
+.contact-cards{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+.contact-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:1.5rem;display:flex;gap:1.1rem;align-items:flex-start;transition:all .25s;}
+.contact-card:hover{border-color:var(--accent);box-shadow:0 8px 28px var(--shadow);transform:translateY(-2px);}
+.cc-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(42,122,75,0.15),rgba(76,175,114,0.08));border:1px solid rgba(42,122,75,0.22);display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;}
+.cc-body h5{font-size:.86rem;font-weight:700;color:var(--text);margin-bottom:.2rem;}
+.cc-body p{font-size:.8rem;color:var(--muted);line-height:1.65;}
+.cc-body a{font-size:.84rem;color:var(--primary);font-weight:600;text-decoration:none;}
+.cc-body a:hover{text-decoration:underline;}
+
+.contact-note{background:linear-gradient(135deg,rgba(42,122,75,0.07),rgba(76,175,114,0.04));border:1px solid rgba(42,122,75,0.2);border-radius:14px;padding:1.4rem 1.5rem;}
+.contact-note h5{font-size:.8rem;font-weight:700;color:var(--primary);margin-bottom:.55rem;display:flex;align-items:center;gap:.5rem;}
+.contact-note ul{list-style:none;display:flex;flex-direction:column;gap:.45rem;}
+.contact-note ul li{font-size:.78rem;color:var(--text2);display:flex;align-items:flex-start;gap:.6rem;line-height:1.55;}
+.contact-note ul li::before{content:'✦';color:var(--accent2);font-size:.55rem;flex-shrink:0;margin-top:.25rem;}
+
+/* Form column */
+.contact-form-wrap{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:2.2rem;box-shadow:0 20px 60px var(--shadow);}
+.contact-form-wrap h3{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:600;color:var(--text);margin-bottom:.3rem;}
+.contact-form-wrap > p{font-size:.8rem;color:var(--muted);margin-bottom:1.7rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
 .form-group{margin-bottom:1rem;}
 .form-group label{display:block;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem;}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--card);border:1.5px solid var(--border2);color:var(--text);padding:.78rem 1rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.87rem;outline:none;transition:all .2s;}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(42,122,75,0.12);}
-.form-group textarea{min-height:100px;resize:vertical;}
-.form-group input::placeholder,.form-group textarea::placeholder{color:var(--muted);}
+.form-group input,
+.form-group select,
+.form-group textarea{width:100%;background:var(--surface);border:1.5px solid var(--border2);color:var(--text);padding:.78rem 1rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.87rem;outline:none;transition:all .2s;}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(42,122,75,0.12);}
+.form-group textarea{min-height:110px;resize:vertical;line-height:1.65;}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:var(--muted);opacity:.7;}
 .form-group select option{background:var(--card);}
-.form-success{display:none;margin-top:1rem;padding:1rem 1.2rem;background:rgba(42,122,75,0.07);border:1px solid rgba(42,122,75,0.22);border-radius:10px;color:var(--primary2);font-size:.85rem;line-height:1.65;}
+.form-bottom{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:.3rem;}
+.form-anon-note{font-size:.73rem;color:var(--muted);display:flex;align-items:center;gap:.4rem;}
+.form-anon-note::before{content:'🔒';font-size:.8rem;}
+.form-success{display:none;margin-top:1.2rem;padding:1.1rem 1.3rem;background:rgba(42,122,75,0.07);border:1px solid rgba(42,122,75,0.22);border-radius:10px;color:var(--primary2);font-size:.85rem;line-height:1.7;}
+
+/* FAQ strip */
+.faq-strip{margin-top:4rem;}
+.faq-strip h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--text);margin-bottom:1.5rem;text-align:center;}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.faq-q{width:100%;background:none;border:none;padding:1.1rem 1.3rem;text-align:left;font-family:'DM Sans',sans-serif;font-size:.87rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:.5rem;transition:color .2s;}
+.faq-q:hover{color:var(--primary);}
+.faq-q .faq-arrow{font-size:.8rem;transition:transform .3s;flex-shrink:0;color:var(--accent2);}
+.faq-q.open .faq-arrow{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;}
+.faq-a.open{max-height:200px;padding:0 1.3rem 1.1rem;}
+.faq-a p{font-size:.82rem;color:var(--muted);line-height:1.75;}
 
 /* FOOTER */
-footer{background:var(--forest);padding:2.5rem 5vw;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:2rem;}
-footer .logo{color:#fff;}
-footer .logo span{color:var(--mint);}
-footer .logo-dot{background:var(--mint);animation:none;}
-.footer-links{display:flex;gap:2rem;justify-content:center;}
-.footer-links a{text-decoration:none;color:rgba(168,213,181,0.6);font-size:.78rem;transition:color .2s;}
-.footer-links a:hover{color:var(--mint);}
-footer p{font-size:.72rem;color:rgba(168,213,181,0.4);text-align:right;}
+footer{background:var(--forest);padding:3rem 5vw 2rem;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(168,213,181,0.15);}
+.footer-brand .logo{color:#fff;display:inline-flex;margin-bottom:1rem;}
+.footer-brand .logo span{color:var(--mint);}
+.footer-brand p{font-size:.8rem;color:rgba(168,213,181,0.55);line-height:1.75;max-width:240px;margin-top:.6rem;}
+.footer-col h5{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);margin-bottom:1rem;}
+.footer-col a{display:block;text-decoration:none;color:rgba(168,213,181,0.55);font-size:.8rem;margin-bottom:.6rem;transition:color .2s;}
+.footer-col a:hover{color:var(--mint);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+.footer-bottom p{font-size:.72rem;color:rgba(168,213,181,0.35);}
+.footer-socials{display:flex;gap:.7rem;}
+.footer-social{width:32px;height:32px;border-radius:8px;background:rgba(168,213,181,0.08);border:1px solid rgba(168,213,181,0.15);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.85rem;transition:all .2s;}
+.footer-social:hover{background:rgba(168,213,181,0.18);border-color:var(--mint);}
 
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
 .reveal.vis{opacity:1;transform:none;}
 
+@media(max-width:1100px){.hero-visual{display:none;}}
 @media(max-width:1000px){.nav-links li:not(:last-child):not(:nth-last-child(2)){display:none;}}
 @media(max-width:860px){
   .nav-links li:not(:last-child){display:none;}
   #home{padding:7rem 1.5rem 3rem;}
-  .about-grid,.chat-layout,.mood-layout,.contact-grid,.journal-layout{grid-template-columns:1fr;gap:2.5rem;}
+  .about-grid,.chat-layout,.mood-layout,.journal-layout,.contact-body,.footer-top{grid-template-columns:1fr;gap:2.5rem;}
   section.page-section{padding:5rem 1.5rem;}
-  .tips-grid,.tiers-grid{grid-template-columns:1fr;}
-  footer{grid-template-columns:1fr;text-align:center;}
-  footer p,.footer-links{text-align:center;justify-content:center;}
+  .tips-grid,.tiers-grid,.testimonials-grid,.faq-grid,.breathe-science,.how-steps{grid-template-columns:1fr;}
+  .how-steps::before{display:none;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
 }
 </style>
 </head>
@@ -318,7 +420,7 @@ footer p{font-size:.72rem;color:rgba(168,213,181,0.4);text-align:right;}
 <!-- HERO -->
 <section id="home">
   <div class="orb" style="width:600px;height:600px;background:rgba(200,168,75,0.1);top:-150px;right:-100px;"></div>
-<div class="orb" style="width:400px;height:400px;background:rgba(192,57,43,0.06);bottom:-50px;left:100px;"></div>
+  <div class="orb" style="width:400px;height:400px;background:rgba(192,57,43,0.06);bottom:-50px;left:100px;"></div>
   <div class="hero-inner">
     <div class="hero-badge"><div class="badge-dot"></div>Mental Health Ecosystem · Est. 2025</div>
     <h1>Your mind<br>deserves <em>care.</em></h1>
@@ -331,20 +433,50 @@ footer p{font-size:.72rem;color:rgba(168,213,181,0.4);text-align:right;}
       <div class="hstat"><div class="num">970M+</div><div class="lbl">Living with mental health<br>conditions worldwide</div></div>
       <div class="hstat"><div class="num">75%</div><div class="lbl">Cases untreated in<br>low-income regions</div></div>
       <div class="hstat"><div class="num">24/7</div><div class="lbl">AI support,<br>always available</div></div>
+      <div class="hstat"><div class="num">₹0</div><div class="lbl">To get started —<br>free forever</div></div>
     </div>
+  </div>
+  <!-- Hero visual cards -->
+  <div class="hero-visual">
+    <div class="hv-card featured"><span class="hv-icon">🤗</span><h4>Mira — AI Companion</h4><p>Always on, always kind. Talk through anything without judgment.</p></div>
+    <div class="hv-card"><span class="hv-icon">🌬️</span><h4>Guided Breathe</h4><p>Calm your nervous system in under 3 minutes.</p></div>
+    <div class="hv-card"><span class="hv-icon">📓</span><h4>Smart Journal</h4><p>Write freely. Understand yourself deeply.</p></div>
+    <div class="hv-card wide"><span class="hv-icon">📊</span><div><h4>Mood Tracker</h4><p>Spot patterns. Celebrate growth.</p></div></div>
   </div>
 </section>
 
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">Free To Start</span>
+    <span class="marquee-item">Judgment-Free</span>
+    <span class="marquee-item">Confidential</span>
+    <span class="marquee-item">India-Focused</span>
+    <span class="marquee-item">24/7 AI Support</span>
+    <span class="marquee-item">Real Therapists</span>
+    <span class="marquee-item">No Account Required</span>
+    <span class="marquee-item">Science-Backed</span>
+    <span class="marquee-item">Free To Start</span>
+    <span class="marquee-item">Judgment-Free</span>
+    <span class="marquee-item">Confidential</span>
+    <span class="marquee-item">India-Focused</span>
+    <span class="marquee-item">24/7 AI Support</span>
+    <span class="marquee-item">Real Therapists</span>
+    <span class="marquee-item">No Account Required</span>
+    <span class="marquee-item">Science-Backed</span>
+  </div>
+</div>
+
 <!-- ABOUT -->
 <section class="page-section" id="about">
-  <div class="orb" style="width:450px;height:450px;background:--backgroudpl;top:-80px;right:-80px;"></div>
+  <div class="orb" style="width:450px;height:450px;background:rgba(42,122,75,0.06);top:-80px;right:-80px;"></div>
   <div class="about-grid">
     <div class="about-body reveal">
       <div class="s-label">Understanding</div>
       <h2 class="s-title">What is<br><em>mental health?</em></h2>
       <p>Mental health is the foundation of how we think, feel, and connect with the world. It shapes every decision we make, every relationship we build, and every challenge we face.</p>
       <p>Despite its importance, mental health remains deeply misunderstood. Mental illness is not weakness — it's a health condition, just like any other, and it deserves the same care and attention.</p>
-      <p>MindSpace was built to close the gap between people in need and the support they deserve.</p>
+      <p>MindSpace was built to close the gap between people in need and the support they deserve — starting with free, accessible tools and growing with you as your needs evolve.</p>
       <a href="#resources" class="btn-primary" style="margin-top:1.5rem;">Explore Resources →</a>
     </div>
     <div class="conditions-grid reveal">
@@ -354,6 +486,37 @@ footer p{font-size:.72rem;color:rgba(168,213,181,0.4);text-align:right;}
       <div class="cond-card"><span class="cond-icon">🎭</span><h4>Bipolar Disorder</h4><p>Extreme mood cycles. Managed effectively with medication and structured therapy.</p><span class="cond-pill">Manageable</span></div>
       <div class="cond-card"><span class="cond-icon">🪞</span><h4>OCD</h4><p>Intrusive thoughts and repetitive behaviors. CBT (ERP) achieves excellent outcomes.</p><span class="cond-pill">Responsive</span></div>
       <div class="cond-card"><span class="cond-icon">🤝</span><h4>Social Anxiety</h4><p>Fear of social situations. Gradual exposure therapy builds lasting confidence.</p><span class="cond-pill">Common</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="page-section" id="how">
+  <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto;">
+    <div class="s-label" style="justify-content:center;">The Process</div>
+    <h2 class="s-title">How <em>MindSpace</em> works</h2>
+    <p style="color:var(--muted);font-size:.9rem;line-height:1.8;">A gentle, step-by-step journey from showing up to feeling better.</p>
+  </div>
+  <div class="how-steps">
+    <div class="step-card reveal">
+      <div class="step-num">1</div>
+      <h4>Show Up</h4>
+      <p>No account needed. Just open MindSpace and you're already in a safe space. Complete anonymity from the start.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">2</div>
+      <h4>Explore Tools</h4>
+      <p>Use Mira for conversation, breathe through anxiety, journal your thoughts, or track your mood patterns.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">3</div>
+      <h4>Build Awareness</h4>
+      <p>Your mood history and journaling help surface patterns — so you understand yourself more clearly over time.</p>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">4</div>
+      <h4>Get Real Help</h4>
+      <p>When you're ready, connect with a licensed therapist — at group or 1-on-1 rates that fit your budget.</p>
     </div>
   </div>
 </section>
@@ -392,6 +555,12 @@ footer p{font-size:.72rem;color:rgba(168,213,181,0.4);text-align:right;}
     </div>
     <p id="breatheCycles" style="text-align:center;margin-top:1rem;font-size:.78rem;color:var(--muted);">Complete 5 cycles for maximum benefit</p>
   </div>
+  <!-- Science cards -->
+  <div class="breathe-science reveal">
+    <div class="sci-card"><span class="sci-icon">🧠</span><h4>Activates the Vagus Nerve</h4><p>Slow, deep breathing stimulates the vagus nerve, shifting your body from fight-or-flight into rest-and-digest mode within minutes.</p></div>
+    <div class="sci-card"><span class="sci-icon">❤️</span><h4>Lowers Heart Rate</h4><p>Controlled exhales longer than inhales have been shown in studies to reduce resting heart rate and lower blood pressure measurably.</p></div>
+    <div class="sci-card"><span class="sci-icon">🌙</span><h4>Improves Sleep</h4><p>The 4-7-8 technique is used in sleep medicine to reduce the time to fall asleep by calming rumination before bed.</p></div>
+  </div>
 </section>
 
 <!-- AI CHAT -->
@@ -407,6 +576,7 @@ footer p{font-size:.72rem;color:rgba(168,213,181,0.4);text-align:right;}
         <div class="cf-item"><div class="cf-icon">🧠</div>Emotionally aware, context-sensitive responses</div>
         <div class="cf-item"><div class="cf-icon">🌐</div>Available in multiple languages</div>
         <div class="cf-item"><div class="cf-icon">🤝</div>Bridges to real therapists when you're ready</div>
+        <div class="cf-item"><div class="cf-icon">💡</div>Suggests coping tools based on what you share</div>
       </div>
       <div class="privacy-note">
         <div class="pn-label">Privacy First</div>
@@ -472,6 +642,11 @@ footer p{font-size:.72rem;color:rgba(168,213,181,0.4);text-align:right;}
       <h2 class="s-title">Write your<br><em>way through.</em></h2>
       <p class="journal-info">Journaling externalizes your thoughts, reducing their weight. Research shows even 5 minutes of daily writing creates measurable improvements in mental clarity and emotional regulation.</p>
       <p class="journal-info" style="color:var(--muted);">Use the prompts tab for inspiration, or write freely. Your entries are saved locally and never leave your device.</p>
+      <div class="journal-benefits">
+        <div class="jb-item"><div class="jb-icon">🧘</div><div class="jb-body"><h5>Reduces rumination</h5><p>Writing a thought down stops your brain from looping it endlessly.</p></div></div>
+        <div class="jb-item"><div class="jb-icon">🔍</div><div class="jb-body"><h5>Surfaces hidden patterns</h5><p>Over weeks, your journal becomes a mirror — showing you what triggers you and what lifts you.</p></div></div>
+        <div class="jb-item"><div class="jb-icon">💪</div><div class="jb-body"><h5>Builds emotional resilience</h5><p>Naming your emotions gives you power over them. Research calls this "affect labeling."</p></div></div>
+      </div>
     </div>
     <div class="reveal">
       <div class="journal-box">
@@ -561,6 +736,34 @@ footer p{font-size:.72rem;color:rgba(168,213,181,0.4);text-align:right;}
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="page-section" id="testimonials">
+  <div class="reveal" style="text-align:center;max-width:520px;margin:0 auto 1rem;">
+    <div class="s-label" style="justify-content:center;">Stories</div>
+    <h2 class="s-title">Words from our<br><em>community.</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">I was skeptical of AI for mental health, but Mira helped me articulate feelings I couldn't even name. The breathing tool got me through a panic attack at 2am when no one else was available.</p>
+      <div class="testi-author"><div class="testi-avatar">P</div><div><div class="testi-name">Priya S.</div><div class="testi-role">Software Engineer, Bangalore</div></div></div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">As a college student with no money for therapy, MindSpace's free tools were a lifeline. The journal prompts helped me figure out I was dealing with more than just "stress." I got real help because of this.</p>
+      <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Aryan M.</div><div class="testi-role">Student, Delhi University</div></div></div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">"</div>
+      <p class="testi-text">The group therapy sessions at ₹499/month are something I can actually afford. My therapist is brilliant, and the platform made it feel safe from the very first session. I've come so far in 3 months.</p>
+      <div class="testi-author"><div class="testi-avatar">R</div><div><div class="testi-name">Ritu K.</div><div class="testi-role">Teacher, Mumbai</div></div></div>
+    </div>
+  </div>
+</section>
+
 <!-- RESOURCES -->
 <section class="page-section" id="resources">
   <div class="reveal">
@@ -608,36 +811,174 @@ footer p{font-size:.72rem;color:rgba(168,213,181,0.4);text-align:right;}
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- CONTACT — redesigned -->
 <section class="page-section" id="contact">
-  <div class="contact-grid">
-    <div class="contact-left reveal">
-      <div class="s-label">Get In Touch</div>
-      <h2 class="s-title">Ready to take<br>the <em>first step?</em></h2>
-      <p>Whether you need support, want to join as a therapist, or are an institution looking for a wellness solution — we're here. No judgment. No pressure.</p>
-      <div class="contact-detail"><div class="cd-icon">📧</div><div class="cd-body"><strong>Email</strong>hello@mindspace.in</div></div>
-      <div class="contact-detail"><div class="cd-icon">📞</div><div class="cd-body"><strong>Call / WhatsApp</strong>+91 98765 43210</div></div>
-      <div class="contact-detail"><div class="cd-icon">🔒</div><div class="cd-body"><strong>Anonymous Form</strong>No name required. We'll respond to any email you provide.</div></div>
-    </div>
+  <div class="orb" style="width:500px;height:500px;background:rgba(42,122,75,0.06);top:-80px;right:-100px;"></div>
+  <div class="contact-hero reveal">
+    <div class="s-label" style="justify-content:center;">Get In Touch</div>
+    <h2 class="s-title">Ready to take<br>the <em>first step?</em></h2>
+    <p>Whether you need support, want to join as a therapist, or are an institution exploring wellness solutions — we're here. No judgment. No pressure. Just a real conversation.</p>
+  </div>
+
+  <div class="contact-body">
+    <!-- Left info column -->
     <div class="reveal">
-      <div class="form-group"><label>Your Name (optional)</label><input type="text" id="fname" placeholder="Anonymous is fine"></div>
-      <div class="form-group"><label>Email (optional)</label><input type="email" id="femail" placeholder="For us to respond"></div>
-      <div class="form-group"><label>I'm reaching out as a…</label>
-        <select id="ftype"><option value="">Select one</option><option>Someone seeking support</option><option>University / Organisation</option><option>Therapist wanting to join</option><option>Press / Media</option><option>Just curious</option></select>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="cc-icon">📧</div>
+          <div class="cc-body">
+            <h5>Email Us</h5>
+            <p>We respond to every message within 24 hours.</p>
+            <a href="mailto:binnybhatia4@gmail.com">binnybhatia4@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">📱</div>
+          <div class="cc-body">
+            <h5>WhatsApp</h5>
+            <p>For quick questions or support — message us directly.</p>
+            <a href="https://wa.me/919560154642" target="_blank">+91 95601 54642</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">🔒</div>
+          <div class="cc-body">
+            <h5>Anonymous Form</h5>
+            <p>No name required. Share what you're comfortable sharing — we'll take it from there.</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon">⏱️</div>
+          <div class="cc-body">
+            <h5>Response Time</h5>
+            <p>We aim to respond within <strong>24 hours</strong> on weekdays, and 48 hours on weekends.</p>
+          </div>
+        </div>
       </div>
-      <div class="form-group"><label>Message</label><textarea id="fmsg" placeholder="Share what's on your mind, or what you're looking for…"></textarea></div>
-      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="submitForm()">Send Message →</button>
-      <div class="form-success" id="formSuccess">✅ Thank you for reaching out. We'll respond within 24 hours. You're brave for taking this step.</div>
+      <div class="contact-note">
+        <h5>🛡️ Who typically reaches out?</h5>
+        <ul>
+          <li>Someone looking for guidance on which plan suits them</li>
+          <li>A university or organisation exploring student wellness programs</li>
+          <li>A therapist or counsellor wanting to join our network</li>
+          <li>Press or media seeking information about MindSpace</li>
+          <li>Someone who just wants to say hi — that's welcome too</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right form column -->
+    <div class="contact-form-wrap reveal">
+      <h3>Send us a message</h3>
+      <p>All fields are optional — share only what you're comfortable with.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="fname" placeholder="Anonymous is perfectly fine">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="femail" placeholder="So we can reply to you">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>I'm reaching out as a…</label>
+        <select id="ftype">
+          <option value="">Select one (optional)</option>
+          <option>Someone seeking support</option>
+          <option>University / Organisation</option>
+          <option>Therapist wanting to join</option>
+          <option>Press / Media</option>
+          <option>Just curious</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <input type="text" id="fsubject" placeholder="e.g. Question about Group Care plan">
+      </div>
+      <div class="form-group">
+        <label>Your Message</label>
+        <textarea id="fmsg" placeholder="Share what's on your mind, or what you're looking for. There are no wrong words here."></textarea>
+      </div>
+      <div class="form-bottom">
+        <span class="form-anon-note">Anonymous & confidential by default</span>
+        <button class="btn-primary" onclick="submitForm()">Send Message →</button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        ✅ <strong>Thank you for reaching out.</strong> We'll respond within 24 hours. You're brave for taking this step — we're honoured you chose to share with us. 💚
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-strip reveal">
+    <h3>Frequently Asked Questions</h3>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is MindSpace really free? <span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>Yes — the free tier includes AI chat, mood tracking, journaling, breathing exercises, and the full crisis helpline directory. No credit card, no trial period. It's yours, always.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Are conversations with Mira private? <span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>Completely. No account is needed and your conversations are never stored on our servers or shared with third parties. What you tell Mira stays with Mira.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How is Mira different from a real therapist? <span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>Mira is an AI companion — she's great for venting, exploring feelings, and learning coping tools. She isn't a licensed therapist and can't diagnose. For deeper work, we connect you with real professionals.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I join as a therapist? <span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>Absolutely. We welcome licensed therapists and counsellors. Use the contact form above and select "Therapist wanting to join" — we'll get back to you with details on our vetting and onboarding process.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is there a sliding scale for pricing? <span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>Yes. We believe cost should never be a barrier to mental health support. If our standard pricing is a challenge, reach out — we have sliding scale options for individuals who qualify.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can organisations partner with MindSpace? <span class="faq-arrow">▾</span></button>
+        <div class="faq-a"><p>Yes — we partner with universities, corporates, and NGOs to bring mental health support to their communities. Get in touch via the form and we'll share our partnership deck.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <a href="#home" class="logo"><div class="logo-dot"></div>Mind<span>Space</span></a>
-  <div class="footer-links">
-    <a href="#about">About</a><a href="#breathe">Breathe</a><a href="#resources">Resources</a><a href="#journal">Journal</a><a href="#contact">Contact</a>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#home" class="logo"><div class="logo-dot"></div>Mind<span>Space</span></a>
+      <p>Affordable, judgment-free mental health support for everyone. Because your mind deserves care, regardless of your circumstances.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Tools</h5>
+      <a href="#breathe">Breathing Exercise</a>
+      <a href="#chat-section">AI Companion</a>
+      <a href="#reframe">Thought Reframing</a>
+      <a href="#journal">Guided Journal</a>
+      <a href="#mood">Mood Tracker</a>
+    </div>
+    <div class="footer-col">
+      <h5>Support</h5>
+      <a href="#resources">Crisis Helplines</a>
+      <a href="#resources">Pricing Tiers</a>
+      <a href="#about">About Mental Health</a>
+      <a href="#tips">Self-Care Tips</a>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <a href="mailto:binnybhatia4@gmail.com">binnybhatia4@gmail.com</a>
+      <a href="https://wa.me/919560154642">WhatsApp Us</a>
+      <a href="#contact">Contact Form</a>
+      <a href="#contact">Join as Therapist</a>
+    </div>
   </div>
-  <p>© 2026 MindSpace · Mental health is a right, not a privilege.</p>
+  <div class="footer-bottom">
+    <p>© 2026 MindSpace · Mental health is a right, not a privilege.</p>
+    <div class="footer-socials">
+      <a class="footer-social" href="#" title="Instagram">📸</a>
+      <a class="footer-social" href="#" title="Twitter">🐦</a>
+      <a class="footer-social" href="#" title="LinkedIn">💼</a>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -780,7 +1121,15 @@ window.addEventListener('load',()=>{
 function submitForm(){
   const msg=document.getElementById('fmsg').value.trim();if(!msg){alert('Please share your message first.');return;}
   document.getElementById('formSuccess').style.display='block';
-  ['fmsg','fname','femail'].forEach(id=>document.getElementById(id).value='');
+  ['fmsg','fname','femail','fsubject'].forEach(id=>document.getElementById(id).value='');
+}
+
+// FAQ
+function toggleFaq(btn){
+  const ans=btn.nextElementSibling;
+  const isOpen=btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(q=>{q.classList.remove('open');q.nextElementSibling.classList.remove('open');});
+  if(!isOpen){btn.classList.add('open');ans.classList.add('open');}
 }
 </script>
 </body>
