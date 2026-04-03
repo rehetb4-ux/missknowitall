@@ -7,6 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
+  .info-card-extra {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.info-card-extra:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(42, 122, 75, 0.1);
+}
 :root {
   --bg:        #F2F8F4;
   --bg2:       #EAF3EC;
@@ -1013,6 +1020,21 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       </div>
 
       <div class="privacy-note" style="margin-top:1.4rem;">
+        <div class="info-card-extra" style="background: var(--card); border: 1px solid var(--border2); border-radius: 14px; padding: 1.5rem; margin-top: 1.2rem; border-left: 4px solid var(--primary);">
+    <h5 style="font-size: 0.9rem; color: var(--primary); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 700; letter-spacing: 0.05em;">✨ Mira's Tech Stack</h5>
+    <p style="font-size: 0.85rem; color: var(--muted); line-height: 1.6;">
+        Powered by <strong>Llama-3 & custom emotion-mapping</strong>. Mira doesn't just read text; she analyzes sentiment shifts in real-time to adjust her tone from "hype-bestie" to "calm-mentor" based on your vibes.
+    </p>
+</div>
+
+<div class="mira-dyk-facts" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
+    <div class="dyk-fact" style="display: flex; align-items: center; gap: 0.7rem; font-size: 0.85rem; color: var(--text2);">
+        <span style="font-size: 1.1rem;">🔒</span> <span>End-to-end encrypted conversations</span>
+    </div>
+    <div class="dyk-fact" style="display: flex; align-items: center; gap: 0.7rem; font-size: 0.85rem; color: var(--text2);">
+        <span style="font-size: 1.1rem;">🧠</span> <span>Evidence-based emotional support</span>
+    </div>
+</div>
         <div class="pn-label">Privacy First</div>
         <p>All conversations are anonymous by default. No account needed. Your words are never sold or shared with anyone, ever.</p>
       </div>
