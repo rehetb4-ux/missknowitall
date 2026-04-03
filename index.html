@@ -1894,5 +1894,34 @@ function submitForm(){const msg=document.getElementById('fmsg').value.trim();if(
 // FAQ
 function toggleFaq(btn){const ans=btn.nextElementSibling;const isOpen=btn.classList.contains('open');document.querySelectorAll('.faq-q.open').forEach(q=>{q.classList.remove('open');q.nextElementSibling.classList.remove('open');});if(!isOpen){btn.classList.add('open');ans.classList.add('open');}}
 </script>
+  <section class="page-section" style="background: var(--bg2); border-top: 2px solid var(--primary); padding: 5rem 5vw;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 class="s-title">Extra <em>Resources</em></h2>
+        <p style="color: var(--muted);">Since you're here, let's fill some gaps in your toolkit.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        
+        <div style="background: var(--card); border: 1.5px solid var(--border2); border-radius: 24px; padding: 2rem; border-left: 8px solid var(--primary);">
+            <h4 style="color: var(--primary2); margin-bottom: 0.8rem;">✨ Mira's Intelligence</h4>
+            <p style="font-size: 0.95rem; color: var(--text2); line-height: 1.6;">Mira isn't just a chatbot; she uses emotion-mapping to identify 15+ subtle mood shifts in your text to provide grounded, real-world validation.</p>
+        </div>
+
+        <div style="background: var(--card2); border: 1.5px solid var(--gold); border-radius: 24px; padding: 2rem;">
+            <h4 style="color: var(--text); margin-bottom: 0.8rem;">🧠 Why Reframing Works</h4>
+            <p style="font-size: 0.95rem; color: var(--muted); line-height: 1.6;">When you "name it to tame it," you move activity from the emotional amygdala to the logical prefrontal cortex, physically lowering stress.</p>
+        </div>
+
+        <div style="background: var(--surface2); border: 1.5px solid var(--border2); border-radius: 24px; padding: 2rem;">
+            <h4 style="color: var(--forest); margin-bottom: 0.8rem;">💡 Daily Prompts</h4>
+            <ul style="list-style: none; font-size: 0.9rem; color: var(--text2); display: flex; flex-direction: column; gap: 0.8rem;">
+                <li><strong>Gratitude:</strong> 3 tiny things that went right?</li>
+                <li><strong>Release:</strong> What worry are you letting go?</li>
+                <li><strong>Growth:</strong> How did you show up for yourself?</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
 </body>
 </html>
