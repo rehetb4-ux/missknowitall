@@ -48,12 +48,13 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 /* ===== NAV ===== */
 nav{position:fixed;top:0;width:100%;z-index:500;padding:0 5vw;display:flex;justify-content:space-between;align-items:center;height:var(--nav-h);background:#2A7A4B;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.1);}
 .logo{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:700;text-decoration:none;color:#fff;display:flex;align-items:center;gap:.55rem;letter-spacing:-0.02em;}
-.logo-dot{width:10px;height:10px;background:var(--mint);border-radius:50%;box-shadow:0 0 10px rgba(168,213,181,0.6);animation:pdot 2.5s ease infinite;}
-@keyframes pdot{0%,100%{transform:scale(1);box-shadow:0 0 8px rgba(168,213,181,0.4);}50%{transform:scale(1.3);box-shadow:0 0 18px rgba(168,213,181,0.7);}}
-.logo span{color:var(--mint);}
+.logo-dot{width:10px;height:10px;background:#FFD966;border-radius:50%;box-shadow:0 0 10px rgba(255,217,102,0.7);animation:pdot 2.5s ease infinite;}
+@keyframes pdot{0%,100%{transform:scale(1);box-shadow:0 0 8px rgba(255,217,102,0.5);}50%{transform:scale(1.3);box-shadow:0 0 20px rgba(255,217,102,0.9);}}
+/* CHANGE 1: "Space" text is now bright gold/yellow for maximum visibility */
+.logo span{color:#FFD966;text-shadow:0 0 18px rgba(255,217,102,0.5);}
 .nav-links{display:flex;gap:0;list-style:none;align-items:center;}
 .nav-links a{text-decoration:none;color:rgba(255,255,255,0.82);font-size:1rem;font-weight:600;padding:0 1rem;height:var(--nav-h);display:flex;align-items:center;border-bottom:2.5px solid transparent;transition:color .2s,border-color .2s;}
-.nav-links a:hover{color:#fff;border-bottom-color:var(--mint);}
+.nav-links a:hover{color:#fff;border-bottom-color:#FFD966;}
 .nav-pill{background:#fff!important;color:var(--primary)!important;border-radius:8px!important;padding:.55rem 1.5rem!important;height:auto!important;font-weight:700!important;border-bottom:none!important;font-size:.95rem!important;margin-left:.8rem;box-shadow:0 4px 18px rgba(0,0,0,0.15);transition:all .2s!important;}
 .nav-pill:hover{background:var(--backgroudpl)!important;color:#fff!important;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,0.2)!important;}
 
@@ -85,55 +86,77 @@ h1 em{font-style:italic;color:var(--primary);}
 .hstat .num{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1;}
 .hstat .lbl{font-size:.95rem;color:var(--muted);margin-top:.4rem;line-height:1.5;}
 
-/* ===== HERO VISUAL — REDESIGNED CARDS ===== */
+/* ===== HERO VISUAL — REDESIGNED PRETTIER CARDS ===== */
 .hero-visual{
   position:absolute;right:5vw;top:50%;transform:translateY(-50%);
-  width:460px;
+  width:480px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:1.2rem;
+  gap:1.6rem;          /* CHANGE 3: increased gap to avoid cards touching */
   z-index:0;
 }
-/* All hero cards same hexagonal-ish shape with consistent geometry */
+
+/* CHANGE 2: More beautiful card shapes with varied, decorative border-radius */
 .hv-card{
   background:var(--card);
   border:1.5px solid var(--border2);
-  border-radius:28px 8px 28px 8px;
+  border-radius:32px 10px 32px 10px;
   padding:2rem 1.8rem 1.8rem;
-  height:200px;
+  height:210px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   position:relative;
   overflow:hidden;
-  transition:transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s;
+  box-shadow:0 6px 24px rgba(15,43,26,0.07);
 }
 .hv-card::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,0.6) 0%,transparent 60%);
+  background:linear-gradient(135deg,rgba(255,255,255,0.7) 0%,transparent 55%);
   pointer-events:none;
 }
+/* Decorative corner accent shape */
 .hv-card::after{
-  content:'';position:absolute;bottom:-30px;right:-30px;
-  width:100px;height:100px;border-radius:50%;
-  background:radial-gradient(circle,rgba(42,122,75,0.12),transparent 70%);
+  content:'';position:absolute;bottom:-20px;right:-20px;
+  width:90px;height:90px;
+  border-radius:50% 30% 50% 30%;
+  background:radial-gradient(circle,rgba(42,122,75,0.14),transparent 70%);
   pointer-events:none;
+  transition:transform .4s;
 }
-.hv-card:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:0 24px 50px rgba(15,43,26,0.14);}
+.hv-card:hover{transform:translateY(-10px) rotate(-1.5deg);box-shadow:0 28px 55px rgba(15,43,26,0.16);}
+.hv-card:hover::after{transform:scale(1.3);}
+
+/* Each card gets a unique shape personality */
+.hv-card:nth-child(1){border-radius:32px 10px 32px 10px;}
+.hv-card:nth-child(2){border-radius:10px 32px 10px 32px;margin-top:1.8rem;}   /* CHANGE 3: more margin */
+.hv-card:nth-child(3){border-radius:32px 10px 32px 10px;}
+.hv-card:nth-child(4){border-radius:10px 32px 10px 32px;margin-top:-1.8rem;}
+
+/* Decorative top-left stripe on each card */
+.hv-card .hv-stripe{
+  position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--primary),var(--accent),transparent);
+  border-radius:10px 0 0 0;
+}
+
 .hv-card.featured{
-  background:linear-gradient(145deg,rgba(42,122,75,0.18),rgba(76,175,114,0.08),var(--card));
+  background:linear-gradient(145deg,rgba(42,122,75,0.15),rgba(76,175,114,0.06),var(--card));
   border-color:var(--primary);
-  box-shadow:0 8px 32px rgba(42,122,75,0.15);
+  box-shadow:0 10px 36px rgba(42,122,75,0.18);
 }
-.hv-card.featured::after{background:radial-gradient(circle,rgba(42,122,75,0.2),transparent 70%);}
-.hv-card:nth-child(2){margin-top:1.4rem;}
-.hv-card:nth-child(4){margin-top:-1.4rem;}
+.hv-card.featured::after{background:radial-gradient(circle,rgba(42,122,75,0.22),transparent 70%);}
+.hv-card.featured .hv-stripe{background:linear-gradient(90deg,var(--primary),var(--lime),var(--teal));}
+
 .hv-top{display:flex;align-items:center;justify-content:space-between;}
 .hv-icon-wrap{
   width:48px;height:48px;border-radius:14px;
   background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.2);
   display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  transition:transform .3s;
 }
+.hv-card:hover .hv-icon-wrap{transform:scale(1.12) rotate(-4deg);}
 .hv-card.featured .hv-icon-wrap{background:rgba(42,122,75,0.2);border-color:rgba(42,122,75,0.4);}
 .hv-tag{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
   background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.18);
@@ -148,13 +171,13 @@ h1 em{font-style:italic;color:var(--primary);}
 .marquee-strip{background:var(--primary);padding:.95rem 0;overflow:hidden;border-top:1px solid var(--primary2);border-bottom:1px solid var(--primary2);}
 .marquee-inner{display:flex;gap:3rem;white-space:nowrap;animation:marquee 28s linear infinite;}
 .marquee-item{font-size:.92rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.85);display:flex;align-items:center;gap:.9rem;}
-.marquee-item::before{content:'✦';color:var(--mint);font-size:.6rem;}
+.marquee-item::before{content:'✦';color:#FFD966;font-size:.6rem;}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
 /* ===== DAILY AFFIRMATION BANNER ===== */
 .daily-affirmation{background:linear-gradient(135deg,var(--primary),var(--primary2));padding:2.8rem 5vw;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
 .da-left{display:flex;align-items:center;gap:1.5rem;flex:1;}
-.da-badge{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:.4rem 1.1rem;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);white-space:nowrap;}
+.da-badge{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:.4rem 1.1rem;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#FFD966;white-space:nowrap;}
 .da-text{font-family:'Playfair Display',serif;font-style:italic;font-size:1.22rem;color:#fff;line-height:1.65;max-width:620px;}
 .da-author{font-size:.88rem;color:rgba(255,255,255,0.6);margin-top:.35rem;}
 .da-btn{background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);color:#fff;border-radius:8px;padding:.7rem 1.6rem;font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;}
@@ -184,20 +207,12 @@ h1 em{font-style:italic;color:var(--primary);}
 .step-card h4{font-size:1.12rem;font-weight:700;margin-bottom:.75rem;color:var(--text);}
 .step-card p{font-size:.97rem;color:var(--muted);line-height:1.76;flex:1;}
 
-/* ===== BREATHE — FULLY ENHANCED ===== */
+/* ===== BREATHE ===== */
 #breathe{background:var(--bg);border-bottom:1px solid var(--border2);}
 .breathe-header{text-align:center;max-width:580px;margin:0 auto;}
 .breathe-main-grid{display:grid;grid-template-columns:280px 1fr 280px;gap:2.5rem;align-items:center;margin-top:3.5rem;max-width:1200px;margin-left:auto;margin-right:auto;}
 .breathe-side-panel{display:flex;flex-direction:column;gap:1.1rem;}
-.bside-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--card-radius);
-  padding:1.5rem 1.6rem;
-  transition:all .25s;
-  position:relative;
-  overflow:hidden;
-}
+.bside-card{background:var(--card);border:1px solid var(--border);border-radius:var(--card-radius);padding:1.5rem 1.6rem;transition:all .25s;position:relative;overflow:hidden;}
 .bside-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--primary),var(--accent));}
 .bside-card:hover{border-color:var(--primary);box-shadow:0 8px 24px var(--shadow);}
 .bside-icon{font-size:1.4rem;margin-bottom:.5rem;display:block;}
@@ -207,7 +222,6 @@ h1 em{font-style:italic;color:var(--primary);}
 .bside-tip .tip-label{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:.5rem;}
 .bside-tip p{font-size:.9rem;color:var(--text2);line-height:1.72;font-style:italic;}
 
-/* CENTER breathing widget */
 .breathe-center{display:flex;flex-direction:column;align-items:center;gap:1.5rem;}
 .breathe-container{max-width:320px;width:100%;}
 .breathe-ring-wrap{position:relative;width:280px;height:280px;margin:0 auto;display:flex;align-items:center;justify-content:center;}
@@ -224,7 +238,6 @@ h1 em{font-style:italic;color:var(--primary);}
 #breatheCount{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:var(--text);line-height:1;margin-top:.15rem;}
 .breathe-label{font-size:.92rem;color:var(--muted);}
 
-/* Technique selector row */
 .breathe-tech-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;width:100%;max-width:320px;}
 .btech-btn{background:var(--card);border:1.5px solid var(--border2);border-radius:10px;padding:.65rem .8rem;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s;text-align:center;line-height:1.3;}
 .btech-btn:hover{border-color:var(--accent);color:var(--primary);}
@@ -234,13 +247,12 @@ h1 em{font-style:italic;color:var(--primary);}
 .breathe-btn:hover{background:var(--primary2);transform:translateY(-1px);}
 #breatheCycles{font-size:.95rem;color:var(--muted);text-align:center;}
 
-/* Bottom benefit stats */
 .breathe-bottom-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:1200px;margin:3rem auto 0;padding:2rem;background:linear-gradient(135deg,rgba(42,122,75,0.06),rgba(76,175,114,0.03));border:1px solid var(--border);border-radius:var(--card-radius);}
 .bstat{text-align:center;padding:.8rem 0;}
 .bstat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--primary);display:block;margin-bottom:.25rem;}
 .bstat-label{font-size:.88rem;color:var(--muted);line-height:1.5;}
 
-/* ===== CHAT — ENHANCED ===== */
+/* ===== CHAT — CHANGE 4: Fill blank space ===== */
 #chat-section{background:var(--bg2);border-bottom:1px solid var(--border2);}
 .chat-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start;}
 .chat-info p{color:var(--text2);line-height:1.85;font-size:1.1rem;margin-bottom:1.1rem;font-weight:300;}
@@ -251,23 +263,36 @@ h1 em{font-style:italic;color:var(--primary);}
 .privacy-note .pn-label{font-size:.78rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--primary);margin-bottom:.45rem;}
 .privacy-note p{font-size:.97rem;color:var(--muted);line-height:1.7;margin:0;}
 
-/* NEW: Mira Capabilities Grid */
 .mira-caps{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1.8rem;}
-.mira-cap-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:1.2rem 1.3rem;
-  transition:all .22s;
-}
+.mira-cap-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.3rem;transition:all .22s;}
 .mira-cap-card:hover{border-color:var(--primary);background:rgba(42,122,75,0.06);transform:translateY(-2px);}
 .mira-cap-card .mc-icon{font-size:1.3rem;margin-bottom:.4rem;display:block;}
 .mira-cap-card h5{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.22rem;}
 .mira-cap-card p{font-size:.85rem;color:var(--muted);line-height:1.6;}
 
-/* NEW: Languages row */
 .mira-langs{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;}
 .lang-pill{background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:.28rem .85rem;font-size:.8rem;font-weight:600;color:var(--text2);}
+
+/* NEW: Mira "Did You Know" strip to fill blank space */
+.mira-did-you-know{
+  margin-top:1.5rem;
+  background:linear-gradient(135deg,rgba(42,122,75,0.07),rgba(76,175,114,0.03));
+  border:1px solid var(--border2);
+  border-radius:var(--card-radius);
+  padding:1.5rem 1.6rem;
+}
+.mira-dyk-label{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+.mira-dyk-label::before{content:'';width:16px;height:2px;background:var(--accent);border-radius:2px;}
+.mira-dyk-facts{display:flex;flex-direction:column;gap:.65rem;}
+.dyk-fact{display:flex;align-items:flex-start;gap:.75rem;font-size:.95rem;color:var(--text2);line-height:1.6;}
+.dyk-fact-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem;}
+
+/* NEW: conversation starters */
+.mira-starters{margin-top:1.4rem;}
+.ms-label{font-size:.78rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem;}
+.ms-chips{display:flex;gap:.5rem;flex-wrap:wrap;}
+.ms-chip{background:var(--card);border:1.5px solid var(--border2);border-radius:100px;padding:.38rem 1rem;font-size:.85rem;font-weight:500;color:var(--text2);cursor:pointer;transition:all .2s;}
+.ms-chip:hover{border-color:var(--primary);color:var(--primary);background:rgba(42,122,75,0.06);}
 
 /* Chat box */
 .chat-box{background:var(--card);border:1px solid var(--border2);border-radius:var(--card-radius);display:flex;flex-direction:column;height:580px;overflow:hidden;box-shadow:0 20px 60px var(--shadow);}
@@ -300,7 +325,7 @@ h1 em{font-style:italic;color:var(--primary);}
 .chat-send{background:var(--primary);border:none;border-radius:8px;width:42px;height:42px;color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;box-shadow:0 3px 10px var(--glow);}
 .chat-send:hover{background:var(--primary2);transform:scale(1.05);}
 
-/* ===== REFRAME — ENHANCED ===== */
+/* ===== REFRAME — CHANGE 5: extra content ===== */
 #reframe{background:var(--bg);}
 .reframe-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:2rem;}
 .reframe-tool{background:var(--card);border:1px solid var(--border2);border-radius:var(--card-radius);padding:2.8rem;box-shadow:0 16px 50px var(--shadow);}
@@ -315,20 +340,18 @@ h1 em{font-style:italic;color:var(--primary);}
 .reframe-result p{color:var(--text2);font-size:1rem;line-height:1.82;}
 .reframe-new{margin-top:1.2rem;padding:1.2rem 1.4rem;background:rgba(42,122,75,0.07);border-left:3px solid var(--primary);border-radius:0 10px 10px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;color:var(--primary2);line-height:1.8;}
 
-/* Reframe right panel — distortion library */
+/* NEW: reframe quick-steps */
+.reframe-steps{margin-top:1.4rem;display:flex;flex-direction:column;gap:.7rem;}
+.rf-step{display:flex;align-items:flex-start;gap:.85rem;padding:1rem 1.2rem;background:var(--bg);border:1px solid var(--border);border-radius:12px;}
+.rf-step-num{width:26px;height:26px;border-radius:50%;background:var(--primary);color:#fff;font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;}
+.rf-step p{font-size:.92rem;color:var(--text2);line-height:1.65;margin:0;}
+.rf-step strong{color:var(--primary2);}
+
 .reframe-right{}
 .distortion-intro{margin-bottom:1.5rem;}
 .distortion-intro p{font-size:1.05rem;color:var(--text2);line-height:1.82;font-weight:300;}
 .distortion-library{display:flex;flex-direction:column;gap:.75rem;}
-.dist-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:1.3rem 1.5rem;
-  display:flex;gap:1rem;align-items:flex-start;
-  transition:all .22s;
-  cursor:pointer;
-}
+.dist-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .22s;cursor:pointer;}
 .dist-card:hover{border-color:var(--accent);background:rgba(42,122,75,0.04);transform:translateX(4px);}
 .dist-num{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--accent);flex-shrink:0;margin-top:-.1rem;}
 .dist-body h5{font-size:.97rem;font-weight:700;color:var(--text);margin-bottom:.25rem;}
@@ -337,6 +360,15 @@ h1 em{font-style:italic;color:var(--primary);}
 .reframe-cbt-note{margin-top:1.5rem;padding:1.4rem 1.6rem;background:linear-gradient(135deg,rgba(42,122,75,0.07),rgba(76,175,114,0.03));border:1px solid rgba(42,122,75,0.18);border-radius:var(--card-radius);}
 .reframe-cbt-note .rn-label{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:.45rem;}
 .reframe-cbt-note p{font-size:.95rem;color:var(--text2);line-height:1.74;}
+
+/* NEW: daily reframe challenge */
+.reframe-challenge{margin-top:1.4rem;background:linear-gradient(135deg,rgba(42,122,75,0.1),rgba(200,168,75,0.06));border:1.5px solid rgba(42,122,75,0.2);border-radius:var(--card-radius);padding:1.5rem 1.6rem;}
+.rc-header{display:flex;align-items:center;gap:.7rem;margin-bottom:.8rem;}
+.rc-badge{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:#FFD966;color:var(--forest);border-radius:4px;padding:.2rem .65rem;}
+.rc-title{font-size:1rem;font-weight:700;color:var(--text);}
+.rc-prompt{font-family:'Playfair Display',serif;font-style:italic;font-size:1.08rem;color:var(--primary2);line-height:1.75;margin-bottom:.9rem;}
+.rc-btn{background:var(--primary);color:#fff;border:none;border-radius:8px;padding:.6rem 1.3rem;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.rc-btn:hover{background:var(--primary2);}
 
 /* ===== QUIZ ===== */
 #quiz{background:var(--bg);border-bottom:1px solid var(--border2);}
@@ -359,7 +391,7 @@ h1 em{font-style:italic;color:var(--primary);}
 .qr-label{font-size:1.2rem;font-weight:600;color:var(--text);margin-bottom:.7rem;}
 .qr-desc{font-size:1.02rem;color:var(--muted);line-height:1.82;margin-bottom:1.8rem;}
 
-/* ===== CRISIS PULSE — ENHANCED ===== */
+/* ===== CRISIS PULSE ===== */
 #crisis-pulse{background:linear-gradient(135deg,rgba(27,94,32,0.08),var(--bg));border-bottom:1px solid var(--border2);padding:7rem 5vw;}
 .crisis-pulse-inner{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:start;max-width:1200px;margin:0 auto;}
 .pulse-left p{font-size:1.1rem;color:var(--text2);line-height:1.88;margin-bottom:1.5rem;font-weight:300;}
@@ -370,7 +402,6 @@ h1 em{font-style:italic;color:var(--primary);}
 .pulse-card .pc-value{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--primary);margin:.3rem 0;}
 .pulse-card .pc-sub{font-size:.9rem;color:var(--muted);}
 
-/* Right panel — enhanced */
 .pulse-right{display:flex;flex-direction:column;gap:1.5rem;}
 .pulse-meter{background:var(--card);border:1px solid var(--border2);border-radius:var(--card-radius);padding:2.4rem;}
 .pulse-meter h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;margin-bottom:1.5rem;color:var(--text);}
@@ -381,20 +412,14 @@ h1 em{font-style:italic;color:var(--primary);}
 .ds-bar{height:100%;border-radius:8px;transition:width 1s ease;}
 .ds-pct{font-size:.88rem;color:var(--muted);width:42px;text-align:right;font-weight:600;}
 
-/* NEW: global impact cards */
 .global-impact-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.85rem;}
-.gi-card{
-  background:var(--card);border:1px solid var(--border);border-radius:14px;
-  padding:1.2rem;text-align:center;
-  transition:all .22s;
-}
+.gi-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem;text-align:center;transition:all .22s;}
 .gi-card:hover{border-color:var(--primary);transform:translateY(-2px);}
 .gi-flag{font-size:1.5rem;margin-bottom:.4rem;display:block;}
 .gi-country{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem;}
 .gi-pct{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--primary);}
 .gi-desc{font-size:.75rem;color:var(--muted);margin-top:.2rem;line-height:1.4;}
 
-/* NEW: Call to action strip */
 .pulse-cta{background:linear-gradient(135deg,var(--primary),var(--primary2));border-radius:var(--card-radius);padding:1.8rem;text-align:center;}
 .pulse-cta h4{font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff;margin-bottom:.5rem;}
 .pulse-cta p{font-size:.95rem;color:rgba(255,255,255,0.75);margin-bottom:1.1rem;line-height:1.65;}
@@ -422,7 +447,7 @@ h1 em{font-style:italic;color:var(--primary);}
 .cl-sublabel{font-size:.88rem;color:var(--muted);}
 .cl-tip{font-size:1.02rem;color:var(--text2);line-height:1.75;font-style:italic;margin-top:.5rem;}
 
-/* ===== JOURNAL ===== */
+/* ===== JOURNAL — CHANGE 7: fill blank space ===== */
 #journal{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);}
 .journal-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;}
 .journal-info p{color:var(--text2);font-size:1.1rem;line-height:1.85;font-weight:300;margin-bottom:1.1rem;}
@@ -445,11 +470,44 @@ h1 em{font-style:italic;color:var(--primary);}
 .j-entry-meta{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);margin-bottom:.45rem;}
 .j-entry-text{font-size:.97rem;color:var(--text2);line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .j-mood-tag{font-size:.72rem;background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.22);color:var(--primary);padding:.14rem .6rem;border-radius:4px;font-weight:600;}
+
 .journal-benefits{display:flex;flex-direction:column;gap:.9rem;margin-top:2rem;}
 .jb-item{display:flex;align-items:flex-start;gap:1rem;padding:1.5rem 1.6rem;background:var(--card);border:1px solid var(--border);border-radius:var(--card-radius);min-height:110px;}
 .jb-icon{font-size:1.5rem;flex-shrink:0;margin-top:.05rem;}
 .jb-body h5{font-size:1.02rem;font-weight:700;color:var(--text);margin-bottom:.32rem;}
 .jb-body p{font-size:.95rem;color:var(--muted);line-height:1.7;}
+
+/* NEW: journal research quote strip */
+.journal-research{
+  margin-top:1.8rem;
+  background:linear-gradient(135deg,rgba(42,122,75,0.08),rgba(76,175,114,0.03));
+  border:1px solid rgba(42,122,75,0.18);
+  border-radius:var(--card-radius);
+  padding:1.6rem 1.8rem;
+}
+.jr-label{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem;}
+.jr-label::before{content:'';width:16px;height:2px;background:var(--accent);border-radius:2px;}
+.jr-stats{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;}
+.jr-stat{text-align:center;padding:1rem;background:var(--card);border:1px solid var(--border);border-radius:12px;}
+.jr-stat .js-num{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--primary);display:block;margin-bottom:.2rem;}
+.jr-stat .js-lbl{font-size:.8rem;color:var(--muted);line-height:1.5;}
+
+/* NEW: journal streak tracker */
+.journal-streak{
+  margin-top:1.2rem;
+  padding:1.3rem 1.6rem;
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:var(--card-radius);
+  display:flex;align-items:center;gap:1.2rem;
+}
+.jstreak-icon{font-size:2rem;flex-shrink:0;}
+.jstreak-body h5{font-size:.97rem;font-weight:700;color:var(--text);margin-bottom:.2rem;}
+.jstreak-body p{font-size:.88rem;color:var(--muted);line-height:1.6;}
+.jstreak-days{display:flex;gap:.3rem;margin-top:.55rem;}
+.jsd{width:22px;height:22px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--muted);}
+.jsd.done{background:var(--primary);border-color:var(--primary);color:#fff;}
+.jsd.today{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 8px var(--glow2);}
 
 /* ===== MOOD ===== */
 #mood{background:var(--bg);border-bottom:1px solid var(--border2);}
@@ -515,7 +573,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
 .testi-role{font-size:.88rem;color:var(--muted);}
 .testi-stars{color:var(--gold);font-size:.92rem;letter-spacing:.1rem;margin-bottom:.75rem;}
 
-/* ===== RESOURCES ===== */
+/* ===== RESOURCES — CHANGE 6 ===== */
 #resources{background:var(--bg2);border-bottom:1px solid var(--border2);}
 .emergency-banner{background:linear-gradient(135deg,rgba(27,94,32,0.12),rgba(42,122,75,0.06));border:1px solid rgba(42,122,75,0.25);border-radius:var(--card-radius);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:3.2rem;}
 .emergency-banner strong{font-size:1.15rem;font-weight:700;color:var(--text);display:block;margin-bottom:.3rem;}
@@ -589,9 +647,9 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
 footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
 .footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.8rem;border-bottom:1px solid rgba(168,213,181,0.15);}
 .footer-brand .logo{color:#fff;display:inline-flex;margin-bottom:1.1rem;}
-.footer-brand .logo span{color:var(--mint);}
+.footer-brand .logo span{color:#FFD966;}
 .footer-brand p{font-size:.95rem;color:rgba(168,213,181,0.55);line-height:1.78;max-width:250px;margin-top:.65rem;}
-.footer-col h5{font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);margin-bottom:1.1rem;}
+.footer-col h5{font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FFD966;margin-bottom:1.1rem;}
 .footer-col a{display:block;text-decoration:none;color:rgba(168,213,181,0.55);font-size:.95rem;margin-bottom:.7rem;transition:color .2s;}
 .footer-col a:hover{color:var(--mint);}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2.2rem;flex-wrap:wrap;gap:1rem;}
@@ -619,6 +677,7 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
   .daily-affirmation{flex-direction:column;}
   .breathe-main-grid{grid-template-columns:1fr;}
   .breathe-tech-row{grid-template-columns:1fr 1fr;}
+  .jr-stats{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
@@ -661,9 +720,10 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
     </div>
   </div>
 
-  <!-- REDESIGNED HERO VISUAL CARDS — same shape, prettier -->
+  <!-- HERO VISUAL — CHANGE 2 & 3: Prettier card shapes + more spacing -->
   <div class="hero-visual">
     <div class="hv-card featured">
+      <div class="hv-stripe"></div>
       <div class="hv-top">
         <div class="hv-icon-wrap">🤗</div>
         <span class="hv-tag">AI</span>
@@ -675,6 +735,7 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       <div class="hv-bottom"><div class="hv-dot"></div><span class="hv-stat">Online now · 24/7</span></div>
     </div>
     <div class="hv-card">
+      <div class="hv-stripe"></div>
       <div class="hv-top">
         <div class="hv-icon-wrap">🌬️</div>
         <span class="hv-tag">Calm</span>
@@ -686,6 +747,7 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       <div class="hv-bottom"><div class="hv-dot"></div><span class="hv-stat">4 techniques</span></div>
     </div>
     <div class="hv-card">
+      <div class="hv-stripe"></div>
       <div class="hv-top">
         <div class="hv-icon-wrap">📓</div>
         <span class="hv-tag">Write</span>
@@ -697,6 +759,7 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       <div class="hv-bottom"><div class="hv-dot"></div><span class="hv-stat">6 prompts · local save</span></div>
     </div>
     <div class="hv-card">
+      <div class="hv-stripe"></div>
       <div class="hv-top">
         <div class="hv-icon-wrap">📊</div>
         <span class="hv-tag">Track</span>
@@ -782,7 +845,7 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
   </div>
 </section>
 
-<!-- BREATHE — FULLY ENRICHED -->
+<!-- BREATHE -->
 <section class="page-section" id="breathe">
   <div class="breathe-header reveal">
     <div class="s-label" style="justify-content:center;">Breathing Tool</div>
@@ -791,7 +854,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
   </div>
 
   <div class="breathe-main-grid reveal">
-    <!-- LEFT PANEL -->
     <div class="breathe-side-panel">
       <div class="bside-card">
         <span class="bside-icon">🧠</span>
@@ -814,7 +876,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       </div>
     </div>
 
-    <!-- CENTER — BREATHING WIDGET -->
     <div class="breathe-center">
       <div class="breathe-tech-row">
         <button class="btech-btn active" onclick="setTech(this,'4-4-4-4')">📦 Box (4-4-4-4)</button>
@@ -841,7 +902,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       <p id="breatheCycles" style="text-align:center;">Complete 5 cycles for maximum benefit</p>
     </div>
 
-    <!-- RIGHT PANEL -->
     <div class="breathe-side-panel">
       <div class="bside-card">
         <span class="bside-icon">📦</span>
@@ -865,7 +925,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
     </div>
   </div>
 
-  <!-- BOTTOM STATS ROW -->
   <div class="breathe-bottom-stats reveal">
     <div class="bstat">
       <span class="bstat-num">2min</span>
@@ -886,7 +945,7 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
   </div>
 </section>
 
-<!-- AI CHAT — ENHANCED -->
+<!-- AI CHAT — CHANGE 4: blank space filled -->
 <section class="page-section" id="chat-section">
   <div class="orb" style="width:500px;height:500px;background:rgba(42,122,75,0.07);bottom:-100px;right:-120px;"></div>
   <div class="chat-layout">
@@ -895,7 +954,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       <h2 class="s-title">Talk to<br><em>someone</em><br>anytime.</h2>
       <p>Mira uses empathetic AI to help you vent, reflect, and understand your needs — with zero judgment and complete privacy.</p>
 
-      <!-- NEW: Capabilities grid -->
       <div class="mira-caps">
         <div class="mira-cap-card">
           <span class="mc-icon">💬</span>
@@ -933,6 +991,27 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
         </div>
       </div>
 
+      <!-- CHANGE 4: "Did you know" facts strip to fill blank space -->
+      <div class="mira-did-you-know">
+        <div class="mira-dyk-label">Did you know?</div>
+        <div class="mira-dyk-facts">
+          <div class="dyk-fact"><span class="dyk-fact-icon">🤖</span>Mira is available round the clock — even at 3am when anxiety peaks and no one else is awake.</div>
+          <div class="dyk-fact"><span class="dyk-fact-icon">🧘</span>Research shows that simply writing or talking about emotions reduces their intensity within minutes.</div>
+          <div class="dyk-fact"><span class="dyk-fact-icon">🔒</span>No message you send to Mira is ever stored, logged, or linked to your identity in any way.</div>
+        </div>
+      </div>
+
+      <!-- CHANGE 4: Conversation starters to fill space -->
+      <div class="mira-starters">
+        <div class="ms-label">Try asking Mira…</div>
+        <div class="ms-chips">
+          <span class="ms-chip" onclick="startChat(this)">"Help me calm down"</span>
+          <span class="ms-chip" onclick="startChat(this)">"I don't know what I'm feeling"</span>
+          <span class="ms-chip" onclick="startChat(this)">"What's wrong with me?"</span>
+          <span class="ms-chip" onclick="startChat(this)">"I need to vent"</span>
+        </div>
+      </div>
+
       <div class="privacy-note" style="margin-top:1.4rem;">
         <div class="pn-label">Privacy First</div>
         <p>All conversations are anonymous by default. No account needed. Your words are never sold or shared with anyone, ever.</p>
@@ -966,7 +1045,7 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
   </div>
 </section>
 
-<!-- REFRAME — ENHANCED WITH TWO-COLUMN LAYOUT -->
+<!-- REFRAME — CHANGE 5: added steps + daily challenge -->
 <section class="page-section" id="reframe">
   <div class="orb" style="width:400px;height:400px;background:rgba(76,175,114,0.08);top:0;right:0;"></div>
   <div class="reveal">
@@ -976,7 +1055,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
   </div>
 
   <div class="reframe-layout reveal">
-    <!-- LEFT: the tool -->
     <div>
       <div class="reframe-tool">
         <h3>Thought Reframing Tool</h3>
@@ -991,6 +1069,29 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
         </div>
       </div>
 
+      <!-- CHANGE 5: How to reframe — step-by-step guide -->
+      <div style="margin-top:1.3rem;">
+        <div style="font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem;">How to reframe a thought — 4 steps</div>
+        <div class="reframe-steps">
+          <div class="rf-step">
+            <div class="rf-step-num">1</div>
+            <p><strong>Notice it.</strong> Catch the negative thought as it arises. Write it down exactly as it appeared.</p>
+          </div>
+          <div class="rf-step">
+            <div class="rf-step-num">2</div>
+            <p><strong>Name it.</strong> Identify the distortion type — all-or-nothing, catastrophizing, mind reading, etc.</p>
+          </div>
+          <div class="rf-step">
+            <div class="rf-step-num">3</div>
+            <p><strong>Challenge it.</strong> Ask: "What evidence do I have? Would I say this to a friend?"</p>
+          </div>
+          <div class="rf-step">
+            <div class="rf-step-num">4</div>
+            <p><strong>Replace it.</strong> Write a kinder, more balanced version that acknowledges reality without cruelty.</p>
+          </div>
+        </div>
+      </div>
+
       <!-- CBT note below tool -->
       <div class="reframe-cbt-note" style="margin-top:1.2rem;">
         <div class="rn-label">📚 Grounded in CBT</div>
@@ -998,7 +1099,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       </div>
     </div>
 
-    <!-- RIGHT: distortion library -->
     <div class="reframe-right">
       <div class="distortion-intro">
         <div class="s-label">Common Distortions</div>
@@ -1055,6 +1155,16 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
           </div>
         </div>
       </div>
+
+      <!-- CHANGE 5: Daily reframe challenge -->
+      <div class="reframe-challenge">
+        <div class="rc-header">
+          <span class="rc-badge">Daily Challenge</span>
+          <span class="rc-title">Today's thought to reframe</span>
+        </div>
+        <div class="rc-prompt" id="rcPrompt">"I'm not where I should be in life by now."</div>
+        <button class="rc-btn" onclick="loadDailyChallenge()">Try this one →</button>
+      </div>
     </div>
   </div>
 </section>
@@ -1099,7 +1209,7 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
   </div>
 </section>
 
-<!-- CRISIS PULSE — ENHANCED -->
+<!-- CRISIS PULSE -->
 <section id="crisis-pulse">
   <div class="orb" style="width:350px;height:350px;background:rgba(42,122,75,0.07);top:-60px;right:0;"></div>
   <div class="crisis-pulse-inner">
@@ -1115,8 +1225,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
         <div class="pulse-card"><div class="pc-label">Psychiatrists</div><div class="pc-value">0.3</div><div class="pc-sub">Per 100,000 people</div></div>
       </div>
     </div>
-
-    <!-- RIGHT — enhanced with more content -->
     <div class="pulse-right reveal">
       <div class="pulse-meter">
         <h3>Most common conditions seeking help on MindSpace</h3>
@@ -1129,33 +1237,14 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
           <div class="ds-row"><span class="ds-label">PTSD</span><div class="ds-bar-wrap"><div class="ds-bar" style="width:0%;background:linear-gradient(90deg,#00897B,#4CAF72);" data-w="18%"></div></div><span class="ds-pct">18%</span></div>
         </div>
       </div>
-
-      <!-- NEW: Global comparison -->
       <div>
         <div style="font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.85rem;">Global treatment gap comparison</div>
         <div class="global-impact-row">
-          <div class="gi-card">
-            <span class="gi-flag">🇮🇳</span>
-            <div class="gi-country">India</div>
-            <div class="gi-pct">83%</div>
-            <div class="gi-desc">untreated</div>
-          </div>
-          <div class="gi-card">
-            <span class="gi-flag">🌍</span>
-            <div class="gi-country">Global avg</div>
-            <div class="gi-pct">67%</div>
-            <div class="gi-desc">untreated</div>
-          </div>
-          <div class="gi-card">
-            <span class="gi-flag">🇺🇸</span>
-            <div class="gi-country">USA</div>
-            <div class="gi-pct">44%</div>
-            <div class="gi-desc">untreated</div>
-          </div>
+          <div class="gi-card"><span class="gi-flag">🇮🇳</span><div class="gi-country">India</div><div class="gi-pct">83%</div><div class="gi-desc">untreated</div></div>
+          <div class="gi-card"><span class="gi-flag">🌍</span><div class="gi-country">Global avg</div><div class="gi-pct">67%</div><div class="gi-desc">untreated</div></div>
+          <div class="gi-card"><span class="gi-flag">🇺🇸</span><div class="gi-country">USA</div><div class="gi-pct">44%</div><div class="gi-desc">untreated</div></div>
         </div>
       </div>
-
-      <!-- NEW: CTA -->
       <div class="pulse-cta">
         <h4>You don't have to be a statistic.</h4>
         <p>Free, confidential support is available right now. No account, no judgment, no cost.</p>
@@ -1211,7 +1300,7 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
   </div>
 </section>
 
-<!-- JOURNAL -->
+<!-- JOURNAL — CHANGE 7: extra content added -->
 <section class="page-section" id="journal">
   <div class="orb" style="width:400px;height:400px;background:rgba(42,122,75,0.07);bottom:0;left:-100px;"></div>
   <div class="journal-layout">
@@ -1220,10 +1309,52 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       <h2 class="s-title">Write your<br><em>way through.</em></h2>
       <p class="journal-info">Journaling externalizes your thoughts, reducing their weight. Research shows even 5 minutes of daily writing creates measurable improvements in mental clarity and emotional regulation.</p>
       <p class="journal-info" style="color:var(--muted);">Use the prompts tab for inspiration, or write freely. Your entries are saved locally and never leave your device.</p>
+
       <div class="journal-benefits">
         <div class="jb-item"><div class="jb-icon">🧘</div><div class="jb-body"><h5>Reduces rumination</h5><p>Writing a thought down stops your brain from looping it endlessly through your mind.</p></div></div>
         <div class="jb-item"><div class="jb-icon">🔍</div><div class="jb-body"><h5>Surfaces hidden patterns</h5><p>Over weeks, your journal becomes a mirror — showing triggers and what lifts you.</p></div></div>
         <div class="jb-item"><div class="jb-icon">💪</div><div class="jb-body"><h5>Builds emotional resilience</h5><p>Naming your emotions gives you power over them. Research calls this "affect labeling."</p></div></div>
+      </div>
+
+      <!-- CHANGE 7: Research stats to fill blank space -->
+      <div class="journal-research">
+        <div class="jr-label">Research-backed</div>
+        <div class="jr-stats">
+          <div class="jr-stat">
+            <span class="js-num">77%</span>
+            <span class="js-lbl">of daily journalers report reduced anxiety within 4 weeks</span>
+          </div>
+          <div class="jr-stat">
+            <span class="js-num">5 min</span>
+            <span class="js-lbl">is all it takes per day for measurable mood improvement</span>
+          </div>
+          <div class="jr-stat">
+            <span class="js-num">43%</span>
+            <span class="js-lbl">boost in working memory from expressive writing sessions</span>
+          </div>
+          <div class="jr-stat">
+            <span class="js-num">3×</span>
+            <span class="js-lbl">more likely to reach personal goals when written down</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHANGE 7: Streak tracker to fill blank space -->
+      <div class="journal-streak">
+        <div class="jstreak-icon">🔥</div>
+        <div class="jstreak-body">
+          <h5>Build your journaling streak</h5>
+          <p>Consistency is where the magic happens. Write a little every day.</p>
+          <div class="jstreak-days">
+            <div class="jsd done">M</div>
+            <div class="jsd done">T</div>
+            <div class="jsd done">W</div>
+            <div class="jsd today">T</div>
+            <div class="jsd">F</div>
+            <div class="jsd">S</div>
+            <div class="jsd">S</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="reveal">
@@ -1367,7 +1498,7 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
   </div>
 </section>
 
-<!-- RESOURCES -->
+<!-- RESOURCES — CHANGE 6: 2 more helplines added -->
 <section class="page-section" id="resources">
   <div class="reveal">
     <div class="s-label">Help & Support</div>
@@ -1384,6 +1515,9 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
     <div class="res-card reveal"><span class="res-type">Youth Support</span><h4>YourDOST</h4><p>Online counselling for students and young professionals navigating life challenges.</p><div class="res-contact">🌐 yourdost.com</div></div>
     <div class="res-card reveal"><span class="res-type">Women's Support</span><h4>Snehi</h4><p>Emotional support and counselling for women experiencing mental health challenges.</p><div class="res-contact">📞 044-24640050</div></div>
     <div class="res-card reveal"><span class="res-type">LGBTQ+ Support</span><h4>Arpita Suicide Hotline</h4><p>Safe, inclusive support for LGBTQ+ individuals facing mental health crises.</p><div class="res-contact">📞 080-23655557</div></div>
+    <!-- CHANGE 6: 2 new entries -->
+    <div class="res-card reveal"><span class="res-type">Online Therapy</span><h4>iMind</h4><p>Tele-mental health platform offering low-cost consultations with NIMHANS-trained professionals across India.</p><div class="res-contact">🌐 imind.in</div></div>
+    <div class="res-card reveal"><span class="res-type">Child & Teen Help</span><h4>Childline India</h4><p>24/7 emergency outreach for children and adolescents in distress, abuse, or mental health crisis.</p><div class="res-contact">📞 1098 (toll-free)</div></div>
   </div>
   <div style="margin-top:5.5rem;" class="reveal">
     <div class="s-label">Access Tiers</div>
@@ -1565,11 +1699,12 @@ function sendMsg(){const inp=document.getElementById('chatInp'),val=inp.value.tr
   },1400);
 }
 function sendQuick(btn){document.getElementById('chatInp').value=btn.textContent.replace(/[😰🌙😮‍💨💬💙]/gu,'').trim();sendMsg();}
+function startChat(chip){document.getElementById('chatInp').value=chip.textContent.replace(/"/g,'');sendMsg();}
 function addMsg(t,r){const m=document.getElementById('chatMsgs'),d=document.createElement('div');d.className='msg '+r;d.style.whiteSpace='pre-wrap';d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight;}
 function showTyping(){const m=document.getElementById('chatMsgs'),d=document.createElement('div');d.className='msg typing';d.id='typing';d.innerHTML='<div class="typing-dots"><span></span><span></span><span></span></div>';m.appendChild(d);m.scrollTop=m.scrollHeight;}
 function removeTyping(){const t=document.getElementById('typing');if(t)t.remove();}
 
-// BREATHING — updated with button-based tech selector
+// BREATHING
 const techniques={'4-4-4-4':{phases:[{label:'Inhale',dur:4,emoji:'🌿'},{label:'Hold',dur:4,emoji:'🍃'},{label:'Exhale',dur:4,emoji:'💨'},{label:'Hold',dur:4,emoji:'🍃'}]},'4-7-8':{phases:[{label:'Inhale',dur:4,emoji:'🌿'},{label:'Hold',dur:7,emoji:'🍃'},{label:'Exhale',dur:8,emoji:'💨'}]},'5-5':{phases:[{label:'Inhale',dur:5,emoji:'🌿'},{label:'Exhale',dur:5,emoji:'💨'}]},'3-6':{phases:[{label:'Inhale',dur:3,emoji:'🌿'},{label:'Exhale',dur:6,emoji:'💨'}]}};
 let currentTech='4-4-4-4';
 const circ=2*Math.PI*115;
@@ -1598,6 +1733,21 @@ const distortions=[
   {keys:['should','must','ought','have to'],type:'Should Statements',explain:'"Should" statements set rigid rules that create guilt when they\'re not met. This pattern is self-punishing and rarely motivating.',reframe:'I don\'t "have to" — I choose to. I\'m allowed to make choices based on what\'s realistic and kind to myself.'},
   {keys:['disappointed','they think','they must','he thinks','she thinks'],type:'Mind Reading',explain:'You\'re assuming you know what someone else is thinking — usually something negative about you. This is almost never accurate.',reframe:'I\'m making an assumption without evidence. I could ask them directly, or accept that I can\'t know for certain.'},
 ];
+const dailyChallenges=[
+  '"I\'m not where I should be in life by now."',
+  '"If I can\'t do it perfectly, there\'s no point in trying."',
+  '"Everyone else has their life together except me."',
+  '"I always say the wrong thing in social situations."',
+  '"I\'ll never be able to change — this is just how I am."',
+];
+let challengeIdx=0;
+function loadDailyChallenge(){
+  const text=document.getElementById('rcPrompt').textContent.replace(/"/g,'');
+  document.getElementById('thoughtInput').value=text.replace(/['"]/g,'');
+  challengeIdx=(challengeIdx+1)%dailyChallenges.length;
+  document.getElementById('rcPrompt').textContent=dailyChallenges[challengeIdx];
+  document.getElementById('thoughtInput').scrollIntoView({behavior:'smooth',block:'center'});
+}
 function loadDistortion(text){document.getElementById('thoughtInput').value=text;document.getElementById('thoughtInput').scrollIntoView({behavior:'smooth',block:'center'});}
 function reframeThought(){
   const t=document.getElementById('thoughtInput').value.toLowerCase();if(!t.trim())return;
@@ -1706,7 +1856,7 @@ window.addEventListener('load',()=>{
 
 // COMMUNITY
 function heartThis(el){const n=parseInt(el.textContent.replace('♥ ',''));el.textContent='♥ '+(n+1);el.style.color='#e74c3c';el.style.transform='scale(1.3)';setTimeout(()=>el.style.transform='scale(1)',300);}
-const cities=['Delhi','Mumbai','Kolkata','Jaipur','Lucknow','Ahmedabad','Chandigarh','Bhopal'];
+const cities=['Delhi','Mumbai','Kolkata','Jaipur','Lucknow','Ahmedabad','Patiala','Bhopal','Ghaziabad'];
 function postAffirmation(){
   const inp=document.getElementById('affInput'),text=inp.value.trim();if(!text)return;
   const city=cities[Math.floor(Math.random()*cities.length)];
