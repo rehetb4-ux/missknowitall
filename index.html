@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -226,10 +221,9 @@ h1 em{font-style:italic;color:var(--primary);}
 .ms-chip{background:var(--card);border:1.5px solid var(--border2);border-radius:100px;padding:.38rem 1rem;font-size:.85rem;font-weight:500;color:var(--text2);cursor:pointer;transition:all .2s;}
 .ms-chip:hover{border-color:var(--primary);color:var(--primary);background:rgba(42,122,75,0.06);}
 
-/* Mira trust strip */
 .mira-trust-card:hover{border-color:var(--primary)!important;transform:translateY(-3px);box-shadow:0 12px 28px var(--shadow);}
 
-.chat-box{background:var(--card);border:1px solid var(--border2);border-radius:var(--card-radius);display:flex;flex-direction:column;height:580px;overflow:hidden;box-shadow:0 20px 60px var(--shadow);}
+.chat-box{background:var(--card);border:1px solid var(--border2);border-radius:var(--card-radius);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px var(--shadow);}
 .chat-header{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.9rem;background:linear-gradient(135deg,rgba(42,122,75,0.12),rgba(76,175,114,0.07));}
 .chat-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 4px 14px var(--glow);}
 .chat-hinfo h4{font-size:1.06rem;font-weight:700;color:var(--text);}
@@ -240,7 +234,7 @@ h1 em{font-style:italic;color:var(--primary);}
 .chat-mood-bar::-webkit-scrollbar{display:none;}
 .qp{background:rgba(42,122,75,0.07);border:1px solid rgba(42,122,75,0.18);border-radius:100px;padding:.38rem 1.05rem;font-size:.85rem;color:var(--primary);font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .2s;cursor:pointer;font-weight:500;}
 .qp:hover{background:rgba(42,122,75,0.15);border-color:var(--primary);}
-.chat-msgs{flex:1;overflow-y:auto;padding:1.2rem;display:flex;flex-direction:column;gap:.85rem;}
+.chat-msgs{height:380px;overflow-y:auto;padding:1.2rem;display:flex;flex-direction:column;gap:.85rem;}
 .chat-msgs::-webkit-scrollbar{width:3px;}
 .chat-msgs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px;}
 .msg{max-width:84%;padding:.95rem 1.25rem;border-radius:12px;font-size:1rem;line-height:1.7;}
@@ -540,7 +534,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
 .faq-a.open{max-height:220px;padding:0 1.6rem 1.4rem;}
 .faq-a p{font-size:.97rem;color:var(--muted);line-height:1.82;}
 
-/* "What happens next" timeline responsive */
 .whats-next-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
 .whats-next-timeline::before{content:'';position:absolute;top:2.4rem;left:calc(12.5% + 1rem);right:calc(12.5% + 1rem);height:2px;background:linear-gradient(90deg,var(--primary),var(--accent),var(--teal));z-index:0;border-radius:2px;}
 .wnt-step{text-align:center;padding:0 1rem;position:relative;z-index:1;}
@@ -835,11 +828,32 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
           <input class="chat-input" id="chatInp" type="text" placeholder="Share what's on your mind…" onkeydown="if(event.key==='Enter')sendMsg()">
           <button class="chat-send" onclick="sendMsg()">➤</button>
         </div>
+
+        <!-- ✅ NEW: Topics Mira can help with -->
+        <div style="padding:.9rem 1.1rem;border-top:1px solid var(--border);background:var(--card2);">
+          <div style="font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:.55rem;">Mira can help with…</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;">
+            <span style="background:rgba(42,122,75,0.08);border:1px solid var(--border2);border-radius:100px;padding:.28rem .85rem;font-size:.8rem;color:var(--primary);font-weight:500;">😮‍💨 Stress</span>
+            <span style="background:rgba(42,122,75,0.08);border:1px solid var(--border2);border-radius:100px;padding:.28rem .85rem;font-size:.8rem;color:var(--primary);font-weight:500;">🌧️ Sadness</span>
+            <span style="background:rgba(42,122,75,0.08);border:1px solid var(--border2);border-radius:100px;padding:.28rem .85rem;font-size:.8rem;color:var(--primary);font-weight:500;">💔 Grief</span>
+            <span style="background:rgba(42,122,75,0.08);border:1px solid var(--border2);border-radius:100px;padding:.28rem .85rem;font-size:.8rem;color:var(--primary);font-weight:500;">⚡ Anxiety</span>
+            <span style="background:rgba(42,122,75,0.08);border:1px solid var(--border2);border-radius:100px;padding:.28rem .85rem;font-size:.8rem;color:var(--primary);font-weight:500;">🧠 Burnout</span>
+            <span style="background:rgba(42,122,75,0.08);border:1px solid var(--border2);border-radius:100px;padding:.28rem .85rem;font-size:.8rem;color:var(--primary);font-weight:500;">💙 Loneliness</span>
+          </div>
+        </div>
+        <!-- ✅ NEW: Status + urgent help bar -->
+        <div style="padding:.85rem 1.1rem;border-top:1px solid var(--border);background:linear-gradient(135deg,rgba(42,122,75,0.05),rgba(76,175,114,0.02));display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px rgba(76,175,114,0.5);display:inline-block;flex-shrink:0;"></span>
+            Mira responds in under 90 seconds
+          </div>
+          <a href="#resources" style="font-size:.82rem;color:var(--primary);font-weight:600;text-decoration:none;display:flex;align-items:center;gap:.3rem;">🆘 Need urgent help?</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== CHANGE 1: MIRA TRUST STRIP — fills blank space below chat ===== -->
+  <!-- MIRA TRUST STRIP -->
   <div class="reveal" style="max-width:1200px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;" class="mira-trust-strip">
     <div class="mira-trust-card" style="background:var(--card);border:1px solid var(--border2);border-radius:var(--card-radius);padding:1.8rem;text-align:center;transition:all .25s;cursor:default;">
       <div style="font-size:2rem;margin-bottom:.6rem;">💬</div>
@@ -926,7 +940,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
         <p>Cognitive Behavioral Therapy (CBT) is one of the most evidence-backed approaches to mental health. The thought records here are adapted from CBT worksheets used by therapists worldwide. This tool is a supplement — not a replacement — for professional care.</p>
       </div>
 
-      <!-- ===== CHANGE 2: NEW "Your Reframe Toolkit" card ===== -->
       <div style="margin-top:1.3rem;background:var(--card);border:1.5px solid var(--border2);border-radius:var(--card-radius);padding:1.8rem 2rem;box-shadow:0 8px 28px var(--shadow);">
         <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem;">
           <span style="font-size:1.4rem;">🧰</span>
@@ -1133,26 +1146,25 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
         </div>
       </div>
 
-      <!-- ===== CHANGE 3: Writing Modes card — fills blank space ===== -->
       <div style="margin-top:1.4rem;background:var(--card);border:1px solid var(--border2);border-radius:var(--card-radius);padding:1.6rem 1.8rem;">
         <div style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;"><span style="width:16px;height:2px;background:var(--accent);border-radius:2px;display:inline-block;"></span>Writing Modes — pick what fits today</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
-          <div style="padding:1rem 1.1rem;background:rgba(42,122,75,0.06);border:1px solid var(--border);border-radius:12px;transition:all .2s;cursor:default;">
+          <div style="padding:1rem 1.1rem;background:rgba(42,122,75,0.06);border:1px solid var(--border);border-radius:12px;cursor:default;">
             <div style="font-size:1.1rem;margin-bottom:.35rem;">🌊</div>
             <div style="font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.2rem;">Free Write</div>
             <div style="font-size:.82rem;color:var(--muted);line-height:1.55;">No rules. Just let thoughts pour out unfiltered. Ideal when you feel stuck.</div>
           </div>
-          <div style="padding:1rem 1.1rem;background:rgba(42,122,75,0.06);border:1px solid var(--border);border-radius:12px;transition:all .2s;cursor:default;">
+          <div style="padding:1rem 1.1rem;background:rgba(42,122,75,0.06);border:1px solid var(--border);border-radius:12px;cursor:default;">
             <div style="font-size:1.1rem;margin-bottom:.35rem;">💡</div>
             <div style="font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.2rem;">Prompted</div>
             <div style="font-size:.82rem;color:var(--muted);line-height:1.55;">Use a journal prompt to guide structure. Best when you don't know where to start.</div>
           </div>
-          <div style="padding:1rem 1.1rem;background:rgba(42,122,75,0.06);border:1px solid var(--border);border-radius:12px;transition:all .2s;cursor:default;">
+          <div style="padding:1rem 1.1rem;background:rgba(42,122,75,0.06);border:1px solid var(--border);border-radius:12px;cursor:default;">
             <div style="font-size:1.1rem;margin-bottom:.35rem;">🙏</div>
             <div style="font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.2rem;">Gratitude</div>
             <div style="font-size:.82rem;color:var(--muted);line-height:1.55;">Three things you're grateful for. Retrains the brain toward the positive.</div>
           </div>
-          <div style="padding:1rem 1.1rem;background:rgba(42,122,75,0.06);border:1px solid var(--border);border-radius:12px;transition:all .2s;cursor:default;">
+          <div style="padding:1rem 1.1rem;background:rgba(42,122,75,0.06);border:1px solid var(--border);border-radius:12px;cursor:default;">
             <div style="font-size:1.1rem;margin-bottom:.35rem;">🔍</div>
             <div style="font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.2rem;">Reflection</div>
             <div style="font-size:.82rem;color:var(--muted);line-height:1.55;">Look back on the week. Surface patterns and growth you missed in the moment.</div>
@@ -1179,6 +1191,30 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
           <div class="journal-bottom">
             <span class="j-char-count" id="charCount">0 words</span>
             <button class="btn-primary" onclick="saveJournalEntry()" style="padding:.7rem 1.5rem;font-size:.95rem;">Save Entry →</button>
+          </div>
+
+          <!-- ✅ NEW: Writing nudges & colour picker below Save button -->
+          <div style="margin-top:1.2rem;padding:1.2rem 1.4rem;background:linear-gradient(135deg,rgba(42,122,75,0.06),rgba(76,175,114,0.03));border:1px solid var(--border);border-radius:12px;">
+            <div style="font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem;display:flex;align-items:center;gap:.45rem;"><span style="width:14px;height:2px;background:var(--accent);display:inline-block;border-radius:2px;"></span>Writing nudges</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.55rem;">
+              <div style="display:flex;align-items:flex-start;gap:.6rem;font-size:.85rem;color:var(--text2);line-height:1.55;"><span style="flex-shrink:0;margin-top:.05rem;">✍️</span><span><strong style="color:var(--primary2);">Start mid-sentence.</strong> "Right now I feel…" beats staring at a blank page.</span></div>
+              <div style="display:flex;align-items:flex-start;gap:.6rem;font-size:.85rem;color:var(--text2);line-height:1.55;"><span style="flex-shrink:0;margin-top:.05rem;">⏱️</span><span><strong style="color:var(--primary2);">Set a 5-min timer.</strong> You'll be surprised how much you have to say.</span></div>
+              <div style="display:flex;align-items:flex-start;gap:.6rem;font-size:.85rem;color:var(--text2);line-height:1.55;"><span style="flex-shrink:0;margin-top:.05rem;">🚫</span><span><strong style="color:var(--primary2);">Don't edit.</strong> Let thoughts flow without judging spelling or grammar.</span></div>
+              <div style="display:flex;align-items:flex-start;gap:.6rem;font-size:.85rem;color:var(--text2);line-height:1.55;"><span style="flex-shrink:0;margin-top:.05rem;">🔑</span><span><strong style="color:var(--primary2);">Name the feeling.</strong> Try finishing: "The emotion under this is…"</span></div>
+            </div>
+          </div>
+
+          <div style="margin-top:.9rem;padding:1.1rem 1.4rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.7rem;">
+            <div style="font-size:.88rem;color:var(--muted);">🎨 <strong style="color:var(--text2);">Colour of today's mood</strong> — pick one:</div>
+            <div style="display:flex;gap:.45rem;" id="colourPicker">
+              <button onclick="pickColour(this,'#2A7A4B','Calm')" title="Calm" style="width:26px;height:26px;border-radius:50%;background:#2A7A4B;border:2px solid transparent;cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"></button>
+              <button onclick="pickColour(this,'#C8A84B','Anxious')" title="Anxious" style="width:26px;height:26px;border-radius:50%;background:#C8A84B;border:2px solid transparent;cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"></button>
+              <button onclick="pickColour(this,'#C0392B','Upset')" title="Upset" style="width:26px;height:26px;border-radius:50%;background:#C0392B;border:2px solid transparent;cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"></button>
+              <button onclick="pickColour(this,'#26A69A','Hopeful')" title="Hopeful" style="width:26px;height:26px;border-radius:50%;background:#26A69A;border:2px solid transparent;cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"></button>
+              <button onclick="pickColour(this,'#7BAF8A','Numb')" title="Numb" style="width:26px;height:26px;border-radius:50%;background:#7BAF8A;border:2px solid transparent;cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"></button>
+              <button onclick="pickColour(this,'#8BC34A','Energised')" title="Energised" style="width:26px;height:26px;border-radius:50%;background:#8BC34A;border:2px solid transparent;cursor:pointer;transition:transform .2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"></button>
+            </div>
+            <div id="colourLabel" style="font-size:.82rem;color:var(--primary);font-weight:600;min-width:70px;"></div>
           </div>
         </div>
         <div class="journal-panel" id="jp-prompts">
@@ -1371,6 +1407,30 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
         <button class="btn-primary" onclick="submitForm()">Send Message →</button>
       </div>
       <div class="form-success" id="formSuccess">✅ <strong>Thank you for reaching out.</strong> We'll respond within 24 hours. You're brave for taking this step — we're honoured you chose to share with us. 💚</div>
+
+      <!-- ✅ NEW: Below-form support strip -->
+      <div style="margin-top:1.4rem;display:flex;flex-direction:column;gap:.75rem;">
+        <div style="padding:1.2rem 1.4rem;background:linear-gradient(135deg,rgba(42,122,75,0.07),rgba(76,175,114,0.03));border:1px solid var(--border);border-radius:14px;display:flex;align-items:flex-start;gap:.85rem;">
+          <span style="font-size:1.2rem;flex-shrink:0;">🕐</span>
+          <div>
+            <div style="font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.18rem;">Need immediate support?</div>
+            <div style="font-size:.85rem;color:var(--muted);line-height:1.6;">Don't wait for a reply — call <strong style="color:var(--primary);">iCall: 9152987821</strong> or chat with Mira right now. Both are free and confidential.</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+          <div style="padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;gap:.7rem;">
+            <span style="font-size:1rem;">📨</span>
+            <div style="font-size:.85rem;color:var(--text2);line-height:1.5;"><strong style="display:block;font-size:.82rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.1rem;">Reply time</strong>Within 24 hrs on weekdays</div>
+          </div>
+          <div style="padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;gap:.7rem;">
+            <span style="font-size:1rem;">🌐</span>
+            <div style="font-size:.85rem;color:var(--text2);line-height:1.5;"><strong style="display:block;font-size:.82rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.1rem;">Language</strong>Hindi &amp; English supported</div>
+          </div>
+        </div>
+        <div style="padding:1.1rem 1.4rem;background:rgba(42,122,75,0.05);border-left:3px solid var(--primary);border-radius:0 12px 12px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--primary2);line-height:1.75;">
+          "Reaching out is not weakness. It is the first and bravest act of self-care."
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1386,7 +1446,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
     </div>
   </div>
 
-  <!-- ===== CHANGE 4: "What happens next" timeline ===== -->
   <div class="reveal" style="margin-top:4rem;max-width:960px;margin-left:auto;margin-right:auto;">
     <div style="text-align:center;margin-bottom:2.5rem;">
       <div style="font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);margin-bottom:.5rem;">After you reach out</div>
@@ -1415,7 +1474,6 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       </div>
     </div>
 
-    <!-- Reassurance strip -->
     <div style="margin-top:2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
       <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.4rem;display:flex;align-items:flex-start;gap:.8rem;">
         <span style="font-size:1.3rem;flex-shrink:0;">🔒</span>
@@ -1662,6 +1720,13 @@ function renderEntries(){
   list.innerHTML=jEntries.map(e=>`<div class="j-entry"><div class="j-entry-meta"><span>${e.date} · ${e.time}</span>${e.mood?`<span class="j-mood-tag">${e.mood}</span>`:''}</div><div class="j-entry-text">${e.text}</div></div>`).join('');
 }
 document.querySelectorAll('.journal-panel').forEach((p,i)=>{if(i!==0)p.style.display='none';});
+
+// JOURNAL COLOUR PICKER
+function pickColour(btn,color,label){
+  document.querySelectorAll('#colourPicker button').forEach(b=>b.style.border='2px solid transparent');
+  btn.style.border='2px solid var(--text)';
+  document.getElementById('colourLabel').textContent='→ '+label;
+}
 
 // MOOD
 function selectMood(btn){document.querySelectorAll('.m-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
