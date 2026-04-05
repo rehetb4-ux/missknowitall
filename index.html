@@ -852,7 +852,30 @@ footer{background:var(--forest);padding:4rem 5vw 2.8rem;}
       </div>
     </div>
   </div>
+<div class="info-card-extra" style="background:var(--card); border:1px solid var(--border2); border-radius:var(--card-radius); padding:1.8rem; margin-top:2rem; display:flex; align-items:flex-start; gap:1.5rem; box-shadow:0 15px 45px var(--shadow); transition: transform 0.3s ease;">
+  
+  <div style="background:rgba(42,122,75,0.1); width:60px; height:60px; border-radius:15px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; flex-shrink:0;">
+    📓
+  </div>
 
+  <div style="flex-grow:1;">
+    <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.4rem;">
+      <h4 style="font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--primary); font-weight:700; margin:0;">Daily Reflection</h4>
+      <span style="background:var(--accent); color:white; font-size:0.65rem; padding:0.2rem 0.6rem; border-radius:100px; text-transform:uppercase; font-weight:800; letter-spacing:0.05em;">New Feature</span>
+    </div>
+    
+    <p style="font-size:0.92rem; color:var(--text2); line-height:1.6; margin-bottom:1.2rem;">
+      Talking is step one. Writing it down is step two. Summarize your chat with Mira to see your emotional patterns over time.
+    </p>
+
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <button style="background:var(--primary); color:white; border:none; padding:0.7rem 1.4rem; border-radius:10px; font-size:0.88rem; font-weight:600; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+        Save to Journal
+      </button>
+      <a href="#" style="font-size:0.85rem; color:var(--muted); text-decoration:none; font-weight:500; border-bottom:1px solid var(--border);">See past entries</a>
+    </div>
+  </div>
+</div>
   <!-- MIRA TRUST STRIP -->
   <div class="reveal" style="max-width:1200px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;" class="mira-trust-strip">
     <div class="mira-trust-card" style="background:var(--card);border:1px solid var(--border2);border-radius:var(--card-radius);padding:1.8rem;text-align:center;transition:all .25s;cursor:default;">
