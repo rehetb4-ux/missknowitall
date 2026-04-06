@@ -89,31 +89,68 @@ h1 em{font-style:italic;color:var(--primary);}
 .hstat .num{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1;}
 .hstat .lbl{font-size:.95rem;color:var(--muted);margin-top:.4rem;line-height:1.5;}
 
-.hero-visual{position:absolute;right:5vw;top:50%;transform:translateY(-50%);width:480px;display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;z-index:0;}
-.hv-card{background:var(--card);border:1.5px solid var(--border2);border-radius:32px 10px 32px 10px;padding:2rem 1.8rem 1.8rem;height:210px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s;box-shadow:0 6px 24px rgba(15,43,26,0.07);}
-.hv-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.7) 0%,transparent 55%);pointer-events:none;}
-.hv-card::after{content:'';position:absolute;bottom:-20px;right:-20px;width:90px;height:90px;border-radius:50% 30% 50% 30%;background:radial-gradient(circle,rgba(42,122,75,0.14),transparent 70%);pointer-events:none;transition:transform .4s;}
-.hv-card:hover{transform:translateY(-10px) rotate(-1.5deg);box-shadow:0 28px 55px rgba(15,43,26,0.16);}
-.hv-card:hover::after{transform:scale(1.3);}
-.hv-card:nth-child(1){border-radius:32px 10px 32px 10px;}
-.hv-card:nth-child(2){border-radius:10px 32px 10px 32px;margin-top:1.8rem;}
-.hv-card:nth-child(3){border-radius:32px 10px 32px 10px;}
-.hv-card:nth-child(4){border-radius:10px 32px 10px 32px;margin-top:-1.8rem;}
-.hv-card .hv-stripe{position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent),transparent);border-radius:10px 0 0 0;}
-.hv-card.featured{background:linear-gradient(145deg,rgba(42,122,75,0.15),rgba(76,175,114,0.06),var(--card));border-color:var(--primary);box-shadow:0 10px 36px rgba(42,122,75,0.18);}
-.hv-card.featured::after{background:radial-gradient(circle,rgba(42,122,75,0.22),transparent 70%);}
-.hv-card.featured .hv-stripe{background:linear-gradient(90deg,var(--primary),var(--lime),var(--teal));}
-.hv-top{display:flex;align-items:center;justify-content:space-between;}
-.hv-icon-wrap{width:48px;height:48px;border-radius:14px;background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.2);display:flex;align-items:center;justify-content:center;font-size:1.4rem;transition:transform .3s;}
-.hv-card:hover .hv-icon-wrap{transform:scale(1.12) rotate(-4deg);}
-.hv-card.featured .hv-icon-wrap{background:rgba(42,122,75,0.2);border-color:rgba(42,122,75,0.4);}
-.hv-tag{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(42,122,75,0.1);border:1px solid rgba(42,122,75,0.18);color:var(--primary);border-radius:100px;padding:.22rem .75rem;}
-.hv-card h4{font-size:1.08rem;font-weight:700;color:var(--text);margin-bottom:.28rem;line-height:1.3;}
-.hv-card p{font-size:.88rem;color:var(--muted);line-height:1.6;}
-.hv-bottom{display:flex;align-items:center;gap:.5rem;}
-.hv-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
-.hv-stat{font-size:.78rem;font-weight:700;color:var(--primary2);}
+./* NEW CONTAINER LAYOUT: Stacked vertically, aligned to the right */
+.hero-visual {
+  position: absolute;
+  right: 5vw;
+  top: 10%; /* Replaced center alignment with a stack start point */
+  width: 480px;
+  display: grid;
+  grid-template-columns: 1fr; /* Changed from 2x2 to 1 column stack */
+  gap: 1.6rem;
+  z-index: 0;
+}
 
+/* NEW CARD SHAPE: Sharp rectangle, uniform look */
+.hv-card {
+  background: var(--card);
+  border: 1.5px solid var(--border2);
+  border-radius: 0; /* Changed from asymmetric curve to simple rectangle */
+  padding: 2rem 1.8rem 1.8rem;
+  height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s;
+  box-shadow: 0 6px 24px rgba(15,43,26,0.07);
+}
+
+/* --- (All previous internal styles remain the same for consistency) --- */
+.hv-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.7) 0%,transparent 55%); pointer-events:none; }
+.hv-card::after { content:''; position:absolute; bottom:-20px; right:-20px; width:90px; height:90px; border-radius:50% 30% 50% 30%; background:radial-gradient(circle,rgba(42,122,75,0.14),transparent 70%); pointer-events:none; transition:transform .4s; }
+
+/* HOVER EFFECT (Cleaned up slightly for the new shape) */
+.hv-card:hover {
+  transform: translateY(-8px); /* Subtle lift, removed tilt */
+  box-shadow: 0 28px 55px rgba(15,43,26,0.16);
+}
+.hv-card:hover::after { transform:scale(1.3); }
+
+/* (Removed all original nth-child margin and border-radius logic) */
+
+/* FEATURED CARD STYLES (Remaining the same for the accent) */
+.hv-card.featured {
+  background: linear-gradient(145deg,rgba(42,122,75,0.15),rgba(76,175,114,0.06),var(--card));
+  border-color: var(--primary);
+  box-shadow: 0 10px 36px rgba(42,122,75,0.18);
+}
+.hv-card.featured::after { background:radial-gradient(circle,rgba(42,122,75,0.22),transparent 70%); }
+.hv-card.featured .hv-stripe { background:linear-gradient(90deg,var(--primary),var(--lime),var(--teal)); }
+
+/* (Remaining internal card styling is the same) */
+.hv-card .hv-stripe { position:absolute; top:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--primary),var(--accent),transparent); border-radius:0; }
+.hv-top { display:flex; align-items:center; justify-content:space-between; }
+.hv-icon-wrap { width:48px; height:48px; border-radius:14px; background:rgba(42,122,75,0.1); border:1px solid rgba(42,122,75,0.2); display:flex; align-items:center; justify-content:center; font-size:1.4rem; transition:transform .3s; }
+.hv-card:hover .hv-icon-wrap { transform:scale(1.12) rotate(-4deg); }
+.hv-card.featured .hv-icon-wrap { background:rgba(42,122,75,0.2); border-color:rgba(42,122,75,0.4); }
+.hv-tag { font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; background:rgba(42,122,75,0.1); border:1px solid rgba(42,122,75,0.18); color:var(--primary); border-radius:100px; padding:.22rem .75rem; }
+.hv-card h4 { font-size:1.08rem; font-weight:700; color:var(--text); margin-bottom:.28rem; line-height:1.3; }
+.hv-card p { font-size:.88rem; color:var(--muted); line-height:1.6; }
+.hv-bottom { display:flex; align-items:center; gap:.5rem; }
+.hv-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.hv-stat { font-size:.78rem; font-weight:700; color:var(--primary2); }
 .marquee-strip{background:var(--primary);padding:.95rem 0;overflow:hidden;border-top:1px solid var(--primary2);border-bottom:1px solid var(--primary2);}
 .marquee-inner{display:flex;gap:3rem;white-space:nowrap;animation:marquee 28s linear infinite;}
 .marquee-item{font-size:.92rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.85);display:flex;align-items:center;gap:.9rem;}
